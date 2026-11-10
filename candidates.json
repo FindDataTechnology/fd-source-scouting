@@ -1,7 +1,7 @@
 {
   "schema": "source-candidates/v1",
   "meta": {
-    "generated_at": "2026-11-10T14:10:11.793636+00:00",
+    "generated_at": "2026-11-10T14:11:45.856204+00:00",
     "source_doc": "data-source-scouting/INDUSTRY-DATA-SOURCES.md",
     "source_doc_sha256": "4f982bf05c5171aa97dcb750f50ba2ae9f1d1b6ce679a2f98a61a67d509893d5",
     "generator": "extract_candidates.py/1.0",

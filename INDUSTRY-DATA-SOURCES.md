@@ -1398,6 +1398,14 @@ Wave C 四扩展（c20/bsci/apri/comext）有 golden 且全绿，但入口只遍
 - 在同一口径下 CP11 与 CP112 **均返回 200 且有值**；
 - 唯一能让三者都显得"无值"的参数组合是 **`unit=RCH_A`**（年变化率未发布 → 三码皆 0 期）。golden 当时极可能用了它。
 
+**落地状态（2026-11-10 主人确认后）**：
+- ✅ 文档已更正：`fd-industry-data/docs/hotel-series-curation.md` 口径注记 3 / 注记 6 / 挂账 D5
+  三处改为「可得」（commit `9ad2342`，已双推）
+- ✅ `scripts/naming_gate_hotel.py` 的 `PAIRING` 常量加更正注释、**取值未动**
+- ⏳ **未做（需另单授权）**：把 `provenance.pairing.state` 由 `missing` 改为可得、注册
+  `hotel.eu.price.*` 概念并回填 CP112 301 期观测——这是**写库动作**，会牵动板面价量背离
+  渲染与既有规则，不在文档更正范围内
+
 **结论与影响**：
 1. **住宿价格指数可得**，hotel 线可补价格面（`CP112` 301 期，可比 E2 夜数做价量背离）；
 2. `hotel-series-curation.md` 的口径注记 3（「酒店线没有欧盟住宿价格指数」）与
