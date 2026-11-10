@@ -1301,3 +1301,21 @@ Wave C 四扩展（c20/bsci/apri/comext）有 golden 且全绿，但入口只遍
 | OpenDataSoft | `/api/explore/v2.1/catalog/datasets?limit=2` → 200（102,992 目录） | **活跃待接** |
 | 深圳开放平台 | `datasetCatalog` → 200 但 `errorCode:10009 appKey不能为空` | **需免费 appKey 注册**（Wave E 既有标注维持） |
 | 水利部水雨情 | `xxfb.mwr.cn/portal/hydroinfoByDays` 本机直连 ConnectTimeout | **换出口/集群侧复测**（集群有既有浏览器指纹通道先例，见 1.2 nbs 403 注） |
+
+---
+
+# 欠账复测队列 · 第三批（4 条，2026-11-10，fd-source-probe 实测）
+
+> 教训沿用花卉 P4：**首页 200 ≠ 有数据通道**。本批 4 条首页全 200，但只有 1 条真能取数。
+
+| 源 | 本轮实测 | 定案 |
+|---|---|---|
+| GDACS（RSS+API） | `gdacs.org/xml/rss.xml` → 200 + **RSS 2.0 XML**，200KB 内 `<item>` 65 条，带 `geo:` 命名空间 | **活跃待接**（真结构化通道：XML feed 可直接解析，含经纬度与 alertlevel） |
+| 搜猪网生猪大数据 | 首页 200，拉满 25,193 B（未截断）；表格是 `<tbody id="reptable">` **空壳**——内含「数据加载中。。。」占位，唯一 `<tr>` 还被 `<!-- -->` 注释包裹 | **不可静态取数**：数据由 JS 异步填充，静态抓只能拿到壳。需找其 XHR 端点或走浏览器通道（另立侦察） |
+| 生意社 100ppi | `100ppi.com/cindex/` → **HTTP 200 但响应体是 JS 挑战页**（`<meta name="robots" content="noindex">` + 混淆 `_0x1/_0x2` 脚本 + 日期 token） | **按 WAF 拦截处理**：200 是伪装，实际要过华为云 WAF 两步 cookie 握手。与侦察簿原注一致，不因 200 判可得 |
+| 国家统计局门户 | `stats.gov.cn` 首页 200 | **维持原判**：首页可达但数据在 easyquery 上，而 easyquery 是 403 拦截页（见陷阱清单 `nbs-easyquery-blocked`）。首页 200 不可作为可得证据 |
+
+**方法论收获（进陷阱清单硬要求）**：本批两条（100ppi、搜猪网）都是「HTTP 200 + 非空体」，
+探针按 HTTP 层判成 `ok`。这正是 spec `source-probe` 那条「分类边界 + 阳性断言」的现实版：
+**对这两类站点，必须给 `expect_contains` 的数据标识（如真实数值行/JSON 字段）才判得出**，
+只凭 200 会把 WAF 挑战页和 JS 空壳当成可得。

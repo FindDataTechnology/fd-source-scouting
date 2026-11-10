@@ -1,14 +1,14 @@
 {
   "schema": "source-candidates/v1",
   "meta": {
-    "generated_at": "2026-11-09T21:27:33.557842+00:00",
+    "generated_at": "2026-11-10T13:05:57.992360+00:00",
     "source_doc": "data-source-scouting/INDUSTRY-DATA-SOURCES.md",
-    "source_doc_sha256": "40dc849c193c6270154efee9e0de54d3d335184213fc72ec26dbf1efa468ad7c",
+    "source_doc_sha256": "acc531a6a04db05bdf3b6349c6fd976dfe6201f79ed03c35dbae88375df9759b",
     "generator": "extract_candidates.py/1.0",
     "coverage": {
-      "tables_converted": 13,
+      "tables_converted": 14,
       "tables_excluded": 16,
-      "rows_converted": 176,
+      "rows_converted": 180,
       "rows_excluded": 77,
       "excluded_tables": [
         {
@@ -3216,6 +3216,61 @@
       },
       "status": "unknown",
       "reason": "换出口/集群侧复测（集群有既有浏览器指纹通道先例，见 1.2 nbs 403 注）",
+      "landed_slug": null
+    },
+    {
+      "id": "gdacs-rssapi-1313",
+      "name": "GDACS（RSS+API）",
+      "doc_line": 1313,
+      "section": "欠账复测队列 · 第三批（4 条，2026-11-10，fd-source-probe 实测）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "gdacs.org/xml/rss.xml → 200 + RSS 2.0 XML，200KB 内 <item> 65 条，带 geo: 命名空间"
+      },
+      "status": "accepted",
+      "landed_slug": "gdacs"
+    },
+    {
+      "id": "搜猪网生猪大数据-1314",
+      "name": "搜猪网生猪大数据",
+      "doc_line": 1314,
+      "section": "欠账复测队列 · 第三批（4 条，2026-11-10，fd-source-probe 实测）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "首页 200，拉满 25,193 B（未截断）；表格是 <tbody id=\"reptable\"> 空壳——内含「数据加载中。。。」占位，唯一 <tr> 还被 <!-- --> 注释包裹"
+      },
+      "status": "unknown",
+      "reason": "不可静态取数：数据由 JS 异步填充，静态抓只能拿到壳。需找其 XHR 端点或走浏览器通道（另立侦察）",
+      "landed_slug": null
+    },
+    {
+      "id": "生意社-100ppi-1315",
+      "name": "生意社 100ppi",
+      "doc_line": 1315,
+      "section": "欠账复测队列 · 第三批（4 条，2026-11-10，fd-source-probe 实测）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "100ppi.com/cindex/ → HTTP 200 但响应体是 JS 挑战页（<meta name=\"robots\" content=\"noindex\"> + 混淆 _0x1/_0x2 脚本 + 日期 token）"
+      },
+      "status": "unknown",
+      "reason": "按 WAF 拦截处理：200 是伪装，实际要过华为云 WAF 两步 cookie 握手。与侦察簿原注一致，不因 200 判可得",
+      "landed_slug": null
+    },
+    {
+      "id": "国家统计局门户",
+      "name": "国家统计局门户",
+      "doc_line": 1316,
+      "section": "欠账复测队列 · 第三批（4 条，2026-11-10，fd-source-probe 实测）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "stats.gov.cn 首页 200"
+      },
+      "status": "unknown",
+      "reason": "维持原判：首页可达但数据在 easyquery 上，而 easyquery 是 403 拦截页（见陷阱清单 nbs-easyquery-blocked）。首页 200 不可作为可得证据",
       "landed_slug": null
     }
   ]
