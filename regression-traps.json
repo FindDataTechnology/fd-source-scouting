@@ -1,0 +1,113 @@
+{
+  "schema": "source-regression-traps/v1",
+  "note": "已知陷阱清单（回放仲裁 4.3 的机制化）。每条记录一个**已经用证据定过性**的结论；回归探测只回答一个问题：这条结论现在是否仍然成立。变了不等于可以接——变了解锁=重侦察。 陷阱两条硬要求（2026-11-10 首次运行现学）：①必须记录**产生该结论的完整请求**（含全部参数），否则复现不出就是假漂移；②对「HTTP 200 但体内是错误」的 API（如 e-Stat 的 STATUS:100），必须给**正面成功标记** expect_contains，不能靠 HTTP 码判。",
+  "origin": "openspec/changes/industry-source-solution-fleet/replay/adjudication.md（酒店线回放漏掉 N2/N3/N5 的根因：执行侧没有已知陷阱清单可依）",
+  "traps": [
+    {
+      "id": "nbs-easyquery-blocked",
+      "source": "nbs-stats",
+      "expect": {
+        "kind": "channel_failure",
+        "why": "403 拦截页（按出口 ACL），非凭据问题"
+      },
+      "probe": {
+        "url": "https://data.stats.gov.cn/easyquery.htm?m=QueryData&dbcode=hgnd&rowcode=zb&colcode=sj&wds=%5B%5D&dfwds=%5B%5D",
+        "headers": {
+          "referer": "https://data.stats.gov.cn/"
+        }
+      },
+      "if_changed": "可达后先按 getTree 枚举住宿业/住宿餐饮业 zb 代码（预期 2-3 次树查询），有指标才谈生成单"
+    },
+    {
+      "id": "census-api-blocked",
+      "source": "census-eits",
+      "expect": {
+        "kind": "channel_failure",
+        "why": "Cloudflare 拦截页（按出口），非缺 key"
+      },
+      "probe": {
+        "url": "https://api.census.gov/data.json"
+      },
+      "if_changed": "换海外出口复测；即便通了也要注册免费 key（防 HTML 伪装 200），并确认 721 住宿类目可用"
+    },
+    {
+      "id": "eurostat-hicp-accommodation-absent",
+      "source": "eurostat-api",
+      "expect": {
+        "kind": "not_published",
+        "why": "HICP 住宿分项 CP11/CP112 上游 not available for dissemination"
+      },
+      "probe": {
+        "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_hicp_midx?format=JSON&lang=EN&coicop=CP112&unit=I15&geo=EU27_2020",
+        "expect_contains": "\"value\""
+      },
+      "if_changed": "上游开始发布住宿价格指数 → 补 hotel.eu 价格面，且可解除 provenance.pairing 的 missing 标注",
+      "disputed": {
+        "note": "golden（2026-11-08）记 CP11/CP112 均 404 not available for dissemination；但本陷阱复现时 CP11/CP111/CP112 **全有数**（301–313 期，2025-12 止，数据集更新 2026-02-06 早于 golden 测量日）。golden 没记下当时的完整 query（unit/geo/s_adj 组合），无法判定是「golden 查错参数」还是「上游口径变化」。",
+        "evidence": "CP112 label='Accommodation services' 301 期；CP11='Restaurants and hotels' 313 期；CP111='Catering services' 301 期（2026-11-10 实测）",
+        "action": "转人工裁决：按当前实测，住宿价格指数**可得**，hotel 线可以补价格面；但需先确认 golden 那条 404 的参数组合，避免把「查错参数」当成「结论过期」"
+      }
+    },
+    {
+      "id": "jp-estat-needs-appid",
+      "source": "jp-estat",
+      "expect": {
+        "kind": "caliber_mismatch",
+        "why": "HTTP 200 但体内 RESULT.STATUS=100「認証に失敗」——错误在 body 里，HTTP 码是 200。用正面标记 STATUS:0 判：无标记即口径不符（=凭据缺失）"
+      },
+      "probe": {
+        "url": "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsList?appId=&statsCode=00550200",
+        "expect_contains": "\"STATUS\":0"
+      },
+      "if_changed": "出现 STATUS:0 说明 appId 已生效 → 再核花き 出荷量/産出額 的表结构（首表形态）"
+    },
+    {
+      "id": "kifa-waf-468",
+      "source": "flower-auction",
+      "expect": {
+        "kind": "channel_failure",
+        "why": "雷池 SafeLine WAF 主动拒绝自动化客户端（468）"
+      },
+      "probe": {
+        "url": "https://www.kifa.net/kIFAPriceIndex.do"
+      },
+      "if_changed": "不重开——硬闯 WAF 属检测规避（项目红线）；仅当上游开放官方 API 才重评"
+    },
+    {
+      "id": "customs-precondition-412",
+      "source": "stats.customs.gov.cn",
+      "expect": {
+        "kind": "channel_failure",
+        "why": "412 Precondition Failed（加速乐前置握手）"
+      },
+      "probe": {
+        "url": "https://stats.customs.gov.cn/"
+      },
+      "if_changed": "通关后先核 HS 06 章口径，再决定是否替代 un-comtrade 的花卉贸易腿"
+    },
+    {
+      "id": "expoflores-wix-no-data",
+      "source": "expoflores",
+      "expect": {
+        "kind": "not_published",
+        "why": "Wix 模板站；/estadisticas/ 与 /exportaciones/ 均 404（P4 实测 2026-11-10）"
+      },
+      "probe": {
+        "url": "https://www.expoflores.com/estadisticas/"
+      },
+      "if_changed": "出现统计页即重侦察其表格结构；否则维持「首页可达 ≠ 有数据通道」"
+    },
+    {
+      "id": "usda-quickstats-needs-key",
+      "source": "usda-quickstats",
+      "expect": {
+        "kind": "credential_invalid",
+        "why": "DEMO_KEY 已失效，须注册免费 key"
+      },
+      "probe": {
+        "url": "https://quickstats.nass.usda.gov/api/api_GET?key=DEMO_KEY&commodity_desc=FLORICULTURE&format=JSON"
+      },
+      "if_changed": "key 到位后核 HORTICULTURE 商品参数是否覆盖花卉口径（F7 剩余项）"
+    }
+  ]
+}

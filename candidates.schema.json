@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://finddata.cn/schemas/source-candidates/v1.json",
+  "title": "源候选清单（data-source-scouting/candidates.json）",
+  "description": "行业数据源候选的唯一结构化事实源。接入漏斗第一段（candidates）读它。纪律：每条必须带 doc_line 溯源；判不出的字段写 unknown，不猜值；否决必须写 reason。",
+  "type": "object",
+  "required": ["schema", "meta", "candidates"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "source-candidates/v1" },
+    "meta": {
+      "type": "object",
+      "required": ["generated_at", "source_doc", "source_doc_sha256", "coverage"],
+      "additionalProperties": false,
+      "properties": {
+        "generated_at": { "type": "string", "description": "ISO-8601 UTC" },
+        "source_doc": { "type": "string", "description": "生成来源文档的相对路径" },
+        "source_doc_sha256": { "type": "string", "description": "来源文档内容哈希——同一哈希 + 同一生成器 = 同一清单" },
+        "generator": { "type": "string", "description": "生成器标识与版本，便于复算" },
+        "coverage": {
+          "type": "object",
+          "description": "抽取覆盖度：把「转换了多少、丢了多少」写成数，禁止静默丢表",
+          "required": ["tables_converted", "tables_excluded", "rows_converted", "rows_excluded"],
+          "additionalProperties": false,
+          "properties": {
+            "tables_converted": { "type": "integer", "minimum": 0 },
+            "tables_excluded": { "type": "integer", "minimum": 0 },
+            "rows_converted": { "type": "integer", "minimum": 0 },
+            "rows_excluded": { "type": "integer", "minimum": 0 },
+            "excluded_tables": {
+              "type": "array",
+              "description": "未转换的表：表头与行数，供人工核对是否有漏掉的候选表",
+              "items": {
+                "type": "object",
+                "required": ["header", "rows"],
+                "properties": {
+                  "header": { "type": "string" },
+                  "rows": { "type": "integer" },
+                  "reason": { "type": "string" },
+                  "line": { "type": "integer" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "status", "doc_line"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$", "description": "稳定 slug" },
+          "name": { "type": "string", "description": "文档中的源名（保留原文，便于人工对位）" },
+          "section": { "type": "string", "description": "所在章节标题（最近的上级标题）" },
+          "wave": { "type": "string", "description": "批次标识（Wave1 / 银行业专场 / 花卉专场 …），从章节标题推" },
+          "vertical": { "type": "array", "items": { "type": "string" }, "description": "行业/方向标签" },
+          "endpoint": { "type": "string", "description": "端点或主机（原文摘录，不补全、不构造）" },
+          "auth": {
+            "type": "object",
+            "required": ["kind"],
+            "additionalProperties": false,
+            "properties": {
+              "kind": { "enum": ["none", "free_key", "paid", "unknown"] },
+              "note": { "type": "string" }
+            }
+          },
+          "cadence": { "type": "string", "description": "上游更新周期（原文口径）" },
+          "history_depth": { "type": "string", "description": "可回溯深度（原文口径）" },
+          "reach": {
+            "type": "object",
+            "description": "可达性：来自文档实测列，不是推断",
+            "required": ["state"],
+            "additionalProperties": false,
+            "properties": {
+              "state": { "enum": ["direct_ok", "blocked", "proxy_only", "mixed", "unknown"] },
+              "detail": { "type": "string" }
+            }
+          },
+          "anti_bot": { "type": "string", "description": "反爬形态（WAF/挑战页/风控），原文口径" },
+          "evidence": {
+            "type": "object",
+            "description": "样本证据：原文摘录或探针证据引用",
+            "additionalProperties": false,
+            "properties": {
+              "summary": { "type": "string" },
+              "ref": { "type": "string", "description": "探针证据文件/条目引用（如 evidence/<label>-probe.json#<id>）" }
+            }
+          },
+          "cost": { "type": "string", "description": "接入成本口径（S/M/L 或 零新建…）" },
+          "value": { "type": "string", "description": "行业价值口径（高/中/低）" },
+          "status": {
+            "enum": ["accepted", "candidate_unprobed", "rejected", "unknown"],
+            "description": "决定状态：accepted=已决定接入；candidate_unprobed=待测候选；rejected=已否决；unknown=文档未给判定"
+          },
+          "reason": { "type": "string", "description": "否决或存疑的理由（rejected/unknown 必填）" },
+          "landed_slug": {
+            "type": ["string", "null"],
+            "description": "对应已落仓单元 spider 目录名；文档正文点名既有单元时填入，否则 null"
+          },
+          "needs_review": { "type": "boolean", "description": "抽取时存在歧义，需人工过一遍" },
+          "doc_line": { "type": "integer", "minimum": 1, "description": "在来源文档中的行号（1-based），人工核对入口" }
+        }
+      }
+    }
+  }
+}

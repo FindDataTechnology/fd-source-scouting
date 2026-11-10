@@ -1,0 +1,3222 @@
+{
+  "schema": "source-candidates/v1",
+  "meta": {
+    "generated_at": "2026-11-09T21:27:33.557842+00:00",
+    "source_doc": "data-source-scouting/INDUSTRY-DATA-SOURCES.md",
+    "source_doc_sha256": "40dc849c193c6270154efee9e0de54d3d335184213fc72ec26dbf1efa468ad7c",
+    "generator": "extract_candidates.py/1.0",
+    "coverage": {
+      "tables_converted": 13,
+      "tables_excluded": 16,
+      "rows_converted": 176,
+      "rows_excluded": 77,
+      "excluded_tables": [
+        {
+          "header": "维度 | 说明",
+          "rows": 6,
+          "line": 13,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "路 | 任务 | 状态",
+          "rows": 12,
+          "line": 181,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "源 | 数据频度 | 原调度 | 修正为 | 省略浪费",
+          "rows": 2,
+          "line": 372,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "itemId | 栏目路径",
+          "rows": 5,
+          "line": 399,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "层 | 组件 | 位置 | 对 NFRA 的价值",
+          "rows": 4,
+          "line": 424,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "单元 | 站点 | 通道 | 实测证据",
+          "rows": 2,
+          "line": 464,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "单元 | 手写内容 | 缺失能力",
+          "rows": 3,
+          "line": 517,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "单元 | 实测结果 | 判定",
+          "rows": 4,
+          "line": 592,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "单元 | 问题 | 处置",
+          "rows": 4,
+          "line": 632,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "源 | 试跑 | 点亮 | 首批观测入库 | 口径守卫基线",
+          "rows": 3,
+          "line": 841,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "源 | 试跑 | 点亮 cron | 观测 | 口径守卫",
+          "rows": 3,
+          "line": 877,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "单元 | 动作 | 实证",
+          "rows": 10,
+          "line": 941,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "单元 | source_used | 观测行 | 概念 | 实测窗口",
+          "rows": 5,
+          "line": 959,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "项 | 实测 | 含义",
+          "rows": 6,
+          "line": 1084,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "年鉴年 | 分品种章节本文件名",
+          "rows": 3,
+          "line": 1117,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "期次 | 出游人次 | 同比 | 花费 | 同比",
+          "rows": 5,
+          "line": 1212,
+          "reason": "表头签名未登记（非候选表或新表）"
+        }
+      ]
+    }
+  },
+  "candidates": [
+    {
+      "id": "商务部数据中心",
+      "name": "商务部数据中心",
+      "doc_line": 64,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "POST data.mofcom.gov.cn/datamofcom/front/totalmonth/query 免鉴权返全序列 JSON（货物进出口月度至 202608）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "月",
+      "vertical": [
+        "K"
+      ],
+      "status": "accepted",
+      "landed_slug": "mofcom-data"
+    },
+    {
+      "id": "国家邮政局快递月报",
+      "name": "国家邮政局快递月报",
+      "doc_line": 65,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "spb.gov.cn/common/search/{channelId}?_isJson=true + 静态正文（业务量/收入/CR8，连续 24 期无缺）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "月",
+      "vertical": [
+        "K"
+      ],
+      "status": "accepted",
+      "landed_slug": "spb-express"
+    },
+    {
+      "id": "工信部-gxsj",
+      "name": "工信部 gxsj",
+      "doc_line": 66,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "miit.gov.cn/api-gateway/jpaas-publish-server/.../build/unit（软件业/通信业等 7 栏月度）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "月",
+      "vertical": [
+        "K"
+      ],
+      "status": "accepted",
+      "landed_slug": "miit-gxsj"
+    },
+    {
+      "id": "专资办电影票房",
+      "name": "专资办电影票房",
+      "doc_line": 67,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "zgdypw.cn/data/searchDayBoxOffice.json + zgdypf.zgdypw.cn/getDayData、getPeriodData（日/周/月全有，回溯 2024+，实时大盘盘中可取）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "vertical": [
+        "B",
+        "D"
+      ],
+      "status": "accepted",
+      "landed_slug": "zgdypf-boxoffice"
+    },
+    {
+      "id": "中央气象台",
+      "name": "中央气象台",
+      "doc_line": 68,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "nmc.cn/rest/weather?stationid=（实况逐时+7日预报；/rest/province 枚举站码）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "时",
+      "vertical": [
+        "B"
+      ],
+      "status": "accepted",
+      "landed_slug": "nmc-weather"
+    },
+    {
+      "id": "水利部水雨情",
+      "name": "水利部水雨情",
+      "doc_line": 69,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": true,
+      "endpoint": "xxfb.mwr.cn/portal/hydroinfoByDays（日通报 JSON）+ surpassWarningInfo 超警 POST",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "vertical": [
+        "B"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "eurostat",
+      "name": "Eurostat",
+      "doc_line": 70,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "ec.europa.eu/eurostat/api/dissemination/.../sts_inpr_m（制造业生产指数 1953 起，T+35 天）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "月",
+      "vertical": [
+        "A"
+      ],
+      "status": "accepted",
+      "landed_slug": "eurostat-api"
+    },
+    {
+      "id": "un-comtrade",
+      "name": "UN Comtrade",
+      "doc_line": 71,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "comtradeapi.un.org/public/v1/preview 无 key 可用；主 API 免费订阅 key，月度 HS6 贸易流 1962 起",
+      "auth": {
+        "kind": "free_key",
+        "note": "免费key"
+      },
+      "cadence": "月",
+      "vertical": [
+        "A"
+      ],
+      "status": "accepted",
+      "landed_slug": "un-comtrade"
+    },
+    {
+      "id": "imf-pcps",
+      "name": "IMF PCPS",
+      "doc_line": 72,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "api.imf.org/external/sdmx/2.1/data/...（初级商品月度价 1990 起；旧 dataservices.imf.org 已死）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "月",
+      "vertical": [
+        "A"
+      ],
+      "status": "accepted",
+      "landed_slug": "imf-pcps"
+    },
+    {
+      "id": "oecd-sdmx",
+      "name": "OECD SDMX",
+      "doc_line": 73,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "sdmx.oecd.org/public/rest/data/...（13 维 key 需按 DSD 拼；CLI/工业景气）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "月/季",
+      "vertical": [
+        "A"
+      ],
+      "status": "accepted",
+      "landed_slug": "oecd-cli"
+    },
+    {
+      "id": "dbnomics",
+      "name": "DBnomics",
+      "doc_line": 74,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "api.db.nomics.world/v22（聚合 94 机构，白捡 SAFE 外管局+CEPII BACI 双边贸易）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "随上游",
+      "vertical": [
+        "C"
+      ],
+      "status": "accepted",
+      "landed_slug": "dbnomics-api"
+    },
+    {
+      "id": "ecb-data-portal",
+      "name": "ECB Data Portal",
+      "doc_line": 75,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "data-api.ecb.europa.eu/service/data/EXR...（CNY/EUR 日汇率+BSI/YC/SUP 独家口径）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日/月",
+      "vertical": [
+        "C"
+      ],
+      "status": "accepted",
+      "landed_slug": "ecb-exr"
+    },
+    {
+      "id": "open-meteo-三件套",
+      "name": "Open-Meteo 三件套",
+      "doc_line": 76,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "api/archive-api/air-quality-api.open-meteo.com（免 key，archive 实测 1940 起，北京 PM2.5 小时值）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "时",
+      "vertical": [
+        "C"
+      ],
+      "status": "accepted",
+      "landed_slug": "open-meteo"
+    },
+    {
+      "id": "搜猪网生猪大数据",
+      "name": "搜猪网生猪大数据",
+      "doc_line": 77,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": true,
+      "endpoint": "soozhu.com/price/data/center/（生猪/仔猪/玉米/豆粕 8 序列日更，AKShare 同源佐证）〔价格类待裁决〕",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "vertical": [
+        "D"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "高德开放平台",
+      "name": "高德开放平台",
+      "doc_line": 78,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": true,
+      "endpoint": "restapi.amap.com/v3/traffic/status/*（2 分钟级交通态势，免费 key 2000 次/日）",
+      "auth": {
+        "kind": "free_key",
+        "note": "免费key"
+      },
+      "cadence": "2min",
+      "vertical": [
+        "D"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "生意社-100ppi",
+      "name": "生意社 100ppi",
+      "doc_line": 79,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": true,
+      "endpoint": "100ppi.com/cindex/（300+ 大宗现货价+BCI/BPI，华为云 WAF 两步固定 cookie 可过）〔价格类待裁决〕",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "vertical": [
+        "D"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "深圳开放平台",
+      "name": "深圳开放平台",
+      "doc_line": 80,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": true,
+      "endpoint": "opendata.sz.gov.cn/api/{接口ID}/{版本}/service.xhtml?appKey=（~2986 个数据接口，区县月度社零/统计月报）",
+      "auth": {
+        "kind": "free_key",
+        "note": "免费appKey"
+      },
+      "cadence": "月",
+      "vertical": [
+        "E"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "data-gov-uk",
+      "name": "data.gov.uk",
+      "doc_line": 81,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": true,
+      "endpoint": "CKAN /api/3/action/package_search",
+      "auth": {
+        "kind": "unknown",
+        "note": "package_show（免鉴权；CKAN 通用适配器基准）"
+      },
+      "cadence": "无",
+      "vertical": [
+        "E"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "data-gov-目录",
+      "name": "data.gov 目录",
+      "doc_line": 82,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": true,
+      "endpoint": "api.gsa.gov/technology/datagov/v4（DEMO_KEY 即用；只做发现层）",
+      "auth": {
+        "kind": "free_key",
+        "note": "免费key"
+      },
+      "vertical": [
+        "E"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "openalex",
+      "name": "OpenAlex",
+      "doc_line": 83,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "api.openalex.org/works 按月 filter 计数=研发活跃度月度序列（1800s 起，日更；S3 全量快照可离线）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "vertical": [
+        "F"
+      ],
+      "status": "accepted",
+      "landed_slug": "openalex-works"
+    },
+    {
+      "id": "gleif",
+      "name": "GLEIF",
+      "doc_line": 84,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "api.gleif.org/api/v1/lei-records（每日黄金副本；initialRegistrationDate 过滤→全球新设法人月度序列）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "vertical": [
+        "F"
+      ],
+      "status": "accepted",
+      "landed_slug": "gleif-lei"
+    },
+    {
+      "id": "国标检索-std-samr",
+      "name": "国标检索 std.samr",
+      "doc_line": 85,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "std.samr.gov.cn/gb/search/gbQueryPage 纯 JSON（发布/实施/废止=监管强度序列；行业标准/团标同构可扩）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "实时",
+      "vertical": [
+        "F"
+      ],
+      "status": "accepted",
+      "landed_slug": "gb-standards"
+    },
+    {
+      "id": "entso-e",
+      "name": "ENTSO-E",
+      "doc_line": 86,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "transparency.entsoe.eu/api（EU27 15min/1h 发电/负荷/跨境，2015 起；免费 token 注册+邮件申请）",
+      "auth": {
+        "kind": "free_key",
+        "note": "免费token"
+      },
+      "cadence": "15min",
+      "vertical": [
+        "G"
+      ],
+      "status": "accepted",
+      "landed_slug": "entsoe-e"
+    },
+    {
+      "id": "eia-v2",
+      "name": "EIA v2",
+      "doc_line": 87,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "api.eia.gov/v2/electricity/rto/*（美国小时级电网+国际月度 215 国；免费 key 秒发，首连建议重试）",
+      "auth": {
+        "kind": "free_key",
+        "note": "免费key"
+      },
+      "cadence": "时/月",
+      "vertical": [
+        "G"
+      ],
+      "status": "accepted",
+      "landed_slug": "eia-v2"
+    },
+    {
+      "id": "ember",
+      "name": "Ember",
+      "doc_line": 88,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "api.ember-energy.org/v1/{dataset}/{monthly,yearly}（215 国电力结构/排放/装机，月更，OpenAPI 全公开）",
+      "auth": {
+        "kind": "free_key",
+        "note": "免费key"
+      },
+      "cadence": "月",
+      "vertical": [
+        "G"
+      ],
+      "status": "accepted",
+      "landed_slug": "ember"
+    },
+    {
+      "id": "usda-quickstats",
+      "name": "USDA QuickStats",
+      "doc_line": 89,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "quickstats.nass.usda.gov/api/api_GET（美国农情周/月报级，州/县级，1900s 起）",
+      "auth": {
+        "kind": "free_key",
+        "note": "免费key"
+      },
+      "cadence": "周/月",
+      "vertical": [
+        "H"
+      ],
+      "status": "accepted",
+      "landed_slug": "usda-quickstats"
+    },
+    {
+      "id": "usda-psd",
+      "name": "USDA PSD",
+      "doc_line": 90,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "api.fas.usda.gov/api/psd/*（全球农产品供需平衡表月度，1960 起）",
+      "auth": {
+        "kind": "free_key",
+        "note": "免费key"
+      },
+      "cadence": "月",
+      "vertical": [
+        "H"
+      ],
+      "status": "accepted",
+      "landed_slug": "usda-psd"
+    },
+    {
+      "id": "faostat-bulk",
+      "name": "FAOSTAT Bulk",
+      "doc_line": 91,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "bulks-faostat.fao.org/production/*.zip（API 已强制 401，走 bulk ZIP 规范化 CSV，1961 起）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "年",
+      "vertical": [
+        "H"
+      ],
+      "status": "accepted",
+      "landed_slug": "statcan-bulk"
+    },
+    {
+      "id": "imf-portwatch",
+      "name": "IMF PortWatch",
+      "doc_line": 92,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "services9.arcgis.com/.../Daily_Ports_Data/FeatureServer/0/query（2065 港+28 咽喉日度 portcalls/吨量，2019 起）＋Chokepoints 同实例",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "vertical": [
+        "I"
+      ],
+      "status": "accepted",
+      "landed_slug": "portwatch-imf"
+    },
+    {
+      "id": "nasa-firms",
+      "name": "NASA FIRMS",
+      "doc_line": 93,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "firms.modaps.eosdis.nasa.gov/data/active_fire/.../Global_24h.csv（全球 24h 火点免 key；MAP_KEY 可自定义 bbox）",
+      "auth": {
+        "kind": "unknown",
+        "note": "无(可选key)"
+      },
+      "cadence": "日",
+      "vertical": [
+        "I"
+      ],
+      "status": "accepted",
+      "landed_slug": "nasa-firms"
+    },
+    {
+      "id": "opensky",
+      "name": "OpenSky",
+      "doc_line": 94,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": true,
+      "endpoint": "opensky-network.org/api/states/all?bbox（匿名实时全球航班；历史需账号，自建采样）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "10s",
+      "vertical": [
+        "I"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "nasa-power",
+      "name": "NASA POWER",
+      "doc_line": 95,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "power.larc.nasa.gov/api/temporal/{hourly,daily,climatology}/point（免 key，辐照/气象 1981/1984 起）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "时/日",
+      "vertical": [
+        "J"
+      ],
+      "status": "accepted",
+      "landed_slug": "nasa-power"
+    },
+    {
+      "id": "usgs-nwis",
+      "name": "USGS NWIS",
+      "doc_line": 96,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "waterservices.usgs.gov/nwis/{dv,iv}（美国水文 15-60min/日值，部分站 100+ 年）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "时/日",
+      "vertical": [
+        "J"
+      ],
+      "status": "accepted",
+      "landed_slug": "usgs-nwis"
+    },
+    {
+      "id": "noaa-ncei",
+      "name": "NOAA NCEI",
+      "doc_line": 97,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "ncei.noaa.gov/access/services/data/v1?dataset=daily-summaries（全球 10 万站日值，GHCN 1763 起）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "vertical": [
+        "J"
+      ],
+      "status": "accepted",
+      "landed_slug": "noaa-ncei"
+    },
+    {
+      "id": "treasury-fiscaldata",
+      "name": "Treasury FiscalData",
+      "doc_line": 98,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": true,
+      "endpoint": "api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/...（免 key，日频国库+月度汇率）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "vertical": [
+        "L"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "usaspending",
+      "name": "USAspending",
+      "doc_line": 99,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": true,
+      "endpoint": "api.usaspending.gov/api/v2/（联邦合同按 NAICS 月度聚合=行业需求信号，FY2001 起）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日(可聚合)",
+      "vertical": [
+        "L"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "census-api",
+      "name": "Census API",
+      "doc_line": 100,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": true,
+      "endpoint": "api.census.gov/data/timeseries/eits/{mots,wts}+CBP（分行业月度零售批发/企业结构；免费 key 必须，防 HTML 错误页伪装 200）",
+      "auth": {
+        "kind": "free_key",
+        "note": "免费key"
+      },
+      "cadence": "月",
+      "vertical": [
+        "L"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "eu-ted",
+      "name": "EU TED",
+      "doc_line": 101,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "POST api.ted.europa.eu/v3/notices/search（欧盟招标/中标含金额+CPV 行业码，日更；另有 eForms 批量 XML 补史）",
+      "auth": {
+        "kind": "unknown",
+        "note": "无(可领key)"
+      },
+      "cadence": "日",
+      "vertical": [
+        "M"
+      ],
+      "status": "accepted",
+      "landed_slug": "ted-notices"
+    },
+    {
+      "id": "世行采购公告",
+      "name": "世行采购公告",
+      "doc_line": 102,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "search.worldbank.org/api/v2/procnotices（42 万条，公告量口径，无金额字段）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "vertical": [
+        "M"
+      ],
+      "status": "accepted",
+      "landed_slug": "worldbank-procnotices"
+    },
+    {
+      "id": "kaggle-datasets",
+      "name": "Kaggle Datasets",
+      "doc_line": 103,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "kaggle.com/api/v1/datasets/list",
+      "auth": {
+        "kind": "unknown",
+        "note": "download（实测免 key 全链路含 ZIP 下载）"
+      },
+      "cadence": "无(建议注册)",
+      "vertical": [
+        "N"
+      ],
+      "status": "accepted",
+      "landed_slug": "hf-datasets"
+    },
+    {
+      "id": "huggingface-镜像",
+      "name": "HuggingFace(镜像)",
+      "doc_line": 104,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": false,
+      "endpoint": "hf-mirror.com/api/datasets（主站直连超时，镜像全兼容 200；实测 15min 刷新的周期数据集）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "随数据集",
+      "vertical": [
+        "N"
+      ],
+      "status": "accepted",
+      "landed_slug": "hf-datasets"
+    },
+    {
+      "id": "opendatasoft",
+      "name": "OpenDataSoft",
+      "doc_line": 105,
+      "section": "★接 候选总表（34 项，全部经实测）",
+      "wave": "Wave 1",
+      "needs_review": true,
+      "endpoint": "data.opendatasoft.com/api/explore/v2.1/catalog（10.2 万数据集聚合目录，免 key；publica 旧域名已死，必须 v2.1）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "随源",
+      "vertical": [
+        "N"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "census-m3",
+      "name": "Census M3",
+      "doc_line": 201,
+      "section": "新增 ★接（15 个）",
+      "wave": "Wave 2",
+      "needs_review": true,
+      "endpoint": "NAICS 334413 出货/库存/订单月度，1992 起；免费 key（全 census 查询强制 key）",
+      "vertical": [
+        "半导体"
+      ],
+      "status": "accepted",
+      "landed_slug": "census-m3"
+    },
+    {
+      "id": "twse-openapi-月营收",
+      "name": "TWSE OpenAPI 月营收",
+      "doc_line": 202,
+      "section": "新增 ★接（15 个）",
+      "wave": "Wave 2",
+      "needs_review": false,
+      "endpoint": "openapi.twse.com.tw/v1/opendata/t187ap05_L，全台上市当月营收 JSON 无 key，產業別可滤半导体；历史靠正向累积",
+      "vertical": [
+        "半导体"
+      ],
+      "status": "accepted",
+      "landed_slug": "twse-monthly-revenue"
+    },
+    {
+      "id": "kosis-openapi",
+      "name": "KOSIS OpenAPI",
+      "doc_line": 203,
+      "section": "新增 ★接（15 个）",
+      "wave": "Wave 2",
+      "needs_review": true,
+      "endpoint": "韩国生产指数/出口月度，免费 key，直连通",
+      "vertical": [
+        "半导体"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "openfda",
+      "name": "openFDA",
+      "doc_line": 204,
+      "section": "新增 ★接（15 个）",
+      "wave": "Wave 2",
+      "needs_review": false,
+      "endpoint": "不良事件月度 10 万+记录（2004 起），免 key（240/min），审批/器械同构端点",
+      "vertical": [
+        "医药"
+      ],
+      "status": "accepted",
+      "landed_slug": "openfda"
+    },
+    {
+      "id": "clinicaltrials-gov-v2",
+      "name": "ClinicalTrials.gov v2",
+      "doc_line": 205,
+      "section": "新增 ★接（15 个）",
+      "wave": "Wave 2",
+      "needs_review": false,
+      "endpoint": "countTotal + AREA[StudyFirstPostDate]RANGE 一次返回整月注册量（2024-01=3776），2000 起，免 key",
+      "vertical": [
+        "医药"
+      ],
+      "status": "accepted",
+      "landed_slug": "clinicaltrials"
+    },
+    {
+      "id": "中检院批签发",
+      "name": "中检院批签发",
+      "doc_line": 206,
+      "section": "新增 ★接（15 个）",
+      "wave": "Wave 2",
+      "needs_review": false,
+      "endpoint": "POST bio.nifdc.org.cn/pqf/search.do?formAction=list1 疫苗/血制品月度批签发 13 字段结构化，免 key 无验证码（https 自签证书需 -k）——国内黄金源",
+      "vertical": [
+        "医药"
+      ],
+      "status": "accepted",
+      "landed_slug": "nifdc-batchcert"
+    },
+    {
+      "id": "中物联-chinawuliu",
+      "name": "中物联 chinawuliu",
+      "doc_line": 270,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": false,
+      "endpoint": "/xsyj/tjsj/ 栏目一个 spider 吃 5 条口径：公路运价周指数（周五发，meta description 机器可读）、LPI 月度、电商物流指数、社会物流总额；2015 起回溯",
+      "vertical": [
+        "物流"
+      ],
+      "status": "accepted",
+      "landed_slug": "chinawuliu-logistics"
+    },
+    {
+      "id": "中钢协数据门户-chinaisa-org-cn",
+      "name": "中钢协数据门户 chinaisa.org.cn",
+      "doc_line": 271,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": false,
+      "endpoint": "并入已占 cisa spider 扩展：POST /gxportal/xfpt/portal/getColumnList JSON 免鉴权，粗钢旬报产量/库存（黄金口径，worldsteel 不覆盖中国旬度）+周度八品种价格指数；注意原 cisa spider 只指向 cisa.org.cn 兄弟站",
+      "vertical": [
+        "钢铁"
+      ],
+      "status": "accepted",
+      "landed_slug": "cisa"
+    },
+    {
+      "id": "nbs-流通领域生产资料价格",
+      "name": "NBS 流通领域生产资料价格",
+      "doc_line": 272,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": true,
+      "endpoint": "旬度 HTML 内联表格 ~50 品（黑金/有色/化工/能源/农林/建材），2014 起回溯；确认 nbs-stats spider 未覆盖→挂现有 NBS 通道增量，不新建源",
+      "vertical": [
+        "大宗"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "四川统计局",
+      "name": "四川统计局",
+      "doc_line": 273,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": true,
+      "endpoint": "月度 38 行规整 HTML 表（规上工业+产品产量+固投+社零+税电指数），每月 16-18 日，requests 可解析",
+      "vertical": [
+        "区域"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "广东统计局",
+      "name": "广东统计局",
+      "doc_line": 274,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": false,
+      "endpoint": "月度 31 行表，唯一含 GDP+进出口总额的省级月度表；部分指标仅增速无绝对值需容错",
+      "vertical": [
+        "区域"
+      ],
+      "status": "accepted",
+      "landed_slug": "sc-gd-stats"
+    },
+    {
+      "id": "carbon-monitor",
+      "name": "Carbon Monitor",
+      "doc_line": 275,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": false,
+      "endpoint": "datas.carbonmonitor.org/API/downloadFullDataset.php 免鉴权全量日频 CSV（64.8 万行，38 国×6 部门，2019 起，滞后 2 月）；必须 --compressed -m 300；旧 db. 域名勿用；电力分燃料同款端点滞后≈0",
+      "vertical": [
+        "碳"
+      ],
+      "status": "accepted",
+      "landed_slug": "carbon-monitor"
+    },
+    {
+      "id": "edgar-v2026",
+      "name": "EDGAR v2026",
+      "doc_line": 276,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": false,
+      "endpoint": "jeodpp.jrc.ec.europa.eu 直链 ZIP 无鉴权：1970-2025 年度+月度×IPCC 行业+0.1° 网格",
+      "vertical": [
+        "碳"
+      ],
+      "status": "accepted",
+      "landed_slug": "edgar-emissions"
+    },
+    {
+      "id": "gdacs-rssapi",
+      "name": "GDACS（RSS+API）",
+      "doc_line": 277,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": true,
+      "endpoint": "免 key 直连，GeoJSON 含 alertlevel，fromDate/toDate 回溯 2020+",
+      "vertical": [
+        "灾害"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "应急管理部-mem-gov-cn",
+      "name": "应急管理部 mem.gov.cn",
+      "doc_line": 278,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": false,
+      "endpoint": "/gk/tjsj/ 月度灾情通报（受灾人次/直接经济损失亿元），月中发布；必须 --compressed",
+      "vertical": [
+        "灾害"
+      ],
+      "status": "accepted",
+      "landed_slug": "mem-disaster"
+    },
+    {
+      "id": "fao-empres-i-bigquery-api",
+      "name": "FAO EMPRES-i BigQuery API",
+      "doc_line": 279,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": false,
+      "endpoint": "api.data.apps.fao.org/api/v2/bigquery?sql_url=<公开.sql> 免 key 直连 CSV：全球动物疫病事件（WOAH 镜像，2025 起 4.2 万行实测）；FAO 通用 SQL 代理可复用到其他 FAO 数据集",
+      "vertical": [
+        "疫情"
+      ],
+      "status": "accepted",
+      "landed_slug": "fao-empres"
+    },
+    {
+      "id": "wto-eping",
+      "name": "WTO ePing",
+      "doc_line": 280,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": false,
+      "endpoint": "eping.wto.org/api/v1/notifications/getLatestNotifications 匿名可用（当日新鲜）；HS+日期检索需免费注册；1995 起",
+      "vertical": [
+        "贸易壁垒"
+      ],
+      "status": "accepted",
+      "landed_slug": "wto-eping"
+    },
+    {
+      "id": "jodi-oil",
+      "name": "JODI-Oil",
+      "doc_line": 281,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": false,
+      "endpoint": "jodidata.org/_resources/files/downloads/oil-data/annual-csv/primary/{year}.csv 确定性 URL，2002-2026 月度行 ~100 国，含质量旗",
+      "vertical": [
+        "能源"
+      ],
+      "status": "accepted",
+      "landed_slug": "jodi-oil"
+    },
+    {
+      "id": "jodi-gas",
+      "name": "JODI-Gas",
+      "doc_line": 282,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": false,
+      "endpoint": "jodidb.org TableViewer 导出（aspx postback 略糙），2009 起 ~30 经济体",
+      "vertical": [
+        "能源"
+      ],
+      "status": "accepted",
+      "landed_slug": "jodi-gas"
+    },
+    {
+      "id": "日本-e-stat",
+      "name": "日本 e-Stat",
+      "doc_line": 283,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": false,
+      "endpoint": "api.e-stat.go.jp/rest/3.0/app/json/... 直连通，免费 appId：百货超市销售月度+三产指数+特定服务业",
+      "vertical": [
+        "日韩零售"
+      ],
+      "status": "accepted",
+      "landed_slug": "jp-estat"
+    },
+    {
+      "id": "kosis-零售-线上购物表",
+      "name": "KOSIS 零售/线上购物表",
+      "doc_line": 284,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": true,
+      "endpoint": "补齐表 ID：零售 DT_1K41003/41012（2020.01 起）、线上购物 DT_1KE10041/10071（2017.01 起品类细分）",
+      "vertical": [
+        "日韩零售"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "eurostat-ei-bsco-m",
+      "name": "Eurostat ei_bsco_m",
+      "doc_line": 285,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": false,
+      "endpoint": "消费者信心正确代码（ei_bsci 已 404）；1985 起月度",
+      "vertical": [
+        "景气"
+      ],
+      "status": "accepted",
+      "landed_slug": "eurostat-api"
+    },
+    {
+      "id": "浙江开放平台",
+      "name": "浙江开放平台",
+      "doc_line": 286,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": true,
+      "endpoint": "POST /dopServer/dataCatalog/apiQueryPage 目录/元数据免登录可编程，「统计月报」7 条经济类接口已定位 sourceCode；取数需 appKey",
+      "vertical": [
+        "地方"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "data-europa-eu-sparql",
+      "name": "data.europa.eu SPARQL",
+      "doc_line": 287,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": true,
+      "endpoint": "bif:contains \"'econom*'\" 语法秒回，2,918 经济数据集可按 dsModifyDate 增量",
+      "vertical": [
+        "发现层"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "eurostat-comext",
+      "name": "Eurostat comext",
+      "doc_line": 288,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": false,
+      "endpoint": "SDMX 2.1 端到端打通（dataflow DS-045409→DSD 6 维→data）：EU-CHN 月度 HS6 贸易实数（德自中锂电 2025-07=€8.15 亿）；product 须 6 位 HS、reporter 不收聚合码 1Z",
+      "vertical": [
+        "中欧贸易"
+      ],
+      "status": "accepted",
+      "landed_slug": "education_oa_fulltext"
+    },
+    {
+      "id": "ourairports",
+      "name": "OurAirports",
+      "doc_line": 289,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": false,
+      "endpoint": "airports.csv 12.7MB 19 字段，航空类主数据",
+      "vertical": [
+        "维表"
+      ],
+      "status": "accepted",
+      "landed_slug": "ourairports"
+    },
+    {
+      "id": "amis",
+      "name": "AMIS",
+      "doc_line": 290,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": false,
+      "endpoint": "POST amis-9189b.appspot.com/fetch {\"query\":\"<SQL>\"} 无鉴权直查 BigQuery（G20 八商品供需）；appspot 被墙必须走代理",
+      "vertical": [
+        "粮农"
+      ],
+      "status": "accepted",
+      "landed_slug": "amis-market"
+    },
+    {
+      "id": "noaa-swpc",
+      "name": "NOAA SWPC",
+      "doc_line": 291,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": false,
+      "endpoint": "Kp 指数 3h/10.7cm 通量，秒回免 key，成本极低",
+      "vertical": [
+        "空间天气"
+      ],
+      "status": "accepted",
+      "landed_slug": "noaa-swpc"
+    },
+    {
+      "id": "afdc",
+      "name": "AFDC",
+      "doc_line": 292,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": true,
+      "endpoint": "页面→正则提 /files/u/...xlsx 直链→下载，全链路无鉴权（S 级自动化模板）",
+      "vertical": [
+        "美国能源"
+      ],
+      "status": "accepted",
+      "landed_slug": "afdc"
+    },
+    {
+      "id": "world-bank-data360-mcp",
+      "name": "World Bank data360-mcp",
+      "doc_line": 293,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": true,
+      "endpoint": "pip install data360-mcp==0.1.3 6 工具无 key，MIT，接公司 open-data MCP 仅加一条配置",
+      "vertical": [
+        "MCP"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "eurostat-apri-pi-outq",
+      "name": "Eurostat apri_pi_outq",
+      "doc_line": 294,
+      "section": "新增 ★接（~26 项）",
+      "wave": "Wave 3",
+      "needs_review": false,
+      "endpoint": "ID 修正（apri_pi05_outq 已失效），季度农业产出价格指数",
+      "vertical": [
+        "农业价格"
+      ],
+      "status": "accepted",
+      "landed_slug": "eurostat-api"
+    },
+    {
+      "id": "nfra-统计-excel-附件",
+      "name": "NFRA 统计 Excel 附件",
+      "doc_line": 706,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": true,
+      "endpoint": "SelectByDocId?docId= → attachmentInfoVOList[].urlOtherName → /chinese/docfile/<年>/<uuid>.xls（BIFF8，裸请求 206 无鉴权）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "季/月",
+      "cost": "S",
+      "vertical": [
+        "行业面"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "nfra-处罚公开",
+      "name": "NFRA 处罚公开",
+      "doc_line": 707,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": true,
+      "endpoint": "/cbircweb/DocInfo/SelectDocByItemIdAndChild?itemId= 叶子 4113(总局662)/4114(监管局本级33,000)/4115(分局41,918)；各机构树 1000→1030/1031/4311",
+      "auth": {
+        "kind": "none",
+        "note": "无(双头)"
+      },
+      "cadence": "日",
+      "cost": "S",
+      "vertical": [
+        "企业面"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "pboc-信贷收支表",
+      "name": "PBoC 信贷收支表",
+      "doc_line": 708,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": true,
+      "endpoint": "diaochatongjisi/116219/116319/<年>ntjsj/jrjgxdsztj/ 静态页内嵌 9 表 xlsx 直链（attachDir/YYYY/MM/<id>.xlsx），2016 起，四类银行分列",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "月",
+      "cost": "S",
+      "vertical": [
+        "行业面"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "pboc-贷款投向",
+      "name": "PBoC 贷款投向",
+      "doc_line": 709,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": true,
+      "endpoint": "goutongjiaoliu/113456/113469/ 季度新闻稿（2026-10 复测新址；2026Q3 实测含普惠小微 38.50 万亿/涉农 54.29 万亿）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "季",
+      "cost": "S",
+      "vertical": [
+        "行业面"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "pboc-货政报告",
+      "name": "PBoC 货政报告",
+      "doc_line": 710,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": true,
+      "endpoint": "zhengcehuobisi/125207/125227/125957/ 议题页单 PDF，2001–2026 全序列",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "季",
+      "cost": "S",
+      "vertical": [
+        "行业面"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "pboc-区域金融",
+      "name": "PBoC 区域金融",
+      "doc_line": 711,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": true,
+      "endpoint": "年度合辑页 33 个 PDF（主报告+31 省+深圳摘要），另有各省分行子域全文页",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "年",
+      "cost": "M",
+      "vertical": [
+        "区域"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "lpr",
+      "name": "LPR",
+      "doc_line": 712,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": true,
+      "endpoint": "GET chinamoney.com.cn/ags/ms/cm-u-bk-currency/LprHisExcel?lang=CN 全史 xlsx 1540 期（2013-10-25 起）；LprHis JSON 恒钳近 12 期只作增量探针",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "月",
+      "cost": "S",
+      "vertical": [
+        "货币市场"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "shibor",
+      "name": "Shibor",
+      "doc_line": 713,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": false,
+      "endpoint": "POST /ags/ms/cm-u-bk-shibor/ShiborHis（必须 POST，参数在 query）全史 2006-10-08 起，窗口 ≤1 年分片；ShiborPriHis 报价行明细（memCode=|拼接串）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "cost": "S",
+      "vertical": [
+        "货币市场"
+      ],
+      "status": "accepted",
+      "landed_slug": "chinamoney-shibor"
+    },
+    {
+      "id": "fr-fdr",
+      "name": "FR/FDR",
+      "doc_line": 714,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": false,
+      "endpoint": "POST .../FrrHis + 静态 /r/cms/www/chinamoney/data/currency/frr-chrt.csv、fdr-chrt.csv",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "cost": "S",
+      "vertical": [
+        "货币市场"
+      ],
+      "status": "accepted",
+      "landed_slug": "chinamoney-shibor"
+    },
+    {
+      "id": "ncd-aaa-曲线",
+      "name": "NCD AAA 曲线",
+      "doc_line": 715,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": false,
+      "endpoint": "GET /ags/ms/cm-u-bk-currency/ClsYldCurvHis?bondType=CYCC41B（曲线码表 ClsYldCurvCurvGO）——线上仅滚动 ~2 个月，须自累积",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "cost": "S",
+      "vertical": [
+        "货币市场"
+      ],
+      "status": "accepted",
+      "landed_slug": "chinamoney-ncd-curve"
+    },
+    {
+      "id": "上清所月报",
+      "name": "上清所月报",
+      "doc_line": 716,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": true,
+      "endpoint": "POST /shchapp/web/sdocClient/monthListPage（JSESSIONID+Referer，channelId=ff80808140a43ba80140a45b17320007）表四托管/表五持有结构，2014-12 起",
+      "auth": {
+        "kind": "unknown",
+        "note": "匿名cookie"
+      },
+      "cadence": "月",
+      "cost": "M",
+      "vertical": [
+        "行业面"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "中债登统计月报",
+      "name": "中债登统计月报",
+      "doc_line": 717,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": false,
+      "endpoint": "POST chinabond.com.cn/cbiw/GetMonthReport/queryContent（ywbbnr=base64 PDF 内联）+ GetDataByte（sWjlx=3 xlsx），1997-01 起，8 表含持有者结构",
+      "auth": {
+        "kind": "none",
+        "note": "无(XRW头)"
+      },
+      "cadence": "月",
+      "cost": "S",
+      "vertical": [
+        "行业面"
+      ],
+      "status": "accepted",
+      "landed_slug": "chinabond-monthly"
+    },
+    {
+      "id": "中债收益率曲线",
+      "name": "中债收益率曲线",
+      "doc_line": 718,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": false,
+      "endpoint": "GET yield.chinabond.com.cn/cbweb-mn/yc/downYearBzqx?year=&ycDefId= 整年包 + queryTree 160+ 曲线——含商业银行二级资本债收益率曲线 AAA-至A 等资本工具曲线",
+      "auth": {
+        "kind": "none",
+        "note": "无(Referer)"
+      },
+      "cadence": "日",
+      "cost": "S",
+      "vertical": [
+        "市场面"
+      ],
+      "status": "accepted",
+      "landed_slug": "chinabond-yield-curve"
+    },
+    {
+      "id": "上清所-trs-公告",
+      "name": "上清所 TRS 公告",
+      "doc_line": 719,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": true,
+      "endpoint": "POST /shchapp/web/disclosureForTrsServer/search（ch166 流通要素/ch144 发行/ch177 评级）；流通要素详情页 HTML 自带代码/总额/期限/票面利率/评级",
+      "auth": {
+        "kind": "none",
+        "note": "无(Referer)"
+      },
+      "cadence": "实时",
+      "cost": "S",
+      "vertical": [
+        "资本工具"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "cba-理财指数",
+      "name": "CBA 理财指数",
+      "doc_line": 720,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": false,
+      "endpoint": "china-cba.net/Index/show/catid/280/id/{46763=2026,44625=2025,43220=2024,38855=2022-23} 附件 PDF 有文本层（53 期，2022-02 起；2022-25 为 docx 更好抽）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "月",
+      "cost": "S/M",
+      "vertical": [
+        "理财"
+      ],
+      "status": "accepted",
+      "landed_slug": "cba-wealth-index"
+    },
+    {
+      "id": "中国理财网报告",
+      "name": "中国理财网报告",
+      "doc_line": 721,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": false,
+      "endpoint": "chinawealth.com.cn/lc_lcsj/lcbg/ 28 期（2013 起），PDF 在详情页 data-recurl 属性",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "季",
+      "cost": "S",
+      "vertical": [
+        "理财"
+      ],
+      "status": "accepted",
+      "landed_slug": "chinawealth-reports"
+    },
+    {
+      "id": "理财产品查询",
+      "name": "理财产品查询",
+      "doc_line": 722,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": true,
+      "endpoint": "POST /lcw-fe-service/m/n（body=RSA 公钥裸 base64）→/prod/search（AES-256-ECB+头 X-Timestamp/X-Nonce/X-Sign=SHA256(data=<ct>&nonce=<n>&timestamp=<t>&signKey=ppnn13%dkstFeb.1st)）",
+      "auth": {
+        "kind": "unknown",
+        "note": "免登录"
+      },
+      "cadence": "实时",
+      "cost": "M",
+      "vertical": [
+        "理财"
+      ],
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "东财披露日历",
+      "name": "东财披露日历",
+      "doc_line": 723,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": false,
+      "endpoint": "GET datacenter-web.eastmoney.com/api/data/v1/get?reportName=RPT_PUBLIC_BS_APPOIN（FIRST_APPOINT_DATE/CHANGE/ACTUAL 三列，回溯 2007，in 批量）——「到期未披露」预警数据源",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "随披露",
+      "cost": "S",
+      "vertical": [
+        "预警"
+      ],
+      "status": "accepted",
+      "landed_slug": "eastmoney-disclosure-plan"
+    },
+    {
+      "id": "港交所披露易",
+      "name": "港交所披露易",
+      "doc_line": 724,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": false,
+      "endpoint": "www1.hkexnews.hk/search/prefix.do（代码→stockId）+ titleSearchServlet.do（列表，YYYYMMDD，t1code=40000 财报/t2Gcode 预警类目）+ PDF 直链；类目树/活跃证券静态 JSON",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "cost": "S",
+      "vertical": [
+        "企业面(H股)"
+      ],
+      "status": "accepted",
+      "landed_slug": "hkex-disclosure"
+    },
+    {
+      "id": "中诚信国际",
+      "name": "中诚信国际",
+      "doc_line": 725,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": false,
+      "endpoint": "website-api.ccxi.com.cn/admin/content/{dqgz,cspj,bdqgz}/page（HMAC-SHA256 签名，钥硬编码前端 app.js 已复现；银行跟踪 3,983 条；PDF 直链 OSS 免签名）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "cost": "S",
+      "vertical": [
+        "评级"
+      ],
+      "status": "accepted",
+      "landed_slug": "ratings-ccxi"
+    },
+    {
+      "id": "大公国际",
+      "name": "大公国际",
+      "doc_line": 726,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": false,
+      "endpoint": "POST dagongcredit.com/api/construction/openApi/getContentInfoPageList（无鉴权，topic=\"商业银行\" 94 条，a1=PDF 直链）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "cost": "S",
+      "vertical": [
+        "评级"
+      ],
+      "status": "accepted",
+      "landed_slug": "dagong-ratings"
+    },
+    {
+      "id": "联合资信",
+      "name": "联合资信",
+      "doc_line": 727,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": false,
+      "endpoint": "lhratings.com/lists/111.html?p=N（2,927 页静态）+ ?title=银行",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "cost": "S",
+      "vertical": [
+        "评级"
+      ],
+      "status": "accepted",
+      "landed_slug": "lh-ratings"
+    },
+    {
+      "id": "东方金诚",
+      "name": "东方金诚",
+      "doc_line": 728,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": false,
+      "endpoint": "dfratings.com/Periodic-tracking.html?page=N + ?wd=银行",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "cost": "S",
+      "vertical": [
+        "评级"
+      ],
+      "status": "accepted",
+      "landed_slug": "dfjc-ratings"
+    },
+    {
+      "id": "上海新世纪",
+      "name": "上海新世纪",
+      "doc_line": 729,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": false,
+      "endpoint": "http://shxsj.com/serve/api/article_api/get_cid_article（仅 HTTP，cid=50，银行 1,081 条，pdf[] 附件对象）",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "cost": "S",
+      "vertical": [
+        "评级"
+      ],
+      "status": "accepted",
+      "landed_slug": "xsj-ratings"
+    },
+    {
+      "id": "银登不良转让",
+      "name": "银登不良转让",
+      "doc_line": 730,
+      "section": "星接候选总表（25 源，全部直连、免 key、无需代理）",
+      "wave": "银行业专场",
+      "needs_review": false,
+      "endpoint": "yindeng.com.cn/ywzq/ywzq_bldkzr/bldkzr_xxpl/bldkzr_xxpl_zrgg/（挂牌 6,155 条）+ ..._zrjggg/（成交 3,030 条，2021 试点起）；PDF 文本层含笔数/户数/未偿本息/加权逾期天数/五级分类",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "实时",
+      "cost": "S-M",
+      "vertical": [
+        "资产质量"
+      ],
+      "status": "accepted",
+      "landed_slug": "yindeng-npl-transfer"
+    },
+    {
+      "id": "moa-生猪产能",
+      "name": "MOA 生猪产能",
+      "doc_line": 915,
+      "section": "判读总表",
+      "wave": "",
+      "needs_review": false,
+      "evidence": {
+        "summary": "moa.gov.cn/ztzl/szcpxx/jdsj/YYYY/YYYYMM/，静态 table.data_table；2026Q3末 能繁母猪 3602 万头（调控目标 96.0%，环比 −4.7%，同比 −10.7%）、生猪存栏 42533 万头。季更（1/4/7/10 月 20 日），月度产能站点不发布"
+      },
+      "status": "accepted",
+      "landed_slug": "moa-hog-price"
+    },
+    {
+      "id": "moa-供需形势-casde",
+      "name": "MOA 供需形势 CASDE",
+      "doc_line": 916,
+      "section": "判读总表",
+      "wave": "",
+      "needs_review": false,
+      "evidence": {
+        "summary": "真通道不在 moa.gov.cn，在 www.agri.cn/sj/gxxs/；5 张表（玉米/大豆/棉花/食用植物油/食糖）× 18–24 行，含面积/产量/进口/消费/期末库存/价格区间；月更 9–12 日发布；回溯 ≥ No.27（2018-09）；CASDE-No. 是稳定期次主键"
+      },
+      "status": "accepted",
+      "landed_slug": "agri-casde"
+    },
+    {
+      "id": "ndrc-猪粮比价",
+      "name": "NDRC 猪粮比价",
+      "doc_line": 917,
+      "section": "判读总表",
+      "wave": "",
+      "needs_review": false,
+      "evidence": {
+        "summary": "/fgsj/ 零生猪链接；唯一周度价格栏目数据在 PNG（且来源标为粮食和物资储备局）；jgjc.ndrc.gov.cn 已成登录制预警系统；站内检索 404/空。原定的一级阈值锚落空"
+      },
+      "status": "rejected",
+      "reason": "❌ 不可得",
+      "landed_slug": null
+    },
+    {
+      "id": "饲料工业协会",
+      "name": "饲料工业协会",
+      "doc_line": 918,
+      "section": "判读总表",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "月更无会员限制，但核心表是 JPG（<table>=0）；正文可提总量、分项只在图里。2026-09：总 3205 / 配合 2996 / 浓缩 119 / 预混 68 万吨"
+      },
+      "status": "unknown",
+      "reason": "⚠️ 需 OCR",
+      "landed_slug": null
+    },
+    {
+      "id": "nbs-农业序列",
+      "name": "NBS 农业序列",
+      "doc_line": 919,
+      "section": "判读总表",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "data.stats.gov.cn 全站 WAF 403 UrlACL（IPv6/强制 IPv4/QueryData/getTree 全 403）；既有单元形态已知（zbcode 扩展零改解析器）；年鉴表全 JPG。农业只有年度，无月度；须在生产环境跑 getTree 补 code"
+      },
+      "status": "unknown",
+      "reason": "⚠️ 本机不可验证",
+      "landed_slug": null
+    },
+    {
+      "id": "海关农产品贸易",
+      "name": "海关农产品贸易",
+      "doc_line": 920,
+      "section": "判读总表",
+      "wave": "",
+      "needs_review": false,
+      "evidence": {
+        "summary": "三主机全前置加速乐（JSL）：412 / 503 / 504，换路径无效；既有单元早已记录同面墙"
+      },
+      "status": "rejected",
+      "reason": "❌ 不可得",
+      "landed_slug": null
+    },
+    {
+      "id": "渔业",
+      "name": "渔业",
+      "doc_line": 921,
+      "section": "判读总表",
+      "wave": "",
+      "needs_review": false,
+      "evidence": {
+        "summary": "yyj.moa.gov.cn 正文内嵌表：1–9 月水产品产量 5389.68 万吨（+4.27%）；年度公报 7652.14 万吨"
+      },
+      "status": "accepted",
+      "landed_slug": "moa-fishery"
+    },
+    {
+      "id": "林业",
+      "name": "林业",
+      "doc_line": 922,
+      "section": "判读总表",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "站点 200 但无统计栏目；「统计年鉴」入口是 SPA 空壳"
+      },
+      "status": "unknown",
+      "reason": "⚠️ 仅年鉴/PDF",
+      "landed_slug": null
+    },
+    {
+      "id": "usda-wasde",
+      "name": "USDA WASDE",
+      "doc_line": 923,
+      "section": "判读总表",
+      "wave": "",
+      "needs_review": false,
+      "evidence": {
+        "summary": ".xls / .txt / .xml 直链，期号 wasde{MM}{YY}；最新 WASDE-676（2026-10）。坑：未发布期返回 200 + apology HTML，必须校验 content-type 与大小"
+      },
+      "status": "accepted",
+      "landed_slug": "usda-wasde"
+    },
+    {
+      "id": "oecd-fao-outlook",
+      "name": "OECD-FAO Outlook",
+      "doc_line": 924,
+      "section": "判读总表",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "oecd.org / agri-outlook.org 三入口全 403（WAF）；sdmx.oecd.org dataflow 列表 200（5.9MB）但未命中 AGROUT，须再挖"
+      },
+      "status": "unknown",
+      "reason": "⚠️ 未验证",
+      "landed_slug": "oecd-cli"
+    },
+    {
+      "id": "wfp-市场粮价",
+      "name": "WFP 市场粮价",
+      "doc_line": 925,
+      "section": "判读总表",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "旧库冻结于 2021-08；活跃库是 global-wfp-food-prices（last_modified 2026-11-05，最新观测 2026-10-15，月频，40 个按年 CSV / 620MB），schema 完全不同"
+      },
+      "status": "unknown",
+      "reason": "⚠️ 需重写适配",
+      "landed_slug": "wfp-food-price"
+    },
+    {
+      "id": "化肥",
+      "name": "化肥",
+      "doc_line": 926,
+      "section": "判读总表",
+      "wave": "",
+      "needs_review": false,
+      "evidence": {
+        "summary": "www.fert.cn/10005/ 月度进出口正文含数值（2026-08 尿素出口 52.46 万吨 / 2.18 亿美元 / 416 美元·吨⁻¹）；产量与出厂价在 vip 需会员；中肥网是商业门户 → authority=industry，不是 association"
+      },
+      "status": "accepted",
+      "landed_slug": "fert-cn"
+    },
+    {
+      "id": "农药",
+      "name": "农药",
+      "doc_line": 927,
+      "section": "判读总表",
+      "wave": "",
+      "needs_review": false,
+      "evidence": {
+        "summary": "CCPIA 全站无统计/数据/价格栏目；ICAMA 只有登记许可查询"
+      },
+      "status": "rejected",
+      "reason": "❌ 协会侧不可得",
+      "landed_slug": null
+    },
+    {
+      "id": "农机",
+      "name": "农机",
+      "doc_line": 928,
+      "section": "判读总表",
+      "wave": "",
+      "needs_review": false,
+      "evidence": {
+        "summary": "njhs.moa.gov.cn/nyjxhqk/ 农业机械化发展统计公报（HTML）：2025 作业面积 79.76 亿亩次、综合机械化率 76.82%、拖拉机 1999.19 万台；可见 2022–2025 四期。无月度官方产销"
+      },
+      "status": "accepted",
+      "landed_slug": "moa-machinery"
+    },
+    {
+      "id": "品种审定",
+      "name": "品种审定",
+      "doc_line": 929,
+      "section": "判读总表",
+      "wave": "",
+      "needs_review": false,
+      "evidence": {
+        "summary": "zys.moa.gov.cn/gsgg/ 同日连发多条省级公示，无时间序列；字段级（是否含品种名/审定编号）未验证"
+      },
+      "status": "accepted",
+      "landed_slug": "moa-variety-approval"
+    },
+    {
+      "id": "棉花",
+      "name": "棉花",
+      "doc_line": 930,
+      "section": "判读总表",
+      "wave": "",
+      "needs_review": false,
+      "evidence": {
+        "summary": "https 未部署（443 RST），但 http://www.chinacotton.org/ 200；articleList.aspx?sort=1/2/4/5/6，双月市场监测报告（如 articleID=409 = 2025 年 7–8 月）"
+      },
+      "status": "accepted",
+      "landed_slug": "cncotton"
+    },
+    {
+      "id": "糖业协会",
+      "name": "糖业协会",
+      "doc_line": 931,
+      "section": "判读总表",
+      "wave": "",
+      "needs_review": false,
+      "evidence": {
+        "summary": "TLS 走完但证书是 CN=5-8lab.com（vhost 错配）→ curl (60)；-k 后仍 403（nginx）。代理恢复也救不了，须换源"
+      },
+      "status": "rejected",
+      "reason": "❌ 不可达（站点侧缺陷）",
+      "landed_slug": null
+    },
+    {
+      "id": "昆明市农业农村局-价格行情",
+      "name": "昆明市农业农村局·价格行情",
+      "doc_line": 1031,
+      "section": "中国境内",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "endpoint": "nyncj.km.gov.cn/nygz/jgxq/",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日",
+      "history_depth": "仅滚动 2–3 月（index_5→2026-10-13；index_20→404）",
+      "anti_bot": "无",
+      "cost": "S",
+      "value": "高",
+      "evidence": {
+        "summary": "单篇 1 表 25 行；列=品名/计量单位/最高价/最低价/均价；样例「红玫瑰（单头）元/枝 0.35/0.22/0.27」「绣球 元/枝 10.32/7.17/8.31」；来源标注「昆明斗南国际花卉产业园开发有限公司」；详情页 /c/YYYY-MM-DD/<id>.shtml"
+      },
+      "reach": {
+        "state": "direct_ok",
+        "detail": "✅200"
+      },
+      "status": "accepted",
+      "landed_slug": "dounan-flower-price"
+    },
+    {
+      "id": "国家林草局",
+      "name": "国家林草局",
+      "doc_line": 1032,
+      "section": "中国境内",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "endpoint": "forestry.gov.cn",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "年/公告",
+      "history_depth": "待实测",
+      "anti_bot": "无",
+      "cost": "M",
+      "value": "中高",
+      "evidence": {
+        "summary": "首页 85 KB 正常；API 网关路径 301（形态待 W0 定位）"
+      },
+      "reach": {
+        "state": "direct_ok",
+        "detail": "✅200"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "农业农村部",
+      "name": "农业农村部",
+      "doc_line": 1033,
+      "section": "中国境内",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "endpoint": "moa.gov.cn",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "月/公告",
+      "anti_bot": "无",
+      "cost": "M",
+      "value": "中",
+      "evidence": {
+        "summary": "首页 114 KB 正常"
+      },
+      "reach": {
+        "state": "direct_ok",
+        "detail": "✅200"
+      },
+      "status": "accepted",
+      "landed_slug": "moa-hog-price"
+    },
+    {
+      "id": "kifa-昆明花拍",
+      "name": "KIFA 昆明花拍",
+      "doc_line": 1034,
+      "section": "中国境内",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "endpoint": "kifa.net/{kIFAPriceIndex,breedQuotation,info}.do",
+      "cadence": "日",
+      "anti_bot": "雷池 SafeLine WAF（server: Tengine + sl-session cookie + /.safeline/static/favicon.png），带完整浏览器头仍 468",
+      "cost": "L",
+      "value": "高但不可得",
+      "evidence": {
+        "summary": "三端点响应体均 14,863 B 挑战页"
+      },
+      "reach": {
+        "state": "blocked",
+        "detail": "❌468"
+      },
+      "status": "rejected",
+      "reason": "实测不可达（❌468）；反爬/阻断：雷池 SafeLine WAF（server: Tengine + sl-session cookie + /.safeline/static/favicon.png），带完整浏览器头仍 468",
+      "landed_slug": "flower-auction"
+    },
+    {
+      "id": "中国花卉协会",
+      "name": "中国花卉协会",
+      "doc_line": 1035,
+      "section": "中国境内",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "endpoint": "chinaflower.org / .org.cn / chinaflower.org.cn",
+      "anti_bot": "域名停放",
+      "value": "已死",
+      "evidence": {
+        "summary": "chinaflower.org DNS→exp.gname.net；.org.cn→NXDOMAIN；chinaflower.org.cn→000"
+      },
+      "reach": {
+        "state": "blocked",
+        "detail": "❌000"
+      },
+      "status": "rejected",
+      "reason": "实测不可达（❌000）；反爬/阻断：域名停放",
+      "landed_slug": null
+    },
+    {
+      "id": "云南花卉",
+      "name": "云南花卉",
+      "doc_line": 1036,
+      "section": "中国境内",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "endpoint": "flowers.yunnan.gov.cn / ynflower.gov.cn",
+      "value": "已死",
+      "evidence": {
+        "summary": "均不可达；归档单元 yunnan-flowers 的 spider.py 含 UCI/FRED 占位 URL（模板垃圾）"
+      },
+      "reach": {
+        "state": "blocked",
+        "detail": "❌000"
+      },
+      "status": "rejected",
+      "reason": "实测不可达（❌000）",
+      "landed_slug": null
+    },
+    {
+      "id": "斗南门户",
+      "name": "斗南门户",
+      "doc_line": 1037,
+      "section": "中国境内",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "endpoint": "dounan.gov.cn(❌000) / dounan.cn(✅200, 4.6 KB gbk)",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "value": "低",
+      "evidence": {
+        "summary": "后者仅 4.6 KB"
+      },
+      "reach": {
+        "state": "mixed",
+        "detail": "混合"
+      },
+      "status": "unknown",
+      "reason": "可达性混合（混合）",
+      "landed_slug": "dounan-flower-price"
+    },
+    {
+      "id": "花讯网",
+      "name": "花讯网",
+      "doc_line": 1038,
+      "section": "中国境内",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "endpoint": "flowercn.net",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "日(资讯)",
+      "anti_bot": "无",
+      "value": "低",
+      "evidence": {
+        "summary": "118 KB，栏目为资讯/社区/栽培，无结构化数据"
+      },
+      "reach": {
+        "state": "direct_ok",
+        "detail": "✅200"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "中国海关",
+      "name": "中国海关",
+      "doc_line": 1039,
+      "section": "中国境内",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "endpoint": "stats.customs.gov.cn / customs.gov.cn",
+      "cadence": "月",
+      "anti_bot": "Precondition Failed（前置加速乐，需 cookie/JS 握手）",
+      "cost": "L",
+      "value": "高但绕行（Comtrade 覆盖）",
+      "evidence": {
+        "summary": "412 + 2.5 KB"
+      },
+      "reach": {
+        "state": "blocked",
+        "detail": "❌412"
+      },
+      "status": "rejected",
+      "reason": "实测不可达（❌412）；反爬/阻断：Precondition Failed（前置加速乐，需 cookie/JS 握手）",
+      "landed_slug": "customs-xborder-retail"
+    },
+    {
+      "id": "国家统计局",
+      "name": "国家统计局",
+      "doc_line": 1040,
+      "section": "中国境内",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "endpoint": "data.stats.gov.cn/easyquery.htm",
+      "cadence": "月",
+      "anti_bot": "WAF",
+      "evidence": {
+        "summary": "403 + 315 B（生产站另有通道，见农业专场）"
+      },
+      "reach": {
+        "state": "blocked",
+        "detail": "❌403"
+      },
+      "status": "rejected",
+      "reason": "实测不可达（❌403）；反爬/阻断：WAF",
+      "landed_slug": null
+    },
+    {
+      "id": "全国标准平台",
+      "name": "全国标准平台",
+      "doc_line": 1041,
+      "section": "中国境内",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "endpoint": "std.samr.gov.cn",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "实时",
+      "anti_bot": "无",
+      "value": "中",
+      "evidence": {
+        "summary": "复用既有单元"
+      },
+      "reach": {
+        "state": "direct_ok",
+        "detail": "✅（既有 gb-standards 单元）"
+      },
+      "status": "accepted",
+      "landed_slug": "gb-standards"
+    },
+    {
+      "id": "花卉展会-门户",
+      "name": "花卉展会/门户",
+      "doc_line": 1042,
+      "section": "中国境内",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "endpoint": "hortiflorexpo.com(✅200) / 59178.com(✅200) / 31expo.com(301) / cnfxw.com(114 B)",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "不定期",
+      "anti_bot": "无",
+      "value": "低",
+      "evidence": {
+        "summary": "均无结构化数据通道"
+      },
+      "reach": {
+        "state": "mixed",
+        "detail": "混合"
+      },
+      "status": "unknown",
+      "reason": "可达性混合（混合）",
+      "landed_slug": null
+    },
+    {
+      "id": "云南-园林类",
+      "name": "云南/园林类",
+      "doc_line": 1043,
+      "section": "中国境内",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "endpoint": "ynyhxh.com(429) / ynflower.org(404) / yuanlin.com(000) / hm160.cn(000)",
+      "anti_bot": "429 限流",
+      "value": "低",
+      "reach": {
+        "state": "mixed",
+        "detail": "混合"
+      },
+      "status": "unknown",
+      "reason": "可达性混合（混合）",
+      "landed_slug": null
+    },
+    {
+      "id": "un-comtrade-1049",
+      "name": "UN Comtrade",
+      "doc_line": 1049,
+      "section": "全球",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "endpoint": "comtradeapi.un.org/public/v1/preview/C/A/HS",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "月/年",
+      "history_depth": "1962 起",
+      "cost": "零新建（un-comtrade 既有参数化）",
+      "value": "高",
+      "evidence": {
+        "summary": "reporterCode=156&period=2023&cmdCode=0601,0602,0603&flowCode=X → 204 行；字段含 reporterCode/partnerCode/cmdCode/period/flowCode/classificationCode=H6；实测 cmdCodes=0601/0602/0603"
+      },
+      "reach": {
+        "state": "direct_ok",
+        "detail": "✅200"
+      },
+      "status": "accepted",
+      "landed_slug": "un-comtrade"
+    },
+    {
+      "id": "eurostat-1050",
+      "name": "Eurostat",
+      "doc_line": 1050,
+      "section": "全球",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "endpoint": "ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/apro_cpsh1",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "年",
+      "history_depth": "多年",
+      "cost": "零新建（eurostat-api）",
+      "value": "高",
+      "evidence": {
+        "summary": "geo=DE&time=2023 → 19,672 B 正常"
+      },
+      "reach": {
+        "state": "direct_ok",
+        "detail": "✅200"
+      },
+      "status": "accepted",
+      "landed_slug": "eurostat-api"
+    },
+    {
+      "id": "aiph-国际园艺生产者协会",
+      "name": "AIPH 国际园艺生产者协会",
+      "doc_line": 1051,
+      "section": "全球",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "endpoint": "aiph.org",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "年",
+      "cost": "S–M",
+      "value": "中高",
+      "evidence": {
+        "summary": "首页 88 KB 正常；年鉴（International Statistics Flowers and Plants）可及性待 W0 实测"
+      },
+      "reach": {
+        "state": "direct_ok",
+        "detail": "✅200（301→aiph.org）"
+      },
+      "status": "accepted",
+      "landed_slug": "aiph-stats"
+    },
+    {
+      "id": "expoflores-厄瓜多尔",
+      "name": "Expoflores（厄瓜多尔）",
+      "doc_line": 1052,
+      "section": "全球",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "endpoint": "expoflores.com",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "月/年",
+      "cost": "M",
+      "value": "中高",
+      "evidence": {
+        "summary": "首页 1.0 MB 正常"
+      },
+      "reach": {
+        "state": "direct_ok",
+        "detail": "✅200"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "kenya-flower-council",
+      "name": "Kenya Flower Council",
+      "doc_line": 1053,
+      "section": "全球",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "endpoint": "kenyaflowercouncil.org",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "年/月",
+      "cost": "S–M",
+      "value": "中",
+      "evidence": {
+        "summary": "首页 109 KB 正常"
+      },
+      "reach": {
+        "state": "direct_ok",
+        "detail": "✅200"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "union-fleurs-欧洲花卉贸易",
+      "name": "Union Fleurs（欧洲花卉贸易）",
+      "doc_line": 1054,
+      "section": "全球",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "endpoint": "unionfleurs.org",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "年",
+      "cost": "S",
+      "value": "中",
+      "evidence": {
+        "summary": "首页 169 KB 正常"
+      },
+      "reach": {
+        "state": "direct_ok",
+        "detail": "✅200"
+      },
+      "status": "accepted",
+      "landed_slug": "aiph-stats"
+    },
+    {
+      "id": "usda-nass",
+      "name": "USDA NASS",
+      "doc_line": 1055,
+      "section": "全球",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "endpoint": "quickstats.nass.usda.gov/api",
+      "auth": {
+        "kind": "free_key",
+        "note": "免费 key"
+      },
+      "cadence": "年/周",
+      "history_depth": "多年",
+      "cost": "零新建（usda-quickstats）",
+      "value": "中高",
+      "evidence": {
+        "summary": "401 + 26 B（key 无效，端点可达）；花卉口径走 HORTICULTURE 商品参数"
+      },
+      "reach": {
+        "state": "direct_ok",
+        "detail": "✅有响应（DEMO key 401）"
+      },
+      "status": "accepted",
+      "landed_slug": "usda-quickstats"
+    },
+    {
+      "id": "日本-e-stat-1056",
+      "name": "日本 e-Stat",
+      "doc_line": 1056,
+      "section": "全球",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "endpoint": "e-stat.go.jp",
+      "auth": {
+        "kind": "unknown",
+        "note": "appId"
+      },
+      "cadence": "月/年",
+      "history_depth": "多年",
+      "cost": "零新建（jp-estat）",
+      "value": "中高",
+      "evidence": {
+        "summary": "花き 走 search_word 参数"
+      },
+      "reach": {
+        "state": "direct_ok",
+        "detail": "✅（既有单元）"
+      },
+      "status": "accepted",
+      "landed_slug": "jp-estat"
+    },
+    {
+      "id": "日本-maff-花",
+      "name": "日本 MAFF 花き",
+      "doc_line": 1057,
+      "section": "全球",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "endpoint": "maff.go.jp/j/tokei/kouhyou/kaki/",
+      "cadence": "年",
+      "value": "绕行 e-Stat",
+      "evidence": {
+        "summary": "403 + 37 KB（bot 拦截）"
+      },
+      "reach": {
+        "state": "blocked",
+        "detail": "❌403"
+      },
+      "status": "rejected",
+      "reason": "实测不可达（❌403）",
+      "landed_slug": null
+    },
+    {
+      "id": "royal-floraholland",
+      "name": "Royal FloraHolland",
+      "doc_line": 1058,
+      "section": "全球",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "endpoint": "royalfloraholland.com",
+      "cadence": "日",
+      "value": "不可得",
+      "evidence": {
+        "summary": "Cloudflare 403 + 386 B；核心数据在付费 Connect"
+      },
+      "reach": {
+        "state": "blocked",
+        "detail": "❌403"
+      },
+      "status": "rejected",
+      "reason": "实测不可达（❌403）",
+      "landed_slug": null
+    },
+    {
+      "id": "usda-门户",
+      "name": "USDA 门户",
+      "doc_line": 1059,
+      "section": "全球",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "endpoint": "usda.gov",
+      "value": "绕行 API",
+      "evidence": {
+        "summary": "403 + 366 B（bot 拦截）"
+      },
+      "reach": {
+        "state": "blocked",
+        "detail": "❌403"
+      },
+      "status": "rejected",
+      "reason": "实测不可达（❌403）",
+      "landed_slug": null
+    },
+    {
+      "id": "荷兰-cbs-statline",
+      "name": "荷兰 CBS StatLine",
+      "doc_line": 1060,
+      "section": "全球",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "endpoint": "opendata.cbs.nl/ODataCatalog/Tables",
+      "auth": {
+        "kind": "none",
+        "note": "无"
+      },
+      "cadence": "年",
+      "history_depth": "旧表",
+      "value": "低（放弃）",
+      "evidence": {
+        "summary": "5,980 张表全量拉取后本地筛 bloem/sierteelt/plant/boomkweker：当代花卉产量无表，仅 1996–2013 旧表（60042ned/80110ned/80125ned/81643NED）"
+      },
+      "reach": {
+        "state": "direct_ok",
+        "detail": "✅200"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "哥伦比亚-asocolflores",
+      "name": "哥伦比亚 Asocolflores",
+      "doc_line": 1061,
+      "section": "全球",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "endpoint": "asocolflores.org",
+      "value": "不可得",
+      "evidence": {
+        "summary": "不可达"
+      },
+      "reach": {
+        "state": "blocked",
+        "detail": "❌000"
+      },
+      "status": "rejected",
+      "reason": "实测不可达（❌000）",
+      "landed_slug": null
+    },
+    {
+      "id": "flws-1-800-flowers-com",
+      "name": "FLWS 1-800-FLOWERS.COM",
+      "doc_line": 1069,
+      "section": "企业面（实测证伪，非估算）",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "vertical": [
+        "美股 NASDAQ"
+      ],
+      "evidence": {
+        "summary": "CIK 1084869；company_tickers.json 命中"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "1377-t-sakata-seed",
+      "name": "1377.T Sakata Seed",
+      "doc_line": 1070,
+      "section": "企业面（实测证伪，非估算）",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "vertical": [
+        "日股 TSE"
+      ],
+      "evidence": {
+        "summary": "EDINET 无 key 返回错误画面（需免费 key）"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "花王股份-603007",
+      "name": "花王股份 603007",
+      "doc_line": 1071,
+      "section": "企业面（实测证伪，非估算）",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "vertical": [
+        "A股"
+      ],
+      "evidence": {
+        "summary": "东财 F10 主营构成 2026H1：新能源混动汽车核心零部件 98.24%、工程 1.70%"
+      },
+      "status": "rejected",
+      "reason": "❌排除：主营已变",
+      "landed_slug": null
+    },
+    {
+      "id": "云投生态-002200",
+      "name": "云投生态 002200",
+      "doc_line": 1072,
+      "section": "企业面（实测证伪，非估算）",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "vertical": [
+        "A股"
+      ],
+      "evidence": {
+        "summary": "2026H1：工程施工 97.70%、苗木销售 0.15%、苗木租摆 0.08%"
+      },
+      "status": "rejected",
+      "reason": "❌不纳入纯花卉层：苗木占比合计仅 0.23%",
+      "landed_slug": null
+    },
+    {
+      "id": "丰乐种业-000713",
+      "name": "丰乐种业 000713",
+      "doc_line": 1073,
+      "section": "企业面（实测证伪，非估算）",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "vertical": [
+        "A股"
+      ],
+      "evidence": {
+        "summary": "2026H1：农化 69.65%、种子 16.51%、香料 13.85%，无花卉分部"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "flo-flowers-foods",
+      "name": "FLO Flowers Foods",
+      "doc_line": 1074,
+      "section": "企业面（实测证伪，非估算）",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "vertical": [
+        "美股"
+      ],
+      "evidence": {
+        "summary": "SEC title = FLOWERS FOODS INC（烘焙）"
+      },
+      "status": "rejected",
+      "reason": "❌名字陷阱：烘焙公司",
+      "landed_slug": null
+    },
+    {
+      "id": "afcg-advanced-flower-capital",
+      "name": "AFCG Advanced Flower Capital",
+      "doc_line": 1075,
+      "section": "企业面（实测证伪，非估算）",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "vertical": [
+        "美股"
+      ],
+      "evidence": {
+        "summary": "SEC title 命中但业务为大麻金融"
+      },
+      "status": "rejected",
+      "reason": "❌名字陷阱：大麻贷款 REIT",
+      "landed_slug": null
+    },
+    {
+      "id": "gsiw-garden-stage",
+      "name": "GSIW Garden Stage",
+      "doc_line": 1076,
+      "section": "企业面（实测证伪，非估算）",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "vertical": [
+        "美股"
+      ],
+      "evidence": {
+        "summary": "SEC title 命中但非园艺"
+      },
+      "status": "rejected",
+      "reason": "❌名字陷阱：港资资产管理",
+      "landed_slug": null
+    },
+    {
+      "id": "邻接候选",
+      "name": "邻接候选",
+      "doc_line": 1077,
+      "section": "企业面（实测证伪，非估算）",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "vertical": [
+        "美股"
+      ],
+      "evidence": {
+        "summary": "CENT（Central Garden & Pet）、SMG（Scotts Miracle-Gro）、HYFM（Hydrofarm）、EDBL（Edible Garden）"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "港股",
+      "name": "港股",
+      "doc_line": 1078,
+      "section": "企业面（实测证伪，非估算）",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "vertical": [
+        "HK"
+      ],
+      "evidence": {
+        "summary": "hkexnews titleSearchServlet 搜 flower，2026-01-01→2026-11-08，recordCnt=0 / result=\"[]\""
+      },
+      "status": "rejected",
+      "reason": "❌无纯花卉标的",
+      "landed_slug": null
+    },
+    {
+      "id": "欧股",
+      "name": "欧股",
+      "doc_line": 1079,
+      "section": "企业面（实测证伪，非估算）",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "vertical": [
+        "EU"
+      ],
+      "evidence": {
+        "summary": "FloraHolland / Dutch Flower Group / Dümmen Orange / Ball Horticultural 均为合作社或私有"
+      },
+      "status": "rejected",
+      "reason": "❌无上市标的",
+      "landed_slug": null
+    },
+    {
+      "id": "新三板",
+      "name": "新三板",
+      "doc_line": 1080,
+      "section": "企业面（实测证伪，非估算）",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "vertical": [
+        "中国"
+      ],
+      "evidence": {
+        "summary": "neeq.com.cn 查询端点持续 302；cninfo column=neeq 返 0。不作为依据，W0 可选复核"
+      },
+      "status": "unknown",
+      "reason": "⚠️未确认",
+      "landed_slug": "cninfo-operating"
+    },
+    {
+      "id": "aiph-aiph-org",
+      "name": "AIPH aiph.org",
+      "doc_line": 1108,
+      "section": "花卉 W0 端点级复测（2026-11-08 01:00–01:30 UTC+8）",
+      "wave": "花卉专场",
+      "needs_review": false,
+      "endpoint": "公开 XLSX 三件，含「分品种章节本」27 个工作表",
+      "status": "accepted",
+      "reach": {
+        "state": "unknown",
+        "detail": "200（首页 78 KB；年鉴索引 248 KB/267 KB body；年版页 196 KB）"
+      },
+      "landed_slug": "aiph-stats"
+    },
+    {
+      "id": "union-fleurs-unionfleurs-org",
+      "name": "Union Fleurs unionfleurs.org",
+      "doc_line": 1109,
+      "section": "花卉 W0 端点级复测（2026-11-08 01:00–01:30 UTC+8）",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "endpoint": "无自有统计；站内仅新闻，唯一统计信息是「AIPH 与 Union Fleurs 联合出版年鉴」",
+      "status": "unknown",
+      "reason": "不建单元（同名数据从 AIPH 取，避免双计）",
+      "reach": {
+        "state": "unknown",
+        "detail": "200（168 KB）"
+      },
+      "landed_slug": "aiph-stats"
+    },
+    {
+      "id": "kenya-flower-council-kenyaflowercouncil-org",
+      "name": "Kenya Flower Council kenyaflowercouncil.org",
+      "doc_line": 1110,
+      "section": "花卉 W0 端点级复测（2026-11-08 01:00–01:30 UTC+8）",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "endpoint": "只有 KFC_FSA_Report_2024_Full_Web_Version.pdf 等可持续性/认证 PDF；无面积/产量/出口时间序列",
+      "status": "unknown",
+      "reason": "降级留痕（肯尼亚出口量走 Comtrade HS0603，比协会口径更干净）",
+      "reach": {
+        "state": "unknown",
+        "detail": "200（109 KB）"
+      },
+      "landed_slug": null
+    },
+    {
+      "id": "expoflores-expoflores-com",
+      "name": "Expoflores expoflores.com",
+      "doc_line": 1111,
+      "section": "花卉 W0 端点级复测（2026-11-08 01:00–01:30 UTC+8）",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "endpoint": "「Biblioteca Digital」为 Wix 动态页（/biblioteca-digital 实测 404，链接由 JS 渲染），无 CSV/XLSX",
+      "status": "unknown",
+      "reason": "降级留痕（厄瓜多尔出口走 Comtrade/BCE）",
+      "reach": {
+        "state": "unknown",
+        "detail": "200（1.0 MB，Wix/JS 站）"
+      },
+      "landed_slug": "un-comtrade"
+    },
+    {
+      "id": "国家林草局-nfga-gov-cn",
+      "name": "国家林草局 nfga.gov.cn",
+      "doc_line": 1112,
+      "section": "花卉 W0 端点级复测（2026-11-08 01:00–01:30 UTC+8）",
+      "wave": "花卉专场",
+      "needs_review": true,
+      "endpoint": "见下",
+      "status": "unknown",
+      "reason": "降级留痕",
+      "reach": {
+        "state": "unknown",
+        "detail": "000（域名已废）；实际站在 forestry.gov.cn"
+      },
+      "landed_slug": null
+    },
+    {
+      "id": "文旅部-星级饭店季报",
+      "name": "文旅部·星级饭店季报",
+      "doc_line": 1181,
+      "section": "三源实测结论（一句话版）",
+      "wave": "酒店行业专场",
+      "needs_review": true,
+      "endpoint": "zwgk.mct.gov.cn",
+      "cadence": "季",
+      "evidence": {
+        "summary": "2024Q3（已停更）"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "文旅部-国内居民出游数据",
+      "name": "文旅部·国内居民出游数据",
+      "doc_line": 1182,
+      "section": "三源实测结论（一句话版）",
+      "wave": "酒店行业专场",
+      "needs_review": false,
+      "endpoint": "zwgk.mct.gov.cn",
+      "cadence": "季 + 年度公报",
+      "evidence": {
+        "summary": "2026 前三季度"
+      },
+      "status": "accepted",
+      "landed_slug": "mct-tourism-demand"
+    },
+    {
+      "id": "中国饭店协会-年度报告",
+      "name": "中国饭店协会·年度报告",
+      "doc_line": 1183,
+      "section": "三源实测结论（一句话版）",
+      "wave": "酒店行业专场",
+      "needs_review": false,
+      "endpoint": "www.chinahotel.org.cn",
+      "cadence": "年",
+      "evidence": {
+        "summary": "2026 版（数至 2025-12-31）"
+      },
+      "status": "accepted",
+      "landed_slug": "ctha-hotel-report"
+    },
+    {
+      "id": "迈点-mbi",
+      "name": "迈点 MBI",
+      "doc_line": 1184,
+      "section": "三源实测结论（一句话版）",
+      "wave": "酒店行业专场",
+      "needs_review": false,
+      "endpoint": "www.meadin.com",
+      "status": "rejected",
+      "reason": "放弃·显式不可得",
+      "landed_slug": null
+    },
+    {
+      "id": "expoflores-厄瓜多尔-1265",
+      "name": "Expoflores（厄瓜多尔）",
+      "doc_line": 1265,
+      "section": "花卉全球供给面探针降级（2026-11-10，industry-source-solution-fleet P4）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "首页 200（Wix 模板站）；/estadisticas/、/exportaciones/、/category/estadisticas/ 均 404；sitemap→pages→/bibliotecadigital 200 但仍是 Wix 壳"
+      },
+      "status": "unknown",
+      "reason": "无结构化数据通道，数字图书馆是 PDF 陈列；0 张生成单",
+      "landed_slug": null
+    },
+    {
+      "id": "kenya-flower-council-1266",
+      "name": "Kenya Flower Council",
+      "doc_line": 1266,
+      "section": "花卉全球供给面探针降级（2026-11-10，industry-source-solution-fleet P4）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "首页 200（Joomla）；文章页 200 但为新闻/认证内容站；sitemap 无统计路径"
+      },
+      "status": "unknown",
+      "reason": "无统计 API；0 张生成单",
+      "landed_slug": null
+    },
+    {
+      "id": "union-fleurs-欧洲",
+      "name": "Union Fleurs（欧洲）",
+      "doc_line": 1267,
+      "section": "花卉全球供给面探针降级（2026-11-10，industry-source-solution-fleet P4）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "首页 200（WordPress）；/publications/ 404；resources-sitemap 200 全是新闻稿"
+      },
+      "status": "unknown",
+      "reason": "新闻/资源站，无数据表；0 张生成单",
+      "landed_slug": "aiph-stats"
+    },
+    {
+      "id": "国家林草局-1268",
+      "name": "国家林草局",
+      "doc_line": 1268,
+      "section": "花卉全球供给面探针降级（2026-11-10，industry-source-solution-fleet P4）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "首页 200（静态 XHTML）"
+      },
+      "status": "unknown",
+      "reason": "维持既有结论：门户形态，API 网关 301 待 W0 定位",
+      "landed_slug": null
+    },
+    {
+      "id": "usda-quickstats-花卉口径",
+      "name": "USDA quickstats（花卉口径）",
+      "doc_line": 1269,
+      "section": "花卉全球供给面探针降级（2026-11-10，industry-source-solution-fleet P4）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "api_GET?key=DEMO_KEY&commodity_desc=FLORICULTURE → 401 {\"error\":[\"unauthorized\"]}"
+      },
+      "status": "unknown",
+      "reason": "凭据无效（Wave C 既有标注维持）；解锁=统一密钥轨道注册 free key",
+      "landed_slug": "usda-quickstats"
+    },
+    {
+      "id": "usaspending-1284",
+      "name": "USAspending",
+      "doc_line": 1284,
+      "section": "欠账复测队列 · 第一批（US 官方 5 条，2026-11-10，fd-source-probe 实测）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "GET /api/v2/awards/last_updated → 200 {\"last_updated\":\"11/06/2026\"}"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "data-gov-目录-1285",
+      "name": "data.gov 目录",
+      "doc_line": 1285,
+      "section": "欠账复测队列 · 第一批（US 官方 5 条，2026-11-10，fd-source-probe 实测）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "GET /organizations?api_key=DEMO_KEY → 200，255,636 数据集目录（DEMO_KEY 可用；侦察簿所记 /refs 路径为误记）"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "treasury-fiscaldata-1286",
+      "name": "Treasury FiscalData",
+      "doc_line": 1286,
+      "section": "欠账复测队列 · 第一批（US 官方 5 条，2026-11-10，fd-source-probe 实测）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "侦察簿所记 v1 路径与 v2 全 404（HTML 404 页）；transparency.treasury.gov 302"
+      },
+      "status": "unknown",
+      "reason": "端点路径漂移，需重侦察；当前不可出单",
+      "landed_slug": null
+    },
+    {
+      "id": "census-api-1287",
+      "name": "Census API",
+      "doc_line": 1287,
+      "section": "欠账复测队列 · 第一批（US 官方 5 条，2026-11-10，fd-source-probe 实测）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "data.json → 403 Cloudflare 拦截页（HTML，oldie 注释）"
+      },
+      "status": "unknown",
+      "reason": "按出口拦截（非凭据）：换海外出口复测；免费 key 仍须注册（防 HTML 伪装 200，W1-L37 原注记维持）",
+      "landed_slug": null
+    },
+    {
+      "id": "opensky-1288",
+      "name": "OpenSky",
+      "doc_line": 1288,
+      "section": "欠账复测队列 · 第一批（US 官方 5 条，2026-11-10，fd-source-probe 实测）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "未探（匿名限流严格）"
+      },
+      "status": "unknown",
+      "reason": "维持原判（keep-candidate）",
+      "landed_slug": null
+    },
+    {
+      "id": "data-gov-uk-ckan",
+      "name": "data.gov.uk CKAN",
+      "doc_line": 1300,
+      "section": "欠账复测队列 · 第二批（中国/国际 4 条，2026-11-10）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "package_search?q=flower&rows=2 → 200（CKAN 标准 API 活）"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "opendatasoft-1301",
+      "name": "OpenDataSoft",
+      "doc_line": 1301,
+      "section": "欠账复测队列 · 第二批（中国/国际 4 条，2026-11-10）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "/api/explore/v2.1/catalog/datasets?limit=2 → 200（102,992 目录）"
+      },
+      "status": "accepted",
+      "landed_slug": "hf-datasets"
+    },
+    {
+      "id": "深圳开放平台-1302",
+      "name": "深圳开放平台",
+      "doc_line": 1302,
+      "section": "欠账复测队列 · 第二批（中国/国际 4 条，2026-11-10）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "datasetCatalog → 200 但 errorCode:10009 appKey不能为空"
+      },
+      "status": "unknown",
+      "reason": "需免费 appKey 注册（Wave E 既有标注维持）",
+      "landed_slug": null
+    },
+    {
+      "id": "水利部水雨情-1303",
+      "name": "水利部水雨情",
+      "doc_line": 1303,
+      "section": "欠账复测队列 · 第二批（中国/国际 4 条，2026-11-10）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "xxfb.mwr.cn/portal/hydroinfoByDays 本机直连 ConnectTimeout"
+      },
+      "status": "unknown",
+      "reason": "换出口/集群侧复测（集群有既有浏览器指纹通道先例，见 1.2 nbs 403 注）",
+      "landed_slug": null
+    }
+  ]
+}

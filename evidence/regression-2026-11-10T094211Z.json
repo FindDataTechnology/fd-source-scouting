@@ -1,0 +1,202 @@
+{
+  "schema": "source-regression-run/v1",
+  "at": "2026-11-10T09:42:11.253538+00:00",
+  "traps_file": "data-source-scouting/regression-traps.json",
+  "rows": [
+    {
+      "trap": {
+        "id": "nbs-easyquery-blocked",
+        "source": "nbs-stats",
+        "expect": {
+          "kind": "channel_failure",
+          "why": "403 拦截页（按出口 ACL），非凭据问题"
+        },
+        "probe": {
+          "url": "https://data.stats.gov.cn/easyquery.htm?m=QueryData&dbcode=hgnd&rowcode=zb&colcode=sj&wds=%5B%5D&dfwds=%5B%5D",
+          "headers": {
+            "referer": "https://data.stats.gov.cn/"
+          }
+        },
+        "if_changed": "可达后先按 getTree 枚举住宿业/住宿餐饮业 zb 代码（预期 2-3 次树查询），有指标才谈生成单"
+      },
+      "got": {
+        "kind": "channel_failure",
+        "status": 403,
+        "reason": "HTTP 403（拦截页形态）",
+        "exit": "2408:8256:328e:2a51:1957:7acd:a6b0:8e70",
+        "body_prefix": "<!DOCTYPE html>\n<html>\n<head><title>403 Forbidden</title></head>\n<body bgcolor=\"white\">\n<center style=\"margin-top: 100px;\"><h1>403 Forbidden</h1></center>\n<hr>\n<center>Client IP: 2408:8256:328e:2a51:1"
+      },
+      "expect": "channel_failure",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "census-api-blocked",
+        "source": "census-eits",
+        "expect": {
+          "kind": "channel_failure",
+          "why": "Cloudflare 拦截页（按出口），非缺 key"
+        },
+        "probe": {
+          "url": "https://api.census.gov/data.json"
+        },
+        "if_changed": "换海外出口复测；即便通了也要注册免费 key（防 HTML 伪装 200），并确认 721 住宿类目可用"
+      },
+      "got": {
+        "kind": "channel_failure",
+        "status": 403,
+        "reason": "HTTP 403（拦截页形态）",
+        "exit": "2408:8256:328e:2a51:1957:7acd:a6b0:8e70",
+        "body_prefix": "<!DOCTYPE html>\n<!--[if lt IE 7]> <html class=\"no-js ie6 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 7]>    <html class=\"no-js ie7 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 8]>    <html class=\"no-"
+      },
+      "expect": "channel_failure",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "eurostat-hicp-accommodation-absent",
+        "source": "eurostat-api",
+        "expect": {
+          "kind": "not_published",
+          "why": "HICP 住宿分项 CP11/CP112 上游 not available for dissemination"
+        },
+        "probe": {
+          "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_hicp_midx?format=JSON&lang=EN&coicop=CP112&unit=I15&geo=EU27_2020",
+          "expect_contains": "\"value\""
+        },
+        "if_changed": "上游开始发布住宿价格指数 → 补 hotel.eu 价格面，且可解除 provenance.pairing 的 missing 标注",
+        "disputed": {
+          "note": "golden（2026-11-08）记 CP11/CP112 均 404 not available for dissemination；但本陷阱复现时 CP11/CP111/CP112 **全有数**（301–313 期，2025-12 止，数据集更新 2026-02-06 早于 golden 测量日）。golden 没记下当时的完整 query（unit/geo/s_adj 组合），无法判定是「golden 查错参数」还是「上游口径变化」。",
+          "evidence": "CP112 label='Accommodation services' 301 期；CP11='Restaurants and hotels' 313 期；CP111='Catering services' 301 期（2026-11-10 实测）",
+          "action": "转人工裁决：按当前实测，住宿价格指数**可得**，hotel 线可以补价格面；但需先确认 golden 那条 404 的参数组合，避免把「查错参数」当成「结论过期」"
+        }
+      },
+      "got": {
+        "kind": "ok",
+        "status": 200,
+        "reason": "HTTP 200 且内容可读",
+        "exit": "2408:8256:328e:2a51:1957:7acd:a6b0:8e70",
+        "body_prefix": "{\"version\":\"2.0\",\"class\":\"dataset\",\"label\":\"HICP - monthly data (index) (1996-2025)\",\"source\":\"ESTAT\",\"updated\":\"2026-02-06T23:00:00+0100\",\"value\":{\"59\":71.35,\"60\":69.11,\"61\":70.18,\"62\":69.95,\"63\":71."
+      },
+      "expect": "not_published",
+      "verdict": "disputed"
+    },
+    {
+      "trap": {
+        "id": "jp-estat-needs-appid",
+        "source": "jp-estat",
+        "expect": {
+          "kind": "caliber_mismatch",
+          "why": "HTTP 200 但体内 RESULT.STATUS=100「認証に失敗」——错误在 body 里，HTTP 码是 200。用正面标记 STATUS:0 判：无标记即口径不符（=凭据缺失）"
+        },
+        "probe": {
+          "url": "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsList?appId=&statsCode=00550200",
+          "expect_contains": "\"STATUS\":0"
+        },
+        "if_changed": "出现 STATUS:0 说明 appId 已生效 → 再核花き 出荷量/産出額 的表结构（首表形态）"
+      },
+      "got": {
+        "kind": "caliber_mismatch",
+        "status": 200,
+        "reason": "响应体不含期望片段 '\"STATUS\":0'",
+        "exit": "2408:8256:328e:2a51:1957:7acd:a6b0:8e70",
+        "body_prefix": "{\"GET_STATS_LIST\":{\"RESULT\":{\"STATUS\":100,\"ERROR_MSG\":\"\\u8A8D\\u8A3C\\u306B\\u5931\\u6557\\u3057\\u307E\\u3057\\u305F\\u3002\\u30A2\\u30D7\\u30EA\\u30B1\\u30FC\\u30B7\\u30E7\\u30F3ID\\u3092\\u78BA\\u8A8D\\u3057\\u3066\\u4E0"
+      },
+      "expect": "caliber_mismatch",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "kifa-waf-468",
+        "source": "flower-auction",
+        "expect": {
+          "kind": "channel_failure",
+          "why": "雷池 SafeLine WAF 主动拒绝自动化客户端（468）"
+        },
+        "probe": {
+          "url": "https://www.kifa.net/kIFAPriceIndex.do"
+        },
+        "if_changed": "不重开——硬闯 WAF 属检测规避（项目红线）；仅当上游开放官方 API 才重评"
+      },
+      "got": {
+        "kind": "channel_failure",
+        "status": null,
+        "reason": "连接层失败：ConnectError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)",
+        "exit": "2408:8256:328e:2a51:1957:7acd:a6b0:8e70",
+        "body_prefix": ""
+      },
+      "expect": "channel_failure",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "customs-precondition-412",
+        "source": "stats.customs.gov.cn",
+        "expect": {
+          "kind": "channel_failure",
+          "why": "412 Precondition Failed（加速乐前置握手）"
+        },
+        "probe": {
+          "url": "https://stats.customs.gov.cn/"
+        },
+        "if_changed": "通关后先核 HS 06 章口径，再决定是否替代 un-comtrade 的花卉贸易腿"
+      },
+      "got": {
+        "kind": "channel_failure",
+        "status": null,
+        "reason": "连接层失败：ConnectError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1010)",
+        "exit": "2408:8256:328e:2a51:1957:7acd:a6b0:8e70",
+        "body_prefix": ""
+      },
+      "expect": "channel_failure",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "expoflores-wix-no-data",
+        "source": "expoflores",
+        "expect": {
+          "kind": "not_published",
+          "why": "Wix 模板站；/estadisticas/ 与 /exportaciones/ 均 404（P4 实测 2026-11-10）"
+        },
+        "probe": {
+          "url": "https://www.expoflores.com/estadisticas/"
+        },
+        "if_changed": "出现统计页即重侦察其表格结构；否则维持「首页可达 ≠ 有数据通道」"
+      },
+      "got": {
+        "kind": "not_published",
+        "status": 404,
+        "reason": "HTTP 404",
+        "exit": "2408:8256:328e:2a51:1957:7acd:a6b0:8e70",
+        "body_prefix": "\n  <!DOCTYPE html>\n<!--\n    \n\n    \n\n  \n  \n      \n-->\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <meta name=\"robots\" content=\""
+      },
+      "expect": "not_published",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "usda-quickstats-needs-key",
+        "source": "usda-quickstats",
+        "expect": {
+          "kind": "credential_invalid",
+          "why": "DEMO_KEY 已失效，须注册免费 key"
+        },
+        "probe": {
+          "url": "https://quickstats.nass.usda.gov/api/api_GET?key=DEMO_KEY&commodity_desc=FLORICULTURE&format=JSON"
+        },
+        "if_changed": "key 到位后核 HORTICULTURE 商品参数是否覆盖花卉口径（F7 剩余项）"
+      },
+      "got": {
+        "kind": "credential_invalid",
+        "status": 401,
+        "reason": "HTTP 401",
+        "exit": "2408:8256:328e:2a51:1957:7acd:a6b0:8e70",
+        "body_prefix": "{\"error\":[\"unauthorized\"]}"
+      },
+      "expect": "credential_invalid",
+      "verdict": "unchanged"
+    }
+  ],
+  "drifted": []
+}

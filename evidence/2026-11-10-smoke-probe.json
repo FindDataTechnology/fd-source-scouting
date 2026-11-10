@@ -1,0 +1,163 @@
+{
+  "label": "2026-11-10-smoke",
+  "generated_at": "2026-11-09T19:23:59.738652+00:00",
+  "via_proxy": false,
+  "records": [
+    {
+      "schema": "source-probe/v1",
+      "ok": true,
+      "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/tour_occ_nim?format=JSON&lang=EN&c_resid=TOTAL&unit=NR&nace_r2=I551-I553&geo=EU27_2020",
+      "final_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/tour_occ_nim?format=JSON&lang=EN&c_resid=TOTAL&unit=NR&nace_r2=I551-I553&geo=EU27_2020",
+      "method": "GET",
+      "status": 200,
+      "elapsed_ms": 1922,
+      "headers": {
+        "access-control-allow-headers": "Content-Type, Accept, X-Requested-With",
+        "access-control-allow-methods": "GET",
+        "access-control-allow-origin": "*",
+        "connection": "keep-alive",
+        "content-type": "application/json",
+        "date": "Mon, 09 Nov 2026 19:23:55 GMT",
+        "set-cookie": "rps=!b0d3/y1oZ1gL9bTbA+6l1zXkw7/S2ZRZ9+whfaPdjLs3q9fcNwJ7ywb2JpLNchwXGSMU0+nH6v+TPwGXQklefNNaOF9YemBlo4cqxbX2; path=/; Httponly; Secure",
+        "transfer-encoding": "chunked"
+      },
+      "body_prefix": "{\"version\":\"2.0\",\"class\":\"dataset\",\"label\":\"Nights spent at tourist accommodation establishments - monthly data\",\"source\":\"ESTAT\",\"updated\":\"2026-11-04T23:00:00+0100\",\"value\":{\"252\":102002788,\"253\":107557592,\"254\":126384511,\"255\":151553673,\"256\":174339985,\"257\":244805859,\"258\":363336991,\"259\":392477687,\"260\":225865187,\"261\":157094023,\"262\":99049722,\"263\":102587797,\"264\":105753778,\"265\":113616194,\"266\":128562315,\"267\":150686105,\"268\":184891801,\"269\":235841261,\"270\":366553819,\"271\":403669668,\"272\":229777411,\"273\":154426395,\"274\":101843005,\"275\":105181162,\"276\":103448956,\"277\":112671433,\"278\":138234615,\"279\":136585505,\"280\":198905029,\"281\":238961717,\"282\":375311534,\"283\":417746718,\"284\":232943889,\"285\":161751546,\"286\":105536966,\"287\":109139609,\"288\":106356567,\"289\":112951418,\"290\":132178828,\"291\":155856786,\"292\":196700556,\"293\":255678934,\"294\":371342525,\"295\":426444280,\"296\":240885903,\"297\":169698518,\"298\":107400969,\"299\":113745274,\"300\":109511561,\"301\":121448839,\"302\":134108359,\"303\":158140338,\"304\":212776120,\"305\":257141209,\"306\":396738940,\"307\":440397436,\"308\":250880374,\"309\":179913579,\"310\":110883486,\"311\":117151568,\"312\":114128157,\"313\":129278408,\"314\":154623864,\"315\":154851155,\"316\":217927167,\"317\":261040958,\"318\":412362882,\"319\":450198741,\"320\":264254455,\"321\":188964054,\"322\":117040590,\"323\":122546608,\"324\":120828833,\"325\":130944390,\"326\":147230178,\"327\":194966101,\"328\":217546897,\"329\":292946134,\"330\":427251968,\"331\":461270781,\"332\":274902543,\"333\":195292105,\"334\":124761210,\"335\":131596236,\"336\":127325093,\"337\":137267709,\"338\":164254157,\"339\":185394102,\"340\":242945288,\"341\":293733820,\"342\":435082222,\"343\":470660796,\"344\":283304764,\"345\":202670861,\"346\":131083197,\"347\":135905564,\"348\":128709248,\"349\":138487748,\"350\":161051540,\"351\":204720325,\"352\":231216144,\"353\":318140002,\"354\":444201158,\"355\":481807555,\"356\":286505034,\"357\":207709072,\"358\":135518496,\"359\":140175194,\"360\":135027352,\"361\":147685570,\"362\":62806244,\"363\":9763338,\"364\":24263499,\"365\":95147311,\"366\":269531626,\"367\":340937920,\"368\":170438469,\"369\":",
+      "body_bytes_read": 2048,
+      "body_truncated": true,
+      "proxy": {
+        "requested": false,
+        "used": false,
+        "kind": "none",
+        "id": null
+      },
+      "exit": {
+        "identity": "2408:8256:328e:2a51:947b:2987:89d4:6c8c",
+        "source": "echo"
+      },
+      "tls": {
+        "profile": "default",
+        "note": "系统默认安全级别"
+      },
+      "hops": [
+        {
+          "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/tour_occ_nim?format=JSON&lang=EN&c_resid=TOTAL&unit=NR&nace_r2=I551-I553&geo=EU27_2020",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "verdict": {
+        "kind": "ok",
+        "label": "可得",
+        "reason": "HTTP 200 且内容可读",
+        "note": ""
+      },
+      "error": null,
+      "_target": {
+        "id": "eurostat-hotel-nights",
+        "note": "EU27 住宿业月度过夜数（酒店线 E2 同源端点），免 key 直连"
+      }
+    },
+    {
+      "schema": "source-probe/v1",
+      "ok": true,
+      "url": "https://data.mofcom.gov.cn/datamofcom/front/totalmonth/query",
+      "final_url": "https://data.mofcom.gov.cn/datamofcom/front/totalmonth/query",
+      "method": "POST",
+      "status": 200,
+      "elapsed_ms": 1441,
+      "headers": {
+        "content-length": "4037",
+        "content-type": "application/json;charset=UTF-8",
+        "date": "Mon, 09 Nov 2026 19:23:58 GMT",
+        "s-cnection": "close",
+        "server": "Apache"
+      },
+      "body_prefix": "[[{\"imexgap_lj_value\":null,\"total_value\":7608.36,\"imexgap_per\":null,\"type\":\"月度统计\",\"trade_date\":\"202609\",\"total_lj_per\":null,\"import_lj_value\":24325.84,\"export_per\":36.3,\"import_lj_per\":null,\"import_per\":31,\"imexgap_value\":1335.32,\"total_lj_value\":58032.79,\"export_lj_value\":33706.96,\"export_lj_per\":null,\"id\":\"53d8a9efa0a4086201a167a6a81400e0\",\"import_value\":3136.52,\"imexgap_lj_per\":null,\"total_per\":34.1,\"export_value\":4471.84},{\"imexgap_lj_value\":null,\"total_value\":6837.97,\"imexgap_per\":null,\"type\":\"月度统计\",\"trade_date\":\"202608\",\"total_lj_per\":null,\"import_lj_value\":21183.33,\"export_per\":25,\"import_lj_per\":null,\"import_per\":28.2,\"imexgap_value\":1190.85,\"total_lj_value\":50421.72,\"export_lj_value\":29238.39,\"export_lj_per\":null,\"id\":\"ff808081a0a863ee01a0c71d8b610035\",\"import_value\":2823.56,\"imexgap_lj_per\":null,\"total_per\":26.3,\"export_value\":4014.41},{\"imexgap_lj_value\":null,\"total_value\":6833.66,\"imexgap_per\":null,\"type\":\"月度统计\",\"trade_date\":\"202607\",\"total_lj_per\":null,\"import_lj_value\":18354.23,\"export_per\":23.9,\"import_lj_per\":null,\"import_per\":27.6,\"imexgap_value\":1123.37,\"total_lj_value\":43580.51,\"export_lj_value\":25226.28,\"export_lj_per\":null,\"id\":\"53d8a9ef9f83bf0801a037f4d9fb0121\",\"import_value\":2855.14,\"imexgap_lj_per\":null,\"total_per\":25.4,\"export_value\":3978.52},{\"imexgap_lj_value\":null,\"total_value\":6991.51,\"imexgap_per\":null,\"type\":\"月度统计\",\"trade_date\":\"202606\",\"total_lj_per\":null,\"import_lj_value\":15493.83,\"export_per\":27,\"import_lj_per\":null,\"import_per\":36,\"imexgap_value\":1256.23,\"total_lj_value\":36747.42,\"export_lj_value\":21253.59,\"export_lj_per\":null,\"id\":\"ff8080819f87ffe0019fa6cd6663000a\",\"import_value\":2867.64,\"imexgap_lj_per\":null,\"total_per\":30.6,\"export_value\":4123.87},{\"imexgap_lj_value\":null,\"total_value\":6481.3,\"imexgap_per\":null,\"type\":\"月度统计\",\"trade_date\":\"202605\",\"total_lj_per\":null,\"import_lj_value\":12616.9,\"export_per\":19.4,\"import_lj_per\":null,\"import_per\":27.4,\"imexgap_value\":1054.3,\"total_lj_value\":29750.8,\"export_lj_value\":17134,\"export_lj_per\":nu",
+      "body_bytes_read": 2048,
+      "body_truncated": true,
+      "proxy": {
+        "requested": false,
+        "used": false,
+        "kind": "none",
+        "id": null
+      },
+      "exit": {
+        "identity": "2408:8256:328e:2a51:947b:2987:89d4:6c8c",
+        "source": "cached"
+      },
+      "tls": {
+        "profile": "legacy",
+        "note": "SECLEVEL=1（上游用旧套件/弱 DH；实测 mofcom 需要此档）"
+      },
+      "hops": [
+        {
+          "url": "https://data.mofcom.gov.cn/datamofcom/front/totalmonth/query",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "verdict": {
+        "kind": "ok",
+        "label": "可得",
+        "reason": "HTTP 200 且内容可读",
+        "note": ""
+      },
+      "error": null,
+      "_target": {
+        "id": "mofcom-totalmonth",
+        "note": "商务部数据中心货物进出口月度（侦察簿 W1-K1），免鉴权 POST 表单；需 legacy TLS 档"
+      }
+    },
+    {
+      "schema": "source-probe/v1",
+      "ok": false,
+      "url": "https://data.stats.gov.cn/easyquery.htm?m=QueryData&dbcode=hgnd&rowcode=zb&colcode=sj&wds=%5B%5D&dfwds=%5B%5D",
+      "final_url": "https://data.stats.gov.cn/easyquery.htm?m=QueryData&dbcode=hgnd&rowcode=zb&colcode=sj&wds=%5B%5D&dfwds=%5B%5D",
+      "method": "GET",
+      "status": 403,
+      "elapsed_ms": 2875,
+      "headers": {
+        "connection": "keep-alive",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Mon, 09 Nov 2026 19:24:00 GMT",
+        "transfer-encoding": "chunked",
+        "wzws-ray": "1249-1794281040.35-s3zzuc"
+      },
+      "body_prefix": "<!DOCTYPE html>\n<html>\n<head><title>403 Forbidden</title></head>\n<body bgcolor=\"white\">\n<center style=\"margin-top: 100px;\"><h1>403 Forbidden</h1></center>\n<hr>\n<center>Client IP: 2408:8256:328e:2a51:947b:2987:89d4:6c8c</center>\n<center>eventID: 1249-1794281040.35-s3zzuc reason:UrlACL</center>\n</body>\n</html>\n\n\n\n\n",
+      "body_bytes_read": 314,
+      "body_truncated": false,
+      "proxy": {
+        "requested": false,
+        "used": false,
+        "kind": "none",
+        "id": null
+      },
+      "exit": {
+        "identity": "2408:8256:328e:2a51:947b:2987:89d4:6c8c",
+        "source": "cached"
+      },
+      "tls": {
+        "profile": "default",
+        "note": "系统默认安全级别"
+      },
+      "hops": [
+        {
+          "url": "https://data.stats.gov.cn/easyquery.htm?m=QueryData&dbcode=hgnd&rowcode=zb&colcode=sj&wds=%5B%5D&dfwds=%5B%5D",
+          "status": 403,
+          "location": null
+        }
+      ],
+      "verdict": {
+        "kind": "channel_failure",
+        "label": "通道故障",
+        "reason": "HTTP 403（拦截页形态）",
+        "note": "疑似网关/WAF 按出口拦截，非凭据问题；换出口复测而不是申请 key"
+      },
+      "error": null,
+      "_target": {
+        "id": "nbs-easyquery",
+        "note": "国家统计局 easyquery（已知按出口拦截：带浏览器 UA 仍 403，拦截页含 Client IP）"
+      }
+    }
+  ]
+}
