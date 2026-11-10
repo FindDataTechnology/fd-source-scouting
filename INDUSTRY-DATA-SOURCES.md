@@ -1408,6 +1408,10 @@ Wave C 四扩展（c20/bsci/apri/comext）有 golden 且全绿，但入口只遍
   与 `hotel.eu.nights.monthly` 重叠 **180 个月**；幂等复跑 inserted=0。
   回滚点 `fd-industry-data/docs/rollback/hotel-pairing-before-2026-11-10.json`；
   决定记录 `openspec/changes/industry-source-solution-fleet/decisions/2026-11-10-hotel-accommodation-price-index.md`
+- ✅ **golden 基线已同步（2026-11-10）**：`replay/golden-side.json` 的 N5 由
+  「CP11/CP112 均 404」改为「**CP112 可得 301 期**」（`kind: probed_available`），
+  原结论保留在 `superseded` 块里可追溯；陷阱 id 由 `…-absent` 改为 `…-available`
+  （旧名会让人误读为"仍不存在"）。回归闸门复跑两次：**20 条全一致 / 漂移 0**
 - ⏳ **仍未做**：板面价量背离的渲染改造与规则调整（`pairing.state` 已改，消费方需验证）
 
 **结论与影响**：

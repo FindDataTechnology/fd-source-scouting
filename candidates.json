@@ -1,9 +1,9 @@
 {
   "schema": "source-candidates/v1",
   "meta": {
-    "generated_at": "2026-11-10T15:00:08.134031+00:00",
+    "generated_at": "2026-11-10T15:28:05.661170+00:00",
     "source_doc": "data-source-scouting/INDUSTRY-DATA-SOURCES.md",
-    "source_doc_sha256": "400b36159a8544b188bfb81ea215e454df08d867fa87a5f3078dfafca24180fe",
+    "source_doc_sha256": "4ff318c1018948d3b8a9b29cde52e9f3b2fe21466d1cb7019be898cfe391a62d",
     "generator": "extract_candidates.py/1.0",
     "coverage": {
       "tables_converted": 17,
@@ -116,7 +116,7 @@
         {
           "header": "检查 | 结果",
           "rows": 5,
-          "line": 1470,
+          "line": 1474,
           "reason": "表头签名未登记（非候选表或新表）"
         }
       ]
