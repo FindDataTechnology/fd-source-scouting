@@ -1338,3 +1338,24 @@ Wave C 四扩展（c20/bsci/apri/comext）有 golden 且全绿，但入口只遍
 **方法论收获**：四川统计局这条演示了「首页 → 栏目列表 → 月报表页」三级发现路径——
 **首跳只是入口，证据必须在数据页**（含表、含指标名）。同时它反证了「硬编码栏目路径」
 的坑：侦察簿记的 `c105855/gzdt.shtml` 已是 404，而首页现存的栏目是 `c112116/sj.shtml`。
+
+---
+
+# 欠账复测队列 · 第五批（凭据类 5 条，2026-11-10，64KB body + method/body 全传）
+
+> 沿用第四批修好的两处 harness（body 窗口 64KB、method/body 一起传）。
+> 本批重点：**凭据类不等于「探不到」**——3 条实测有明确体内答复，2 条被误以为要 key 其实不要。
+
+| 源 | 本轮实测（阳性标记 / 体内答复） | 定案 |
+|---|---|---|
+| 中国货币网 LPR | `GET /ags/ms/cm-u-bk-currency/LprHis?lang=CN&startDate=…&endDate=…` → 200，`"rep_code":"200"` + `records[]` 含 `{"5Y":"3.50","1Y":"3.00","showDateCN":"2026-10-20"}` | **活跃待接（免 key）**——侦察簿记「LPR」但未验证；实测公开可读，无需鉴权 |
+| 上清所月报 | `POST /shchapp/web/sdocClient/monthListPage`（body `{"pageNo":1,"pageSize":2}`，**只需 Referer**）→ 200 `{"flag":"0","data":[…]}`，标题含「表一 上海清算所固定收益产品业务总览」「表二 …发行量」 | **活跃待接（免 key）**——侦察簿记「需 JSESSIONID+Referer」，实测**只要 Referer**，JSESSIONID 非必需 |
+| 高德开放平台 | `GET /v3/traffic/status/rectangle?rectangle=…` → **HTTP 200** 但体 `{"status":"0","info":"INVALID_USER_KEY","infocode":"10001"}` | **需免费 key**（200 是伪装，体内报错——第三例同型，见 F2） |
+| KOSIS OpenAPI | `GET /openapi/Param/statisticsParameterData.do?apiKey=` → **HTTP 200** 但体 `{"err":"10","errMsg":"인증 KEY값이 누락되었습니다."}`（认证 KEY 缺失） | **需免费 key**（第四例同型） |
+| NFRA 统计/处罚 | 侦察簿只记**路径片段**（`SelectByDocId?docId=` / `SelectDocByItemIdAndChild?itemId=`）；实测拼出的完整 URL 均 404；首页是 `meta refresh` 壳页（237 B），跳真首页后 59,813 B 内**无「行政处罚」字样**、无 `itemId` 线索 | **信息不足，需重侦察**：缺「完整端点 + itemId 取值」。不是不可得，是**我们没有可复现的请求** |
+
+**方法论收获（第三条硬要求，收进陷阱清单）**：凭据类源分三种，不能一律按「要 key」归档——
+① 真公开（LPR、上清所：免 key，且上清所连 JSESSIONID 都不需要）；
+② 200 伪装（高德、KOSIS：200 + 体内 KEY 错误，必须阳性断言才判得出）；
+③ 缺可复现请求（NFRA：只知道路径片段，拼不出端点 → 只能标「需重侦察」，
+**不能标不可得**）。

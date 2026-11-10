@@ -1,14 +1,14 @@
 {
   "schema": "source-candidates/v1",
   "meta": {
-    "generated_at": "2026-11-10T13:13:05.570386+00:00",
+    "generated_at": "2026-11-10T13:27:46.062016+00:00",
     "source_doc": "data-source-scouting/INDUSTRY-DATA-SOURCES.md",
-    "source_doc_sha256": "b768723d80581f46c71da3132e20ab48b73a164ec9dd2e24519c62957217f32c",
+    "source_doc_sha256": "38ac7a12645df77cdad7e43aa78cac08e2c405abfd91211eda58419e97e86a11",
     "generator": "extract_candidates.py/1.0",
     "coverage": {
-      "tables_converted": 15,
+      "tables_converted": 16,
       "tables_excluded": 16,
-      "rows_converted": 185,
+      "rows_converted": 190,
       "rows_excluded": 77,
       "excluded_tables": [
         {
@@ -3338,6 +3338,74 @@
       },
       "status": "unknown",
       "reason": "同上（并入同一条陷阱，不重复登记）",
+      "landed_slug": null
+    },
+    {
+      "id": "中国货币网-lpr",
+      "name": "中国货币网 LPR",
+      "doc_line": 1351,
+      "section": "欠账复测队列 · 第五批（凭据类 5 条，2026-11-10，64KB body + method/body 全传）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "GET /ags/ms/cm-u-bk-currency/LprHis?lang=CN&startDate=…&endDate=… → 200，\"rep_code\":\"200\" + records[] 含 {\"5Y\":\"3.50\",\"1Y\":\"3.00\",\"showDateCN\":\"2026-10-20\"}"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "上清所月报-1352",
+      "name": "上清所月报",
+      "doc_line": 1352,
+      "section": "欠账复测队列 · 第五批（凭据类 5 条，2026-11-10，64KB body + method/body 全传）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "POST /shchapp/web/sdocClient/monthListPage（body {\"pageNo\":1,\"pageSize\":2}，只需 Referer）→ 200 {\"flag\":\"0\",\"data\":[…]}，标题含「表一 上海清算所固定收益产品业务总览」「表二 …发行量」"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "高德开放平台-1353",
+      "name": "高德开放平台",
+      "doc_line": 1353,
+      "section": "欠账复测队列 · 第五批（凭据类 5 条，2026-11-10，64KB body + method/body 全传）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "GET /v3/traffic/status/rectangle?rectangle=… → HTTP 200 但体 {\"status\":\"0\",\"info\":\"INVALID_USER_KEY\",\"infocode\":\"10001\"}"
+      },
+      "status": "unknown",
+      "reason": "需免费 key（200 是伪装，体内报错——第三例同型，见 F2）",
+      "landed_slug": null
+    },
+    {
+      "id": "kosis-openapi-1354",
+      "name": "KOSIS OpenAPI",
+      "doc_line": 1354,
+      "section": "欠账复测队列 · 第五批（凭据类 5 条，2026-11-10，64KB body + method/body 全传）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "GET /openapi/Param/statisticsParameterData.do?apiKey= → HTTP 200 但体 {\"err\":\"10\",\"errMsg\":\"인증 KEY값이 누락되었습니다.\"}（认证 KEY 缺失）"
+      },
+      "status": "unknown",
+      "reason": "需免费 key（第四例同型）",
+      "landed_slug": null
+    },
+    {
+      "id": "nfra-统计-处罚",
+      "name": "NFRA 统计/处罚",
+      "doc_line": 1355,
+      "section": "欠账复测队列 · 第五批（凭据类 5 条，2026-11-10，64KB body + method/body 全传）",
+      "wave": "",
+      "needs_review": false,
+      "evidence": {
+        "summary": "侦察簿只记路径片段（SelectByDocId?docId= / SelectDocByItemIdAndChild?itemId=）；实测拼出的完整 URL 均 404；首页是 meta refresh 壳页（237 B），跳真首页后 59,813 B 内无「行政处罚」字样、无 itemId 线索"
+      },
+      "status": "rejected",
+      "reason": "信息不足，需重侦察：缺「完整端点 + itemId 取值」。不是不可得，是我们没有可复现的请求",
       "landed_slug": null
     }
   ]

@@ -154,6 +154,12 @@ TABLE_SPECS: list[TableSpec] = [
         note="P4 探针降级表（2026-11-10，无证据不出单首次生效）",
     ),
     TableSpec(
+        signature=("源", "本轮实测（阳性标记 / 体内答复）", "定案"),
+        mapping={"源": "name", "本轮实测（阳性标记 / 体内答复）": "evidence", "定案": "verdict"},
+        status_rule="verdict",
+        note="欠账复测队列第五批（凭据类）",
+    ),
+    TableSpec(
         signature=("源", "本轮实测（含阳性标记）", "定案"),
         mapping={"源": "name", "本轮实测（含阳性标记）": "evidence", "定案": "verdict"},
         status_rule="verdict",
