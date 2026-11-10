@@ -1,6 +1,6 @@
 {
   "schema": "source-regression-traps/v1",
-  "note": "已知陷阱清单（回放仲裁 4.3 的机制化）。每条记录一个**已经用证据定过性**的结论；回归探测只回答一个问题：这条结论现在是否仍然成立。变了不等于可以接——变了解锁=重侦察。 陷阱两条硬要求（2026-11-10 首次运行现学）：①必须记录**产生该结论的完整请求**（含全部参数），否则复现不出就是假漂移；②对「HTTP 200 但体内是错误」的 API（如 e-Stat 的 STATUS:100），必须给**正面成功标记** expect_contains，不能靠 HTTP 码判。",
+  "note": "已知陷阱清单（回放仲裁 4.3 的机制化）。每条记录一个**已经用证据定过性**的结论；回归探测只回答一个问题：这条结论现在是否仍然成立。变了不等于可以接——变了解锁=重侦察。 陷阱两条硬要求（2026-11-10 首次运行现学）：①必须记录**产生该结论的完整请求**（含全部参数），否则复现不出就是假漂移；②对「HTTP 200 但体内是错误」的 API（如 e-Stat 的 STATUS:100），必须给**正面成功标记** expect_contains，不能靠 HTTP 码判。 2026-11-10 第四批再补两条陷阱自身的坑：③expect_contains 只对**截断前缀**匹配——默认 2048B，标记常在 2KB 之后（同一 URL：2048B 判 caliber_mismatch、65536B 判 ok），回归探测已统一放宽到 64KB 并支持 per-trap max_body_bytes；④只传 header 不传 method/body，会把陷阱里的 POST 打成 GET（zhejiang 拿不到 sourceCode、data-europa 返 406/400），回归探测已改为 method/body/header 一起传。",
   "origin": "openspec/changes/industry-source-solution-fleet/replay/adjudication.md（酒店线回放漏掉 N2/N3/N5 的根因：执行侧没有已知陷阱清单可依）",
   "traps": [
     {
@@ -126,14 +126,14 @@
       "id": "soozhu-js-filled-table",
       "source": "soozhu",
       "expect": {
-        "kind": "caliber_mismatch",
-        "why": "tbody 是空壳（含「数据加载中」占位、唯一 tr 被注释），数据由 JS 异步填充"
+        "kind": "ok",
+        "why": "页面仍是 JS 空壳：含「数据加载中」占位（数据靠 XHR 填充，静态抓不到数值行）"
       },
       "probe": {
         "url": "https://www.soozhu.com/price/data/center/",
-        "expect_contains": "元/公斤"
+        "expect_contains": "数据加载中"
       },
-      "if_changed": "页内出现真实数值行，或侦察出其 XHR 端点后重评"
+      "if_changed": "「数据加载中」消失 = 页面改成静态渲染或已能静态取数 → 重侦察其表格结构"
     },
     {
       "id": "gdacs-rss-alive",
@@ -147,6 +147,57 @@
         "expect_contains": "<item>"
       },
       "if_changed": "feed 结构变化或停更 → 按四分类重判（不是直接判死）"
+    },
+    {
+      "id": "zhejiang-dopserver-catalog-alive",
+      "source": "zhejiang-opendata",
+      "expect": {
+        "kind": "ok",
+        "why": "POST 数据目录 API 返回 sourceCode/数据元结构（免登录可编程）"
+      },
+      "probe": {
+        "url": "https://data.zjzwfw.gov.cn/dopServer/dataCatalog/apiQueryPage",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json",
+          "referer": "https://data.zjzwfw.gov.cn/"
+        },
+        "body": "{\"pageNum\":1,\"pageSize\":2}",
+        "expect_contains": "\"sourceCode\""
+      },
+      "if_changed": "返回体失去 sourceCode/success 字段 → 接口改版，重侦察参数白名单"
+    },
+    {
+      "id": "data-europa-sparql-alive",
+      "source": "data.europa.eu",
+      "expect": {
+        "kind": "ok",
+        "why": "标准 SPARQL 端点，返回 SPARQL JSON（head/results/bindings）"
+      },
+      "probe": {
+        "url": "https://data.europa.eu/sparql",
+        "method": "POST",
+        "headers": {
+          "accept": "application/sparql-results+json",
+          "content-type": "application/x-www-form-urlencoded"
+        },
+        "body": "query=SELECT%20*%20WHERE%20%7B%3Fs%20%3Fp%20%3Fo%7D%20LIMIT%202",
+        "expect_contains": "\"bindings\""
+      },
+      "if_changed": "不再返回 SPARQL JSON → 端点迁移或需鉴权"
+    },
+    {
+      "id": "sichuan-stats-monthly-table-alive",
+      "source": "sichuan-stats",
+      "expect": {
+        "kind": "ok",
+        "why": "月度指标页含规整 HTML 表（含「规模以上工业」）——首页 200 不算证据"
+      },
+      "probe": {
+        "url": "https://tjj.sc.gov.cn/scstjj/c112116/sj.shtml",
+        "expect_contains": "最新发布"
+      },
+      "if_changed": "栏目列表不再含「最新发布」→ 栏目路径又变了，按首页链接重新发现（勿硬编码）"
     }
   ]
 }

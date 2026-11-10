@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -43,11 +44,24 @@ def probe_one(binary: Path, trap: dict) -> dict:
     out.parent.mkdir(parents=True, exist_ok=True)
     cmd = [str(binary), "probe", url, "--label", f"regression/{trap['id']}",
            "--caller", "scouting/regression_probe", "--json-out", str(out)]
+    # 陷阱断言的是**结构**（表格/JSON 字段），标记常在 2KB 之后。
+    # 实测教训（2026-11-10 第四批）：同一条 URL，默认 2048B 判 caliber_mismatch、
+    # 65536B 判 ok——不是源变了，是 expect_contains 只对截断前缀匹配。
+    # 故回归探测单独放宽窗口，可按 trap 覆盖。
+    env = dict(os.environ)
+    env["FD_PROBE_MAX_BODY_BYTES"] = str(
+        int((spec.get("max_body_bytes") or 65536)))
+    # method/body 必须一起传：只传 header 会把陷阱里的 POST 全打成 GET
+    # ——第四批实测症状：zhejiang 拿不到 sourceCode、data-europa 返 406。
+    if spec.get("method"):
+        cmd += ["--method", str(spec["method"])]
     for k, v in (spec.get("headers") or {}).items():
         cmd += ["--header", f"{k}:{v}"]
+    if spec.get("body") is not None:
+        cmd += ["--body", str(spec["body"])]
     if spec.get("expect_contains"):
         cmd += ["--expect-contains", spec["expect_contains"]]
-    proc = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
+    proc = subprocess.run(cmd, capture_output=True, text=True, timeout=180, env=env)
     try:
         doc = json.loads(out.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):

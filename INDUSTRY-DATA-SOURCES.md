@@ -1319,3 +1319,22 @@ Wave C 四扩展（c20/bsci/apri/comext）有 golden 且全绿，但入口只遍
 探针按 HTTP 层判成 `ok`。这正是 spec `source-probe` 那条「分类边界 + 阳性断言」的现实版：
 **对这两类站点，必须给 `expect_contains` 的数据标识（如真实数值行/JSON 字段）才判得出**，
 只凭 200 会把 WAF 挑战页和 JS 空壳当成可得。
+
+---
+
+# 欠账复测队列 · 第四批（5 条，2026-11-10，fd-source-probe 实测 + 阳性断言）
+
+> 本批每条都给了**阳性 `expect_contains`**（数据标识），不靠 HTTP 200 判可得——第三批
+> 100ppi/搜猪网的教训：200 可能只是 WAF 挑战页或 JS 空壳。
+
+| 源 | 本轮实测（含阳性标记） | 定案 |
+|---|---|---|
+| 浙江开放平台 | `POST /dopServer/dataCatalog/apiQueryPage`（body `{"pageNum":1,"pageSize":2}`，带 referer）→ 200 `{"success":true,"code":"2000","total":null,"result":{"records":[{"id":"FzK5…","sourceName":"浙江省公证员执业证版式文件","sourceCode":"S330000TAB0220…"}]}}` | **活跃待接**（真数据目录 API：免登录可编程，返回 sourceCode/数据元结构） |
+| data.europa.eu SPARQL | `Accept: application/sparql-results+json` + 真查询 → 200 **SPARQL JSON**（`head`/`results`，bindings=2） | **活跃待接**（标准 SPARQL 端点，可 `dsModifyDate` 增量） |
+| 四川统计局 | 首页 200 **不算**；顺首页链接找到 `/scstjj/c112116/sj.shtml` → 最新发布列表 → 月度页 `/scstjj/c112117/2026/9/16/073e…shtml`（131,580 B，**含 `<table>`，含「规模以上工业」**） | **活跃待接**（规整 HTML 表可 requests+parser 解析；须按首页链接发现，硬编码栏目路径会 404——本轮 `c105855/gzdt.shtml` 即 404） |
+| NBS 流通领域（`dbcode=fsyd`） | `easyquery.htm?m=QueryData&dbcode=fsyd…` → **403** | **通道拦截**（与 `nbs-easyquery-blocked` 同源，维持 Wave 排除；换出口/集群指纹通道另议） |
+| NBS 生产指数等其余入口 | 同域，同上 403 | 同上（并入同一条陷阱，不重复登记） |
+
+**方法论收获**：四川统计局这条演示了「首页 → 栏目列表 → 月报表页」三级发现路径——
+**首跳只是入口，证据必须在数据页**（含表、含指标名）。同时它反证了「硬编码栏目路径」
+的坑：侦察簿记的 `c105855/gzdt.shtml` 已是 404，而首页现存的栏目是 `c112116/sj.shtml`。

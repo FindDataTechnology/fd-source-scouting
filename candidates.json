@@ -1,14 +1,14 @@
 {
   "schema": "source-candidates/v1",
   "meta": {
-    "generated_at": "2026-11-10T13:05:57.992360+00:00",
+    "generated_at": "2026-11-10T13:13:05.570386+00:00",
     "source_doc": "data-source-scouting/INDUSTRY-DATA-SOURCES.md",
-    "source_doc_sha256": "acc531a6a04db05bdf3b6349c6fd976dfe6201f79ed03c35dbae88375df9759b",
+    "source_doc_sha256": "b768723d80581f46c71da3132e20ab48b73a164ec9dd2e24519c62957217f32c",
     "generator": "extract_candidates.py/1.0",
     "coverage": {
-      "tables_converted": 14,
+      "tables_converted": 15,
       "tables_excluded": 16,
-      "rows_converted": 180,
+      "rows_converted": 185,
       "rows_excluded": 77,
       "excluded_tables": [
         {
@@ -3271,6 +3271,73 @@
       },
       "status": "unknown",
       "reason": "维持原判：首页可达但数据在 easyquery 上，而 easyquery 是 403 拦截页（见陷阱清单 nbs-easyquery-blocked）。首页 200 不可作为可得证据",
+      "landed_slug": null
+    },
+    {
+      "id": "浙江开放平台-1332",
+      "name": "浙江开放平台",
+      "doc_line": 1332,
+      "section": "欠账复测队列 · 第四批（5 条，2026-11-10，fd-source-probe 实测 + 阳性断言）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "POST /dopServer/dataCatalog/apiQueryPage（body {\"pageNum\":1,\"pageSize\":2}，带 referer）→ 200 {\"success\":true,\"code\":\"2000\",\"total\":null,\"result\":{\"records\":[{\"id\":\"FzK5…\",\"sourceName\":\"浙江省公证员执业证版式文件\",\"sourceCode\":\"S330000TAB0220…\"}]}}"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "data-europa-eu-sparql-1333",
+      "name": "data.europa.eu SPARQL",
+      "doc_line": 1333,
+      "section": "欠账复测队列 · 第四批（5 条，2026-11-10，fd-source-probe 实测 + 阳性断言）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "Accept: application/sparql-results+json + 真查询 → 200 SPARQL JSON（head/results，bindings=2）"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "四川统计局-1334",
+      "name": "四川统计局",
+      "doc_line": 1334,
+      "section": "欠账复测队列 · 第四批（5 条，2026-11-10，fd-source-probe 实测 + 阳性断言）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "首页 200 不算；顺首页链接找到 /scstjj/c112116/sj.shtml → 最新发布列表 → 月度页 /scstjj/c112117/2026/9/16/073e…shtml（131,580 B，含 <table>，含「规模以上工业」）"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "nbs-流通领域-dbcodefsyd",
+      "name": "NBS 流通领域（dbcode=fsyd）",
+      "doc_line": 1335,
+      "section": "欠账复测队列 · 第四批（5 条，2026-11-10，fd-source-probe 实测 + 阳性断言）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "easyquery.htm?m=QueryData&dbcode=fsyd… → 403"
+      },
+      "status": "unknown",
+      "reason": "通道拦截（与 nbs-easyquery-blocked 同源，维持 Wave 排除；换出口/集群指纹通道另议）",
+      "landed_slug": null
+    },
+    {
+      "id": "nbs-生产指数等其余入口",
+      "name": "NBS 生产指数等其余入口",
+      "doc_line": 1336,
+      "section": "欠账复测队列 · 第四批（5 条，2026-11-10，fd-source-probe 实测 + 阳性断言）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "同域，同上 403"
+      },
+      "status": "unknown",
+      "reason": "同上（并入同一条陷阱，不重复登记）",
       "landed_slug": null
     }
   ]
