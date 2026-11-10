@@ -1402,9 +1402,13 @@ Wave C 四扩展（c20/bsci/apri/comext）有 golden 且全绿，但入口只遍
 - ✅ 文档已更正：`fd-industry-data/docs/hotel-series-curation.md` 口径注记 3 / 注记 6 / 挂账 D5
   三处改为「可得」（commit `9ad2342`，已双推）
 - ✅ `scripts/naming_gate_hotel.py` 的 `PAIRING` 常量加更正注释、**取值未动**
-- ⏳ **未做（需另单授权）**：把 `provenance.pairing.state` 由 `missing` 改为可得、注册
-  `hotel.eu.price.*` 概念并回填 CP112 301 期观测——这是**写库动作**，会牵动板面价量背离
-  渲染与既有规则，不在文档更正范围内
+- ✅ **已落库（2026-11-10，含回滚点）**：概念 `hotel.eu.accommodation_price_index.monthly`
+  + **301 期观测**（2000-12→2025-12，entity EU27_2020，source_used=eurostat-api，只增不改）；
+  `provenance.pairing` 4 条 `missing → partial`（debt 收窄到 D1，新增 available_side.eu）。
+  与 `hotel.eu.nights.monthly` 重叠 **180 个月**；幂等复跑 inserted=0。
+  回滚点 `fd-industry-data/docs/rollback/hotel-pairing-before-2026-11-10.json`；
+  决定记录 `openspec/changes/industry-source-solution-fleet/decisions/2026-11-10-hotel-accommodation-price-index.md`
+- ⏳ **仍未做**：板面价量背离的渲染改造与规则调整（`pairing.state` 已改，消费方需验证）
 
 **结论与影响**：
 1. **住宿价格指数可得**，hotel 线可补价格面（`CP112` 301 期，可比 E2 夜数做价量背离）；
