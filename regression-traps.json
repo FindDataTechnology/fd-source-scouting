@@ -34,19 +34,16 @@
       "id": "eurostat-hicp-accommodation-absent",
       "source": "eurostat-api",
       "expect": {
-        "kind": "not_published",
-        "why": "HICP 住宿分项 CP11/CP112 上游 not available for dissemination"
+        "kind": "ok",
+        "why": "住宿价格指数 CP112 实际可得（301 期 2000-12→2025-12，unit=I15）"
       },
       "probe": {
         "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_hicp_midx?format=JSON&lang=EN&coicop=CP112&unit=I15&geo=EU27_2020",
-        "expect_contains": "\"value\""
+        "expect_contains": "\"value\"",
+        "max_body_bytes": 20000
       },
-      "if_changed": "上游开始发布住宿价格指数 → 补 hotel.eu 价格面，且可解除 provenance.pairing 的 missing 标注",
-      "disputed": {
-        "note": "golden（2026-11-08）记 CP11/CP112 均 404 not available for dissemination；但本陷阱复现时 CP11/CP111/CP112 **全有数**（301–313 期，2025-12 止，数据集更新 2026-02-06 早于 golden 测量日）。golden 没记下当时的完整 query（unit/geo/s_adj 组合），无法判定是「golden 查错参数」还是「上游口径变化」。",
-        "evidence": "CP112 label='Accommodation services' 301 期；CP11='Restaurants and hotels' 313 期；CP111='Catering services' 301 期（2026-11-10 实测）",
-        "action": "转人工裁决：按当前实测，住宿价格指数**可得**，hotel 线可以补价格面；但需先确认 golden 那条 404 的参数组合，避免把「查错参数」当成「结论过期」"
-      }
+      "if_changed": "CP112 不再返回 value = 上游改版或下架 → 重侦察；注意 unit=RCH_A 时恒为 0 期（年变化率未发布），必须用 unit=I15/I05",
+      "note": "2026-11-10 定谳：golden 记「CP11/CP112 均 404」不成立。三参数实测定谳——CP11 313 期(1999-12→)、CP111 301 期(2000-12→)、CP112 301 期(2000-12→) 全部 200；CP111 的期数与起点与 golden 完全一致，说明是同一数据集同一口径，故 golden 那条 404 只能是当时查错参数（很可能用了 unit=RCH_A：实测该 unit 三码均 0 期）。结论：住宿价格指数可得，hotel 线可补价格面；此前「无住宿价格指数」的口径注记作废。"
     },
     {
       "id": "jp-estat-needs-appid",
@@ -256,6 +253,38 @@
         "expect_contains": "\"err\":\"10\""
       },
       "if_changed": "err=10 消失 = key 已生效或接口改版 → 重侦察（KOSIS 两张表 DT_1K41003/DT_1KE10041）"
+    },
+    {
+      "id": "pboc-listing-static-shell",
+      "source": "pbc",
+      "expect": {
+        "kind": "ok",
+        "why": "栏目页仍是 eportal 渲染的空壳：页面内嵌 eportal 隐藏字段（eportalappPortletId），静态 HTML 里没有条目链接"
+      },
+      "probe": {
+        "url": "https://www.pbc.gov.cn/diaochatongjisi/116219/116319/index.html",
+        "expect_contains": "eportalappPortletId"
+      },
+      "if_changed": "页面不再内嵌 eportal（改成静态列表）= 可静态抓，重侦察条目链接结构"
+    },
+    {
+      "id": "shch-trs-needs-column-param",
+      "source": "shclearing-trs",
+      "expect": {
+        "kind": "ok",
+        "why": "接口在但栏目参数未探明：200 + body「请选择查询的栏目」（断言错误标记存在=陷阱成立）"
+      },
+      "probe": {
+        "url": "https://www.shclearing.com.cn/shchapp/web/disclosureForTrsServer/search",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json",
+          "referer": "https://www.shclearing.com.cn/"
+        },
+        "body": "{\"ch\":166,\"pageNo\":1,\"pageSize\":2}",
+        "expect_contains": "请选择查询的栏目"
+      },
+      "if_changed": "不再提示「请选择查询的栏目」= 参数已探明或接口改版 → 从其前端 JS 取真实请求重评"
     }
   ]
 }

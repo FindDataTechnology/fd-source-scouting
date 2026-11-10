@@ -1,0 +1,511 @@
+{
+  "schema": "source-regression-run/v1",
+  "at": "2026-11-10T13:45:49.731098+00:00",
+  "traps_file": "data-source-scouting/regression-traps.json",
+  "rows": [
+    {
+      "trap": {
+        "id": "nbs-easyquery-blocked",
+        "source": "nbs-stats",
+        "expect": {
+          "kind": "channel_failure",
+          "why": "403 拦截页（按出口 ACL），非凭据问题"
+        },
+        "probe": {
+          "url": "https://data.stats.gov.cn/easyquery.htm?m=QueryData&dbcode=hgnd&rowcode=zb&colcode=sj&wds=%5B%5D&dfwds=%5B%5D",
+          "headers": {
+            "referer": "https://data.stats.gov.cn/"
+          }
+        },
+        "if_changed": "可达后先按 getTree 枚举住宿业/住宿餐饮业 zb 代码（预期 2-3 次树查询），有指标才谈生成单"
+      },
+      "got": {
+        "kind": "channel_failure",
+        "status": 403,
+        "reason": "HTTP 403（拦截页形态）",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": "<!DOCTYPE html>\n<html>\n<head><title>403 Forbidden</title></head>\n<body bgcolor=\"white\">\n<center style=\"margin-top: 100px;\"><h1>403 Forbidden</h1></center>\n<hr>\n<center>Client IP: 163.125.162.244</cent"
+      },
+      "expect": "channel_failure",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "census-api-blocked",
+        "source": "census-eits",
+        "expect": {
+          "kind": "channel_failure",
+          "why": "Cloudflare 拦截页（按出口），非缺 key"
+        },
+        "probe": {
+          "url": "https://api.census.gov/data.json"
+        },
+        "if_changed": "换海外出口复测；即便通了也要注册免费 key（防 HTML 伪装 200），并确认 721 住宿类目可用"
+      },
+      "got": {
+        "kind": "channel_failure",
+        "status": 403,
+        "reason": "HTTP 403（拦截页形态）",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": "<!DOCTYPE html>\n<!--[if lt IE 7]> <html class=\"no-js ie6 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 7]>    <html class=\"no-js ie7 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 8]>    <html class=\"no-"
+      },
+      "expect": "channel_failure",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "eurostat-hicp-accommodation-absent",
+        "source": "eurostat-api",
+        "expect": {
+          "kind": "ok",
+          "why": "住宿价格指数 CP112 实际可得（301 期 2000-12→2025-12，unit=I15）"
+        },
+        "probe": {
+          "url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_hicp_midx?format=JSON&lang=EN&coicop=CP112&unit=I15&geo=EU27_2020",
+          "expect_contains": "\"value\"",
+          "max_body_bytes": 20000
+        },
+        "if_changed": "CP112 不再返回 value = 上游改版或下架 → 重侦察；注意 unit=RCH_A 时恒为 0 期（年变化率未发布），必须用 unit=I15/I05",
+        "note": "2026-11-10 定谳：golden 记「CP11/CP112 均 404」不成立。三参数实测定谳——CP11 313 期(1999-12→)、CP111 301 期(2000-12→)、CP112 301 期(2000-12→) 全部 200；CP111 的期数与起点与 golden 完全一致，说明是同一数据集同一口径，故 golden 那条 404 只能是当时查错参数（很可能用了 unit=RCH_A：实测该 unit 三码均 0 期）。结论：住宿价格指数可得，hotel 线可补价格面；此前「无住宿价格指数」的口径注记作废。"
+      },
+      "got": {
+        "kind": "ok",
+        "status": 200,
+        "reason": "HTTP 200 且内容可读",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": "{\"version\":\"2.0\",\"class\":\"dataset\",\"label\":\"HICP - monthly data (index) (1996-2025)\",\"source\":\"ESTAT\",\"updated\":\"2026-02-06T23:00:00+0100\",\"value\":{\"59\":71.35,\"60\":69.11,\"61\":70.18,\"62\":69.95,\"63\":71."
+      },
+      "expect": "ok",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "jp-estat-needs-appid",
+        "source": "jp-estat",
+        "expect": {
+          "kind": "caliber_mismatch",
+          "why": "HTTP 200 但体内 RESULT.STATUS=100「認証に失敗」——错误在 body 里，HTTP 码是 200。用正面标记 STATUS:0 判：无标记即口径不符（=凭据缺失）"
+        },
+        "probe": {
+          "url": "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsList?appId=&statsCode=00550200",
+          "expect_contains": "\"STATUS\":0"
+        },
+        "if_changed": "出现 STATUS:0 说明 appId 已生效 → 再核花き 出荷量/産出額 的表结构（首表形态）"
+      },
+      "got": {
+        "kind": "caliber_mismatch",
+        "status": 200,
+        "reason": "响应体不含期望片段 '\"STATUS\":0'",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": "{\"GET_STATS_LIST\":{\"RESULT\":{\"STATUS\":100,\"ERROR_MSG\":\"\\u8A8D\\u8A3C\\u306B\\u5931\\u6557\\u3057\\u307E\\u3057\\u305F\\u3002\\u30A2\\u30D7\\u30EA\\u30B1\\u30FC\\u30B7\\u30E7\\u30F3ID\\u3092\\u78BA\\u8A8D\\u3057\\u3066\\u4E0"
+      },
+      "expect": "caliber_mismatch",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "kifa-waf-468",
+        "source": "flower-auction",
+        "expect": {
+          "kind": "channel_failure",
+          "why": "雷池 SafeLine WAF 主动拒绝自动化客户端（468）"
+        },
+        "probe": {
+          "url": "https://www.kifa.net/kIFAPriceIndex.do"
+        },
+        "if_changed": "不重开——硬闯 WAF 属检测规避（项目红线）；仅当上游开放官方 API 才重评"
+      },
+      "got": {
+        "kind": "channel_failure",
+        "status": null,
+        "reason": "连接层失败：ConnectError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": ""
+      },
+      "expect": "channel_failure",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "customs-precondition-412",
+        "source": "stats.customs.gov.cn",
+        "expect": {
+          "kind": "channel_failure",
+          "why": "412 Precondition Failed（加速乐前置握手）"
+        },
+        "probe": {
+          "url": "https://stats.customs.gov.cn/"
+        },
+        "if_changed": "通关后先核 HS 06 章口径，再决定是否替代 un-comtrade 的花卉贸易腿"
+      },
+      "got": {
+        "kind": "channel_failure",
+        "status": null,
+        "reason": "连接层失败：ConnectError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1010)",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": ""
+      },
+      "expect": "channel_failure",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "expoflores-wix-no-data",
+        "source": "expoflores",
+        "expect": {
+          "kind": "not_published",
+          "why": "Wix 模板站；/estadisticas/ 与 /exportaciones/ 均 404（P4 实测 2026-11-10）"
+        },
+        "probe": {
+          "url": "https://www.expoflores.com/estadisticas/"
+        },
+        "if_changed": "出现统计页即重侦察其表格结构；否则维持「首页可达 ≠ 有数据通道」"
+      },
+      "got": {
+        "kind": "not_published",
+        "status": 404,
+        "reason": "HTTP 404",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": "\n  <!DOCTYPE html>\n<!--\n    \n\n    \n\n  \n  \n      \n-->\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n    <meta name=\"robots\" content=\""
+      },
+      "expect": "not_published",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "usda-quickstats-needs-key",
+        "source": "usda-quickstats",
+        "expect": {
+          "kind": "credential_invalid",
+          "why": "DEMO_KEY 已失效，须注册免费 key"
+        },
+        "probe": {
+          "url": "https://quickstats.nass.usda.gov/api/api_GET?key=DEMO_KEY&commodity_desc=FLORICULTURE&format=JSON"
+        },
+        "if_changed": "key 到位后核 HORTICULTURE 商品参数是否覆盖花卉口径（F7 剩余项）"
+      },
+      "got": {
+        "kind": "credential_invalid",
+        "status": 401,
+        "reason": "HTTP 401",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": "{\"error\":[\"unauthorized\"]}"
+      },
+      "expect": "credential_invalid",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "100ppi-waf-js-challenge",
+        "source": "100ppi",
+        "expect": {
+          "kind": "caliber_mismatch",
+          "why": "HTTP 200 但体内是 JS 挑战页（noindex + 混淆脚本 + 日期 token）——必须给数据标识才判得出"
+        },
+        "probe": {
+          "url": "https://100ppi.com/cindex/",
+          "expect_contains": "BCI"
+        },
+        "if_changed": "出现真实指数表格/接口才重评；否则维持「200 是 WAF 伪装，非可得」"
+      },
+      "got": {
+        "kind": "caliber_mismatch",
+        "status": 200,
+        "reason": "响应体不含期望片段 'BCI'",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": "\t\t    <html>\n\t\t    <head><meta name=\"robots\" content=\"noindex,noarchive\"></head>\n\t\t    <body>\n\t\t        \t\t\t    <script>\n\t           \t\t(function(_0x1){\n\t               \t\tvar _0x2 = \"ae2c8726b4cf09ce1bb"
+      },
+      "expect": "caliber_mismatch",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "soozhu-js-filled-table",
+        "source": "soozhu",
+        "expect": {
+          "kind": "ok",
+          "why": "页面仍是 JS 空壳：含「数据加载中」占位（数据靠 XHR 填充，静态抓不到数值行）"
+        },
+        "probe": {
+          "url": "https://www.soozhu.com/price/data/center/",
+          "expect_contains": "数据加载中"
+        },
+        "if_changed": "「数据加载中」消失 = 页面改成静态渲染或已能静态取数 → 重侦察其表格结构"
+      },
+      "got": {
+        "kind": "ok",
+        "status": 200,
+        "reason": "HTTP 200 且内容可读",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": "<!DOCTYPE html><html lang=\"zh-hans\" ><head><title>搜猪数据中心|金猪数据中心|查猪价|生猪价格走势|今日猪价|生猪价格预测|冯永辉猪价|搜猪网_生猪预警网</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/><meta name=\"renderer\" "
+      },
+      "expect": "ok",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "gdacs-rss-alive",
+        "source": "gdacs",
+        "expect": {
+          "kind": "ok",
+          "why": "RSS 2.0 XML，含 <item> 与 geo: 命名空间（真结构化通道）"
+        },
+        "probe": {
+          "url": "https://www.gdacs.org/xml/rss.xml",
+          "expect_contains": "<item>"
+        },
+        "if_changed": "feed 结构变化或停更 → 按四分类重判（不是直接判死）"
+      },
+      "got": {
+        "kind": "ok",
+        "status": 200,
+        "reason": "HTTP 200 且内容可读",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": "﻿<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:geo=\"http://www.w3.org/2003/01/geo/wgs84_pos#\" xmlns:gdacs=\"http://www.gdacs.org\" xmlns:gl"
+      },
+      "expect": "ok",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "zhejiang-dopserver-catalog-alive",
+        "source": "zhejiang-opendata",
+        "expect": {
+          "kind": "ok",
+          "why": "POST 数据目录 API 返回 sourceCode/数据元结构（免登录可编程）"
+        },
+        "probe": {
+          "url": "https://data.zjzwfw.gov.cn/dopServer/dataCatalog/apiQueryPage",
+          "method": "POST",
+          "headers": {
+            "content-type": "application/json",
+            "referer": "https://data.zjzwfw.gov.cn/"
+          },
+          "body": "{\"pageNum\":1,\"pageSize\":2}",
+          "expect_contains": "\"sourceCode\""
+        },
+        "if_changed": "返回体失去 sourceCode/success 字段 → 接口改版，重侦察参数白名单"
+      },
+      "got": {
+        "kind": "ok",
+        "status": 200,
+        "reason": "HTTP 200 且内容可读",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": "{\"success\":true,\"code\":\"2000\",\"message\":\"请求处理成功\",\"total\":null,\"result\":{\"records\":[{\"id\":\"FzK5cEiLrTl17AZTXSQVgA==\",\"sourceName\":\"浙江省公证员执业证版式文件\",\"sourceCode\":\"S330000TAB0220181122000101\",\"sourceType\":"
+      },
+      "expect": "ok",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "data-europa-sparql-alive",
+        "source": "data.europa.eu",
+        "expect": {
+          "kind": "ok",
+          "why": "标准 SPARQL 端点，返回 SPARQL JSON（head/results/bindings）"
+        },
+        "probe": {
+          "url": "https://data.europa.eu/sparql",
+          "method": "POST",
+          "headers": {
+            "accept": "application/sparql-results+json",
+            "content-type": "application/x-www-form-urlencoded"
+          },
+          "body": "query=SELECT%20*%20WHERE%20%7B%3Fs%20%3Fp%20%3Fo%7D%20LIMIT%202",
+          "expect_contains": "\"bindings\""
+        },
+        "if_changed": "不再返回 SPARQL JSON → 端点迁移或需鉴权"
+      },
+      "got": {
+        "kind": "ok",
+        "status": 200,
+        "reason": "HTTP 200 且内容可读",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": "\n{ \"head\": { \"link\": [], \"vars\": [\"s\", \"p\", \"o\"] },\n  \"results\": { \"distinct\": false, \"ordered\": true, \"bindings\": [\n    { \"s\": { \"type\": \"uri\", \"value\": \"http://www.openlinksw.com/virtrdf-data-format"
+      },
+      "expect": "ok",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "sichuan-stats-monthly-table-alive",
+        "source": "sichuan-stats",
+        "expect": {
+          "kind": "ok",
+          "why": "月度指标页含规整 HTML 表（含「规模以上工业」）——首页 200 不算证据"
+        },
+        "probe": {
+          "url": "https://tjj.sc.gov.cn/scstjj/c112116/sj.shtml",
+          "expect_contains": "最新发布"
+        },
+        "if_changed": "栏目列表不再含「最新发布」→ 栏目路径又变了，按首页链接重新发现（勿硬编码）"
+      },
+      "got": {
+        "kind": "ok",
+        "status": 200,
+        "reason": "HTTP 200 且内容可读",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": "<!doctype html>\r\n<html>\r\n\r\n<head>\r\n  <meta charset=\"utf-8\">\r\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\" />\r\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0,"
+      },
+      "expect": "ok",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "chinamoney-lpr-no-key-alive",
+        "source": "chinamoney-lpr",
+        "expect": {
+          "kind": "ok",
+          "why": "免 key 公开可读：rep_code=200 + records 含 1Y/5Y 报价"
+        },
+        "probe": {
+          "url": "https://www.chinamoney.com.cn/ags/ms/cm-u-bk-currency/LprHis?lang=CN&startDate=2024-01-01&endDate=2024-12-31",
+          "expect_contains": "\"rep_code\":\"200\""
+        },
+        "if_changed": "若要求鉴权或 rep_code 非 200 → 通道变化，重侦察（勿直接判死）"
+      },
+      "got": {
+        "kind": "ok",
+        "status": 200,
+        "reason": "HTTP 200 且内容可读",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": "{\"head\":{\"version\":\"2.0\",\"provider\":\"CWAP\",\"req_code\":\"\",\"rep_code\":\"200\",\"rep_message\":\"\",\"ts\":1794318340167,\"producer\":\"\",\"tstext\":\"2026-11-10 21:45:40\"},\"data\":{\"endDateCN\":\"2026-11-10\",\"baseCurveC"
+      },
+      "expect": "ok",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "shch-monthly-referer-only-alive",
+        "source": "shclearing-monthly",
+        "expect": {
+          "kind": "ok",
+          "why": "只要 Referer 即可 POST 到月报清单（侦察簿原记需 JSESSIONID，实测非必需）"
+        },
+        "probe": {
+          "url": "https://www.shclearing.com.cn/shchapp/web/sdocClient/monthListPage",
+          "method": "POST",
+          "headers": {
+            "content-type": "application/json",
+            "referer": "https://www.shclearing.com.cn/"
+          },
+          "body": "{\"pageNo\":1,\"pageSize\":2}",
+          "expect_contains": "\"flag\":\"0\""
+        },
+        "if_changed": "flag 非 0 或开始要求 JSESSIONID 会话 → 反爬升级，重侦察会话建立步骤"
+      },
+      "got": {
+        "kind": "ok",
+        "status": 200,
+        "reason": "HTTP 200 且内容可读",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": "{\"flag\":\"0\",\"data\":[{\"id\":\"ff808081430916c401430dd24277111c\",\"title\":\"报表项目说明\",\"content\":null,\"isTop\":\"0\",\"crtime\":\"2013-12-20 10:25:19\",\"isPublic\":\"0\",\"creatorId\":30,\"creatorName\":\"yaojingwei\",\"operId"
+      },
+      "expect": "ok",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "amap-needs-key-200-masquerade",
+        "source": "amap",
+        "expect": {
+          "kind": "caliber_mismatch",
+          "why": "HTTP 200 但体内 INVALID_USER_KEY（需免费 key；200 是伪装）"
+        },
+        "probe": {
+          "url": "https://restapi.amap.com/v3/traffic/status/rectangle?rectangle=116.35,39.85;116.55,40.05",
+          "expect_contains": "\"trafficinfo\""
+        },
+        "if_changed": "体内出现 trafficinfo（真数据）= key 已注入或接口放开 → 重评接入"
+      },
+      "got": {
+        "kind": "caliber_mismatch",
+        "status": 200,
+        "reason": "响应体不含期望片段 '\"trafficinfo\"'",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": "{\"status\":\"0\",\"info\":\"INVALID_USER_KEY\",\"infocode\":\"10001\"}"
+      },
+      "expect": "caliber_mismatch",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "kosis-needs-key-200-masquerade",
+        "source": "kosis",
+        "expect": {
+          "kind": "ok",
+          "why": "200 伪装仍成立：体内 err=10「认证 KEY 缺失」（断言的是**错误标记本身**，标记存在=仍需 key；与高德那种「断言成功标记缺席」是两种写法，见 note）"
+        },
+        "probe": {
+          "url": "https://kosis.kr/openapi/Param/statisticsParameterData.do?method=getList&apiKey=&itmId=T01&objL1=ALL&format=json&jsonVD=Y&prdSe=Y&startPrdDe=2020&endPrdDe=2024&orgId=101&tblId=DT_1K41003",
+          "expect_contains": "\"err\":\"10\""
+        },
+        "if_changed": "err=10 消失 = key 已生效或接口改版 → 重侦察（KOSIS 两张表 DT_1K41003/DT_1KE10041）"
+      },
+      "got": {
+        "kind": "ok",
+        "status": 200,
+        "reason": "HTTP 200 且内容可读",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": "{\"err\":\"10\",\"errMsg\":\"인증 KEY값이 누락되었습니다.\"}"
+      },
+      "expect": "ok",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "pboc-listing-static-shell",
+        "source": "pbc",
+        "expect": {
+          "kind": "ok",
+          "why": "栏目页仍是 eportal 渲染的空壳：页面内嵌 eportal 隐藏字段（eportalappPortletId），静态 HTML 里没有条目链接"
+        },
+        "probe": {
+          "url": "https://www.pbc.gov.cn/diaochatongjisi/116219/116319/index.html",
+          "expect_contains": "eportalappPortletId"
+        },
+        "if_changed": "页面不再内嵌 eportal（改成静态列表）= 可静态抓，重侦察条目链接结构"
+      },
+      "got": {
+        "kind": "ok",
+        "status": 200,
+        "reason": "HTTP 200 且内容可读",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"><html>\n <head>\n  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=ut"
+      },
+      "expect": "ok",
+      "verdict": "unchanged"
+    },
+    {
+      "trap": {
+        "id": "shch-trs-needs-column-param",
+        "source": "shclearing-trs",
+        "expect": {
+          "kind": "ok",
+          "why": "接口在但栏目参数未探明：200 + body「请选择查询的栏目」（断言错误标记存在=陷阱成立）"
+        },
+        "probe": {
+          "url": "https://www.shclearing.com.cn/shchapp/web/disclosureForTrsServer/search",
+          "method": "POST",
+          "headers": {
+            "content-type": "application/json",
+            "referer": "https://www.shclearing.com.cn/"
+          },
+          "body": "{\"ch\":166,\"pageNo\":1,\"pageSize\":2}",
+          "expect_contains": "请选择查询的栏目"
+        },
+        "if_changed": "不再提示「请选择查询的栏目」= 参数已探明或接口改版 → 从其前端 JS 取真实请求重评"
+      },
+      "got": {
+        "kind": "ok",
+        "status": 200,
+        "reason": "HTTP 200 且内容可读",
+        "exit": "2408:8256:328e:2a51:7dba:8cfa:9e66:2276",
+        "body_prefix": "{\"success\":false,\"root\":[],\"totalProperty\":\"0\",\"message\":\"请选择查询的栏目\"}"
+      },
+      "expect": "ok",
+      "verdict": "unchanged"
+    }
+  ],
+  "drifted": []
+}

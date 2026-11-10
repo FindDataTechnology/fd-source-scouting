@@ -1,15 +1,15 @@
 {
   "schema": "source-candidates/v1",
   "meta": {
-    "generated_at": "2026-11-10T13:27:46.062016+00:00",
+    "generated_at": "2026-11-10T13:44:34.114498+00:00",
     "source_doc": "data-source-scouting/INDUSTRY-DATA-SOURCES.md",
-    "source_doc_sha256": "38ac7a12645df77cdad7e43aa78cac08e2c405abfd91211eda58419e97e86a11",
+    "source_doc_sha256": "13c6d7ad9ef1d16e6f8a4312bc1e9cfc3fd488a1e9ddc137c396d54b8c30cc88",
     "generator": "extract_candidates.py/1.0",
     "coverage": {
-      "tables_converted": 16,
-      "tables_excluded": 16,
-      "rows_converted": 190,
-      "rows_excluded": 77,
+      "tables_converted": 17,
+      "tables_excluded": 17,
+      "rows_converted": 195,
+      "rows_excluded": 80,
       "excluded_tables": [
         {
           "header": "维度 | 说明",
@@ -105,6 +105,12 @@
           "header": "期次 | 出游人次 | 同比 | 花费 | 同比",
           "rows": 5,
           "line": 1212,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "coicop | 标签 | unit=I15 | unit=I05 | unit=RCH_A",
+          "rows": 3,
+          "line": 1390,
           "reason": "表头签名未登记（非候选表或新表）"
         }
       ]
@@ -3406,6 +3412,74 @@
       },
       "status": "rejected",
       "reason": "信息不足，需重侦察：缺「完整端点 + itemId 取值」。不是不可得，是我们没有可复现的请求",
+      "landed_slug": null
+    },
+    {
+      "id": "pboc-信贷收支表-1369",
+      "name": "PBoC 信贷收支表",
+      "doc_line": 1369,
+      "section": "欠账复测队列 · 第六批（5 条，2026-11-10，64KB + method/body）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "栏目页 diaochatongjisi/116219/116319/index.html → 200，65,536 B；<title>统计数据</title>；页内 273 个 <tr> 全是站点导航（30 行有效文本为「信息公开/新闻发布/法律法规…」），0 个条目链接"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "pboc-贷款投向-1370",
+      "name": "PBoC 贷款投向",
+      "doc_line": 1370,
+      "section": "欠账复测队列 · 第六批（5 条，2026-11-10，64KB + method/body）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "同构（goutongjiaoliu/113456/113469）→ 200"
+      },
+      "status": "unknown",
+      "reason": "同上，同一 eportal 机制",
+      "landed_slug": null
+    },
+    {
+      "id": "pboc-货政报告-1371",
+      "name": "PBoC 货政报告",
+      "doc_line": 1371,
+      "section": "欠账复测队列 · 第六批（5 条，2026-11-10，64KB + method/body）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "同构（zhengcehuobisi/125207/125227/125957）→ 200"
+      },
+      "status": "unknown",
+      "reason": "同上；PDF 直链需从 eportal 列表取",
+      "landed_slug": null
+    },
+    {
+      "id": "pboc-区域金融-1372",
+      "name": "PBoC 区域金融",
+      "doc_line": 1372,
+      "section": "欠账复测队列 · 第六批（5 条，2026-11-10，64KB + method/body）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "同构（年度合辑页 33 PDF）→ 200"
+      },
+      "status": "unknown",
+      "reason": "同上",
+      "landed_slug": null
+    },
+    {
+      "id": "上清所-trs-公告-1373",
+      "name": "上清所 TRS 公告",
+      "doc_line": 1373,
+      "section": "欠账复测队列 · 第六批（5 条，2026-11-10，64KB + method/body）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "POST /shchapp/web/disclosureForTrsServer/search（body 试了 ch/channelId/ch166/columnId=166 四种键名）→ HTTP 200 但体 {\"success\":false,\"root\":[],\"totalProperty\":\"0\",\"message\":\"请选择查询的栏目\"}"
+      },
+      "status": "accepted",
       "landed_slug": null
     }
   ]
