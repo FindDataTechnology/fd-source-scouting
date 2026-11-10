@@ -1,15 +1,15 @@
 {
   "schema": "source-candidates/v1",
   "meta": {
-    "generated_at": "2026-11-10T13:44:34.114498+00:00",
+    "generated_at": "2026-11-10T14:10:11.793636+00:00",
     "source_doc": "data-source-scouting/INDUSTRY-DATA-SOURCES.md",
-    "source_doc_sha256": "13c6d7ad9ef1d16e6f8a4312bc1e9cfc3fd488a1e9ddc137c396d54b8c30cc88",
+    "source_doc_sha256": "4f982bf05c5171aa97dcb750f50ba2ae9f1d1b6ce679a2f98a61a67d509893d5",
     "generator": "extract_candidates.py/1.0",
     "coverage": {
       "tables_converted": 17,
-      "tables_excluded": 17,
+      "tables_excluded": 18,
       "rows_converted": 195,
-      "rows_excluded": 80,
+      "rows_excluded": 85,
       "excluded_tables": [
         {
           "header": "维度 | 说明",
@@ -111,6 +111,12 @@
           "header": "coicop | 标签 | unit=I15 | unit=I05 | unit=RCH_A",
           "rows": 3,
           "line": 1390,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "检查 | 结果",
+          "rows": 5,
+          "line": 1462,
           "reason": "表头签名未登记（非候选表或新表）"
         }
       ]

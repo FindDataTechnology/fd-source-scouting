@@ -259,32 +259,35 @@
       "source": "pbc",
       "expect": {
         "kind": "ok",
-        "why": "栏目页仍是 eportal 渲染的空壳：页面内嵌 eportal 隐藏字段（eportalappPortletId），静态 HTML 里没有条目链接"
+        "why": "栏目页确认为 eportal 空壳：页内 0 个条目链接（/t20YYYYMM_xxxx.html）、0 个服务端渲染条目标题、portlet 地址 /eportal/ui?pageId=… 实测 404；页面只内嵌 eportal 隐藏字段（eportalappPortletId）"
       },
       "probe": {
         "url": "https://www.pbc.gov.cn/diaochatongjisi/116219/116319/index.html",
         "expect_contains": "eportalappPortletId"
       },
-      "if_changed": "页面不再内嵌 eportal（改成静态列表）= 可静态抓，重侦察条目链接结构"
+      "if_changed": "页面出现明文条目链接或 portlet 端点可用 = 可静态取数 → 重侦察；对照：TRS 能反推是因为 cwbg.js 里明文写着端点，PBoC 页面没有任何明文端点"
     },
     {
-      "id": "shch-trs-needs-column-param",
+      "id": "shch-trs-alive-with-real-params",
       "source": "shclearing-trs",
       "expect": {
         "kind": "ok",
-        "why": "接口在但栏目参数未探明：200 + body「请选择查询的栏目」（断言错误标记存在=陷阱成立）"
+        "why": "参数已从 cwbg.js + 页面 channelId 读出（非猜测）：form-urlencoded + keyword 非空 + channelId=1205 + limit/start；返回 success:true 与 root 数据行（含 title/url/publishDate）"
       },
       "probe": {
         "url": "https://www.shclearing.com.cn/shchapp/web/disclosureForTrsServer/search",
         "method": "POST",
         "headers": {
-          "content-type": "application/json",
-          "referer": "https://www.shclearing.com.cn/"
+          "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+          "x-requested-with": "XMLHttpRequest",
+          "referer": "https://www.shclearing.com.cn/xxpl/zxpz/"
         },
-        "body": "{\"ch\":166,\"pageNo\":1,\"pageSize\":2}",
-        "expect_contains": "请选择查询的栏目"
+        "body": "keyword=债券&startDate=&endDate=&channelId=1205&limit=10&start=0",
+        "expect_contains": "\"totalProperty\":",
+        "max_body_bytes": 300000
       },
-      "if_changed": "不再提示「请选择查询的栏目」= 参数已探明或接口改版 → 从其前端 JS 取真实请求重评"
+      "if_changed": "不再返回 success/root → 接口或参数改版，回 cwbg.js 重取请求体；注意别加 accept: application/json（实测会让服务端返 HTML）",
+      "note": "2026-11-10 从前端 JS 反推成功（不猜键名）：cwbg.js 的 searchData() 构造 params={keyword:(keyWord 去空格 split(' ')), startDate, endDate, channelId, limit, start}，jQuery traditional:true + 默认 form-urlencoded；channelId 来自承载页内联脚本 var channelId=\"1205\"（/xxpl/zxpz/ 专项品种，3640 条）。踩坑：① body 必须是 form-urlencoded 不是 JSON（JSON 会得「请选择查询的栏目」）；② keyword 必须非空（前端有「请输入关键字」拦截）；③ 加 accept: application/json 会返 HTML —— header 形状敏感。"
     }
   ]
 }

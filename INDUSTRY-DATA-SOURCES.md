@@ -1407,3 +1407,72 @@ Wave C 四扩展（c20/bsci/apri/comext）有 golden 且全绿，但入口只遍
 **方法论教训**：`404 not available for dissemination` 不是"该指标不存在"，而是**该 code×unit 组合未发布**。
 把一个 404 推广成"整条线没有价格指数"，是典型的「一个参数组合的结论被当成全集」。
 本轮能翻案，靠的是**三 code × 三 unit 的矩阵**，而不是单点复测。
+
+---
+
+# 决策记录：上清所 TRS 公告**跑通**（2026-11-10，参数取自前端 JS，非猜测）
+
+**旧状态**：侦察簿记「POST `/shchapp/web/disclosureForTrsServer/search`（ch166 流通要素/ch1…）」，
+我此前试 `ch` / `channelId` / `ch166` / `columnId` 四种键名全部得
+`{"success":false,"root":[],"message":"请选择查询的栏目"}` —— 那是**猜键名**的必然结果。
+
+**反推过程（这才是正路）**：
+1. 首页 411,246 B（需 2MB body 窗口才拿到 `<body>`，前 241KB 全在 `<head>`）
+2. 导航 → `/xxpl/zxpz/`（专项品种，`pageTotal=3640`）
+3. 该页加载 `../../images/cwbg.js`（61,663 B）——`grep disclosureForTrs` 命中
+4. `cwbg.js` 的 `searchData()` 构造：
+   ```js
+   var params = {
+     keyword: this.keyWord.trim().split(' '),   // 数组，且必须非空（前端拦「请输入关键字」）
+     startDate: startTime, endDate: endTime,
+     channelId: this.channelId,
+     limit: this.pageSize, start: start
+   };
+   $.ajax({ url: shclearing.app_root + "disclosureForTrsServer/search",
+            type: 'POST', dataType: "json", traditional: true, data: params, ... });
+   ```
+   → **form-urlencoded + traditional（数组按键重复）+ 不是 JSON**
+5. `channelId` 由承载页内联脚本给出：`var channelId = "1205";`（`/xxpl/zxpz/`）
+
+**实测结果**（`keyword=债券`）：
+
+```
+HTTP 200 · {"success":true, "totalProperty":1150, "root":[
+  {"title":"关于调整印度尼西亚共和国2026年度第二期人民币债券(债券通)(品种三)簿记建档发行金额的说明",
+   "url":"…/t20261110_1902568.html","publishDate":"2026-11-10","channelId":"1208"}, …]}
+```
+
+`keyword=评级` → 785 条；`keyword=2026` → 588 条。**通道可用，字段为 title/url/publishDate/channelId。**
+
+**三个踩坑（写进陷阱清单）**：
+1. body 必须是 `form-urlencoded`；用 JSON 会得「请选择查询的栏目」（服务端按表单参数绑定）
+2. `keyword` 必须非空（前端有拦截），空串等于不查
+3. **加 `accept: application/json, text/javascript, */*; q=0.01` 会返 HTML**；去掉即恢复 JSON —— header 形状敏感，照抄前端时不要自创
+
+**方法论**：这一条此前被我判成「200 伪装 + 参数未探明」。真相是**参数可从公开前端 JS 完整反推**——
+先找承载页 → 找它加载的业务 JS → 读 `searchData()` 的 params 构造 → 找页面内联变量。
+「参数未知」的正确处置是**读前端**，不是穷举键名。
+
+---
+
+# 第六批补充定案：PBoC 四条**确认为 eportal 空壳**（2026-11-10，按同一手法验到底）
+
+用反推 TRS 的同一手法（读页面 JS / 找 portlet 端点）把 PBoC 四条验到底：
+
+| 检查 | 结果 |
+|---|---|
+| `/diaochatongjisi/116219/116319/index.html`（信贷收支） | 200，`<title>统计数据</title>`，273 个 `<tr>` 全是站点导航 |
+| 页面内条目链接（`/t20YYYYMM_xxxx.html`） | **0 个** |
+| 服务端渲染的条目标题锚文本（含"收支表/统计表/报告/数据"） | **0 个** |
+| 页面内 `eportal` portlet 地址 | 仅 `/eportal/ui?pageId=…`（UI 壳，实测 **404**） |
+| 页面内唯一接口 | `https://wzdig.pbc.gov.cn/search/pcRender`（站内**搜索**表单，非数据目录） |
+
+**定案：PBoC 信贷收支表 / 贷款投向 / 货政报告 / 区域金融 四条均无法静态取数。**
+数据由 eportal portlet 在浏览器端异步装配，静态 HTML 里只有导航。
+要接须先打通 eportal 的 portlet 数据接口（页面未暴露明文端点）→ **需重侦察，非"不可得"**。
+
+**与 TRS 的对照（同一天、同一手法、不同结果）**：
+- TRS 能反推成功，是因为业务 JS `cwbg.js` 里**明文写着** `$.ajax({url: app_root+"disclosureForTrsServer/search", data: params})`；
+- PBoC 反推不出来，是因为它的数据流走 portlet 容器运行时装配，页面里**没有任何明文端点**。
+> 判据：**"能否从公开前端 JS 读到明文请求构造"决定了这条路走不走得通**。
+> 读得到 → 可反推（TRS）；读不到 → 只能重侦察，不得穷举参数（PBoC）。
