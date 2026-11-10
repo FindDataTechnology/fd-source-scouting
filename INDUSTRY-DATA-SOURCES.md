@@ -1412,6 +1412,12 @@ Wave C 四扩展（c20/bsci/apri/comext）有 golden 且全绿，但入口只遍
   「CP11/CP112 均 404」改为「**CP112 可得 301 期**」（`kind: probed_available`），
   原结论保留在 `superseded` 块里可追溯；陷阱 id 由 `…-absent` 改为 `…-available`
   （旧名会让人误读为"仍不存在"）。回归闸门复跑两次：**20 条全一致 / 漂移 0**
+- ✅ **下游消费者核查（2026-11-10，全仓 grep）**：`replay/golden-side.json` **只有文档引用，
+  **没有任何代码读取**（`golden-side`/`negative_conclusions`/`probed_404`/`hotel-replay-golden`
+  四个关键词在 `*.py|*.sh|*.js|*.mjs|*.ts` 中命中数为 0）→ 不存在按 `probed_404` 穷举的分支，
+  改 kind 无兼容性风险。但「无消费者 = 无校验」，故新增闸门
+  `scripts/validate_golden.py`：schema 固定、**kind 闭集**（新增 kind 必须同时改校验器）、
+  `superseded` 块四要素齐全（结论反转必须留痕）
 - ⏳ **仍未做**：板面价量背离的渲染改造与规则调整（`pairing.state` 已改，消费方需验证）
 
 **结论与影响**：
