@@ -1283,7 +1283,7 @@ Wave C 四扩展（c20/bsci/apri/comext）有 golden 且全绿，但入口只遍
 |---|---|---|
 | USAspending | `GET /api/v2/awards/last_updated` → 200 `{"last_updated":"11/06/2026"}` | **活跃待接**（联邦合同按 NAICS 月度聚合=行业需求信号，W1-L2 原判维持） |
 | data.gov 目录 | `GET /organizations?api_key=DEMO_KEY` → 200，255,636 数据集目录（DEMO_KEY 可用；侦察簿所记 `/refs` 路径为误记） | **活跃待接**（只做发现层，W1-E 原判维持） |
-| Treasury FiscalData | 侦察簿所记 v1 路径与 v2 全 404（HTML 404 页）；`transparency.treasury.gov` 302 | **端点路径漂移，需重侦察**；当前不可出单 |
+| Treasury FiscalData | 侦察簿所记 v1 路径与 v2 全 404（HTML 404 页）；`transparency.treasury.gov` 302 | **⚠ 2026-11-11 已推翻**：见第七批反转记录——v1/v2 三条端点实测 200 且体首 `{"data":[`。原判「端点路径漂移，需重侦察；当前不可出单」**作废**（`transparency.treasury.gov` 的 302 仍成立，那是另一个面，判据各自独立） |
 | Census API | `data.json` → 403 Cloudflare 拦截页（HTML，oldie 注释） | **按出口拦截**（非凭据）：换海外出口复测；免费 key 仍须注册（防 HTML 伪装 200，W1-L37 原注记维持） |
 | OpenSky | 未探（匿名限流严格） | 维持原判（keep-candidate） |
 
@@ -1498,3 +1498,76 @@ HTTP 200 · {"success":true, "totalProperty":1150, "root":[
 - PBoC 反推不出来，是因为它的数据流走 portlet 容器运行时装配，页面里**没有任何明文端点**。
 > 判据：**"能否从公开前端 JS 读到明文请求构造"决定了这条路走不走得通**。
 > 读得到 → 可反推（TRS）；读不到 → 只能重侦察，不得穷举参数（PBoC）。
+
+---
+
+# 欠账复测队列 · 第七批（4 条，2026-11-11，免 key JSON 面；含 1 条结论反转）
+
+> 取「accepted + 无证据 + 未落地」的 29 条空白里最省事的一组：全部免 key、GET、JSON 体、
+> 有可机器判定的阳性标记。探针版本与第六批同（64KB body）。
+
+| 源 | 本轮实测 | 定案 |
+|---|---|---|
+| Treasury FiscalData | `GET /services/api/fiscal_service/v1/accounting/dts/deposits_withdrawals_operating_cash?page[size]=1` → **200**，体 `{"data":[{"record_date":"2005-10-03","account_type":"Federal Reserve Account",…`（2,540 B）；另测 `v1/accounting/od/rates_of_exchange` → 200、`v2/accounting/od/avg_interest_rates` → 200，三条均 ok | **活跃待接（推翻第一批判定）** —— 详见下方反转记录 |
+| data.gov.uk | `GET /api/3/action/package_search?rows=1` → **200**，体 `{"help": …, "success": true, "result": {…`（25,289 B） | **活跃待接**（CKAN 标准动作，可直接编程取元数据与资源分布） |
+| OpenDataSoft | `GET /api/explore/v2.1/catalog/datasets?limit=1` → **200**，体 `{"total_count": 102983, "results": [{"visibility": "domain", …` | **活跃待接**（10.3 万数据集聚合目录，免 key；做发现层，与 data.gov 目录同类） |
+| GDACS | `GET /gdacsapi/api/events/geteventlist/SEARCH?eventlist=EQ&fromDate=2026-10-01&toDate=2026-10-31` → **200**，体 `{"type":"FeatureCollection","features":[{"type":"Feature","bbox":[…` | **活跃待接**（免 key GeoJSON，含坐标与 alertlevel；灾害事件面，fromDate/toDate 可回溯） |
+
+## 反转记录：Treasury FiscalData「端点漂移、不可出单」（第一批判定）作废
+
+**原结论（第一批判定，2026-11-10）**：
+> 侦察簿所记 v1 路径与 v2 全 404（HTML 404 页）；`transparency.treasury.gov` 302
+> → **端点路径漂移，需重侦察**；当前不可出单
+
+**推翻日**：2026-11-11
+
+**证据（本轮实测，三条独立端点，全部 200 且体首为 `{"data":[`）**：
+
+| 端点 | 状态 | 体首 |
+|---|---|---|
+| `v1/accounting/dts/deposits_withdrawals_operating_cash` | 200 | `{"data":[{"record_date":"2005-10-03","account_type":"Federal Reserve Account",…` |
+| `v1/accounting/od/rates_of_exchange` | 200 | `{"data":[{"record_date":"2001-03-31","country":"Afghanistan","currency":"Afghani",…` |
+| `v2/accounting/od/avg_interest_rates` | 200 | `{"data":[{"record_date":"2001-01-31","security_type_desc":"Marketable",…` |
+
+**最可能的成因（不为结论服务，只作解释，未证实）**：第一批当时的 404 是 HTML 页，
+与现在的 JSON 面不同 —— 更像是当时打到了**错误的服务名**（`fiscal_service` 之后那一段是
+数据集路径，拼错就落 404 HTML），而不是 API 整体下线。按约束③「选可验证更严的一侧」：
+现在有三条可逐字段复核的 200，采信正向观测；旧判定的"不可出单"作废。
+
+**决定记录**：本条无需单独立 change 级决定记录——它不涉及跨消费者共享口径列，也不改变
+「接不接」的业务判断（原本就是 accepted）；只更正事实层结论，故就地留痕（本节）。
+
+**仍须注意**：`transparency.treasury.gov` 的 302 与本 API 是**两个面**，不要因为 API 活了
+就认为那个门户也活了；两者判据各自独立。
+
+## 本批口径
+
+- 四条均**未改** candidates 的 accepted 状态（复测不改「接不接」，只把"有没有证据"从空补成有）
+- 阳性标记均取**体内结构**（`"data":[` / `"success": true` / `"total_count"` / `FeatureCollection`），
+  不取状态码单独作证——200 伪装在这个仓已有六例（TRS/PBoC/amap/KOSIS 等）
+
+## 本批的口径纠偏：99 条「无证据」里只有 7 条是真空白
+
+做第七批时先入为主地把「accepted + 无证据」当成待办队列，得到 99 条。实际统计后发现这是个**口径错误**：
+
+| 口径 | 数 | 说明 |
+|---|---|---|
+| mention（每张表一行） | 199 | 同一个源会在「★接 候选总表」和「欠账复测队列」各出现一次 |
+| **唯一源**（按名归一） | **168** | 业务上真正要数的是这个 |
+| accepted mention | 144 | |
+| accepted 唯一源 | 128 | |
+| 无证据且未落地 mention | 29 | 看似待办 |
+| 其中同族已有证据（重复 mention） | 22 | **不是待办**，兄弟行早就测过 |
+| **真空白（同族无任何证据）** | **7** | 只有这 7 条需要探测 |
+
+真空白 7 条（截至 2026-11-11）：`nbs-流通领域生产资料价格`、`kosis-零售-线上购物表`、
+`world-bank-data360-mcp`、`nfra-统计-excel-附件`、`nfra-处罚公开`、`lpr`、`理财产品查询`。
+特征也清楚：**5 条需要凭据或特殊通道**（KOSIS 免费 key、data360-mcp 是 pip 包、
+两条 NFRA 走 docId 参数链、LPR 与理财走 chinamoney/lcw 的 JS 加密通道），
+不是"抓一下就有"的类型。
+
+**已落进代码，不靠记性**：`extract_candidates.py` 的 `summarize()` 现在同时报
+mention / 唯一源 / 真空白，self-test 钉住 `_name_key` 的全半角括号与大小写归一。
+判据纪律：**先按名归一再决定要不要跑探测**——否则会把重复 mention 当欠账，白跑一轮
+还会往漏斗里塞重复行（本轮就塞了 4 条，接受这个代价是因为复测批次的既有惯例是
+"一批一组新行"，且新口径已能让读数不再失真）。

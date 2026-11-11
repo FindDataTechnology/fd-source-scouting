@@ -1,15 +1,15 @@
 {
   "schema": "source-candidates/v1",
   "meta": {
-    "generated_at": "2026-11-11T01:55:31.694869+00:00",
+    "generated_at": "2026-11-11T03:19:08.955026+00:00",
     "source_doc": "data-source-scouting/INDUSTRY-DATA-SOURCES.md",
-    "source_doc_sha256": "d6453f422ac9314162f2864309a81fef1180657663c7f5316dc048d1c109e3df",
+    "source_doc_sha256": "735486c968ddb4a03c301c2680fc4a37bd1b614be7d7585c393481337ae79346",
     "generator": "extract_candidates.py/1.0",
     "coverage": {
-      "tables_converted": 17,
-      "tables_excluded": 18,
-      "rows_converted": 195,
-      "rows_excluded": 85,
+      "tables_converted": 18,
+      "tables_excluded": 20,
+      "rows_converted": 199,
+      "rows_excluded": 95,
       "excluded_tables": [
         {
           "header": "维度 | 说明",
@@ -117,6 +117,18 @@
           "header": "检查 | 结果",
           "rows": 5,
           "line": 1484,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "端点 | 状态 | 体首",
+          "rows": 3,
+          "line": 1526,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "口径 | 数 | 说明",
+          "rows": 7,
+          "line": 1553,
           "reason": "表头签名未登记（非候选表或新表）"
         }
       ]
@@ -3145,7 +3157,7 @@
         "summary": "侦察簿所记 v1 路径与 v2 全 404（HTML 404 页）；transparency.treasury.gov 302"
       },
       "status": "unknown",
-      "reason": "端点路径漂移，需重侦察；当前不可出单",
+      "reason": "⚠ 2026-11-11 已推翻：见第七批反转记录——v1/v2 三条端点实测 200 且体首 {\"data\":[。原判「端点路径漂移，需重侦察；当前不可出单」作废（transparency.treasury.gov 的 302 仍成立，那是另一个面，判据各自独立）",
       "landed_slug": null
     },
     {
@@ -3487,6 +3499,58 @@
       },
       "status": "accepted",
       "landed_slug": null
+    },
+    {
+      "id": "treasury-fiscaldata-1511",
+      "name": "Treasury FiscalData",
+      "doc_line": 1511,
+      "section": "欠账复测队列 · 第七批（4 条，2026-11-11，免 key JSON 面；含 1 条结论反转）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "GET /services/api/fiscal_service/v1/accounting/dts/deposits_withdrawals_operating_cash?page[size]=1 → 200，体 {\"data\":[{\"record_date\":\"2005-10-03\",\"account_type\":\"Federal Reserve Account\",…（2,540 B）；另测 v1/accounting/od/rates_of_exchange → 200、v2/accounting/od/avg_interest_rates → 200，三条均 ok"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "data-gov-uk-1512",
+      "name": "data.gov.uk",
+      "doc_line": 1512,
+      "section": "欠账复测队列 · 第七批（4 条，2026-11-11，免 key JSON 面；含 1 条结论反转）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "GET /api/3/action/package_search?rows=1 → 200，体 {\"help\": …, \"success\": true, \"result\": {…（25,289 B）"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "opendatasoft-1513",
+      "name": "OpenDataSoft",
+      "doc_line": 1513,
+      "section": "欠账复测队列 · 第七批（4 条，2026-11-11，免 key JSON 面；含 1 条结论反转）",
+      "wave": "",
+      "needs_review": true,
+      "evidence": {
+        "summary": "GET /api/explore/v2.1/catalog/datasets?limit=1 → 200，体 {\"total_count\": 102983, \"results\": [{\"visibility\": \"domain\", …"
+      },
+      "status": "accepted",
+      "landed_slug": "hf-datasets"
+    },
+    {
+      "id": "gdacs",
+      "name": "GDACS",
+      "doc_line": 1514,
+      "section": "欠账复测队列 · 第七批（4 条，2026-11-11，免 key JSON 面；含 1 条结论反转）",
+      "wave": "",
+      "needs_review": false,
+      "evidence": {
+        "summary": "GET /gdacsapi/api/events/geteventlist/SEARCH?eventlist=EQ&fromDate=2026-10-01&toDate=2026-10-31 → 200，体 {\"type\":\"FeatureCollection\",\"features\":[{\"type\":\"Feature\",\"bbox\":[…"
+      },
+      "status": "accepted",
+      "landed_slug": "jp-yahoo-events"
     }
   ]
 }

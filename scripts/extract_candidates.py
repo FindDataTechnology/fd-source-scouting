@@ -702,6 +702,16 @@ def build(doc: Path = DOC) -> dict:
     }
 
 
+def _name_key(name: str) -> str:
+    """源名归一键：同一源会在多处表格出现（总表 + 欠账复测队列），必须能认成同一源。
+
+    2026-11-11 实测教训：把「accepted 无证据」当待办清单时得到 99 条，其中 26 组的
+    兄弟行**早就带着证据**（同一源在复测队列里测过）——不做归一会把重复 mention
+    当成真空白，白跑一轮探测、还会往漏斗里塞重复行。
+    """
+    return re.sub(r"[\s\-_·（）()/]+", "", (name or "")).lower()
+
+
 def summarize(doc: dict) -> str:
     cands = doc["candidates"]
     by_status: dict[str, int] = {}
@@ -710,10 +720,30 @@ def summarize(doc: dict) -> str:
     landed = sum(1 for c in cands if c.get("landed_slug"))
     review = sum(1 for c in cands if c.get("needs_review"))
     cov = doc["meta"]["coverage"]
+
+    # mention（每张表一行）与唯一源是两个口径：漏斗行数是 mention，业务上要的是唯一源。
+    # 只报 mention 会被读成"有 199 个源"，实际只有 168 个。
+    groups: dict[str, list[dict]] = {}
+    for c in cands:
+        groups.setdefault(_name_key(c["name"]), []).append(c)
+    uniq = len(groups)
+    acc_uniq = len({k for k, g in groups.items() if any(x["status"] == "accepted" for x in g)})
+    # 真空白 = accepted、无证据、且同族无任何一行带证据。同族有证据的属于重复 mention。
+    acked = [c for c in cands if c["status"] == "accepted"]
+    no_ev = [c for c in acked if not c.get("evidence") and not c.get("landed_slug")]
+    truly = [
+        c for c in no_ev
+        if not any(x.get("evidence") for x in groups[_name_key(c["name"])])
+    ]
+    dup_no_ev = len(no_ev) - len(truly)
+
     lines = [
-        f"候选清单：{len(cands)} 条（来源 {doc['meta']['source_doc']}）",
-        f"  按状态：" + "，".join(f"{k}={v}" for k, v in sorted(by_status.items())),
+        f"候选清单：{len(cands)} 条 mention / 唯一源 {uniq} 个（来源 {doc['meta']['source_doc']}）",
+        f"  按状态（mention）：" + "，".join(f"{k}={v}" for k, v in sorted(by_status.items()))
+        + f"；accepted 唯一源 {acc_uniq} 个",
         f"  已对到在产单元：" + str(landed) + "，待复核：" + str(review),
+        f"  无证据且未落地：{len(no_ev)} 条 mention，其中**同族已带证据（重复 mention）** {dup_no_ev} 条"
+        f" → **真空白 {len(truly)} 条**",
         f"  覆盖度：转换 {cov['tables_converted']} 表 / 排除 {cov['tables_excluded']} 表；"
         f"行 转换 {cov['rows_converted']} / 排除 {cov['rows_excluded']}",
     ]
@@ -762,6 +792,11 @@ def self_test() -> int:
     check("slug token shibor", match_by_slug_token("POST /ags/ms/cm-u-bk-shibor/ShiborHis", _s), "chinamoney-shibor")
     check("slug token strong", match_by_slug_token("datacenter-web.eastmoney.com RPT_PUBLIC 披露日历", _s), "eastmoney-disclosure-plan")
     check("slug token shared host ambiguous", match_by_slug_token("chinamoney.com.cn 数据", _s), None)
+    # 源名归一（2026-11-11 加）：漏斗行数是 mention，同一源会在总表与复测队列各出现一次。
+    # 不算归一会把重复 mention 当成"真空白"去重跑探测（实测 29 → 7）。
+    check("name key 全半角括号归一", _name_key("Expoflores（厄瓜多尔）"), _name_key("Expoflores (厄瓜多尔)"))
+    check("name key 忽略大小写与空格", _name_key("KOSIS 零售/线上购物表"), _name_key("kosis零售线上购物表"))
+    check("name key 仍区分不同源", _name_key("上清所月报") != _name_key("上清所 TRS 公告"), True)
 
     real = build()
     cov = real["meta"]["coverage"]
