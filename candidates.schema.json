@@ -52,7 +52,7 @@
         "required": ["id", "name", "status", "doc_line"],
         "additionalProperties": false,
         "properties": {
-          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$", "description": "稳定 slug" },
+          "id": { "type": "string", "pattern": "^[a-z0-9\u4e00-\u9fff][a-z0-9\u4e00-\u9fff-]*$", "description": "稳定 slug（候选内部主键，不进 URL、不进文件路径）。允许中文：中文源名没有稳定的英文对应，音译会引入不稳定标识；真正必须禁的是空白/斜杠/全角标点（slugify 已换成 '-' 或删除）。本字段原写 ASCII-only 但从未被执行——195 条里 119 条违约而无人察觉；2026-11-11 按 slugify 的真实产出对齐，并由 extract_candidates.py --self-test 常驻校验。" },
           "name": { "type": "string", "description": "文档中的源名（保留原文，便于人工对位）" },
           "section": { "type": "string", "description": "所在章节标题（最近的上级标题）" },
           "wave": { "type": "string", "description": "批次标识（Wave1 / 银行业专场 / 花卉专场 …），从章节标题推" },

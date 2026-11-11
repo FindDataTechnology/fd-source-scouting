@@ -1,9 +1,9 @@
 {
   "schema": "source-candidates/v1",
   "meta": {
-    "generated_at": "2026-11-10T15:40:35.756174+00:00",
+    "generated_at": "2026-11-11T01:55:31.694869+00:00",
     "source_doc": "data-source-scouting/INDUSTRY-DATA-SOURCES.md",
-    "source_doc_sha256": "b0889860cf6cb1986cc5b1aaf8c14b7ab56cb2a20a0a708a5f9979c225a7741c",
+    "source_doc_sha256": "d6453f422ac9314162f2864309a81fef1180657663c7f5316dc048d1c109e3df",
     "generator": "extract_candidates.py/1.0",
     "coverage": {
       "tables_converted": 17,
@@ -116,7 +116,7 @@
         {
           "header": "检查 | 结果",
           "rows": 5,
-          "line": 1478,
+          "line": 1484,
           "reason": "表头签名未登记（非候选表或新表）"
         }
       ]
@@ -794,7 +794,7 @@
       "doc_line": 99,
       "section": "★接 候选总表（34 项，全部经实测）",
       "wave": "Wave 1",
-      "needs_review": true,
+      "needs_review": false,
       "endpoint": "api.usaspending.gov/api/v2/（联邦合同按 NAICS 月度聚合=行业需求信号，FY2001 起）",
       "auth": {
         "kind": "none",
@@ -805,7 +805,7 @@
         "L"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "usaspending-awards"
     },
     {
       "id": "census-api",
@@ -3119,7 +3119,7 @@
         "summary": "GET /api/v2/awards/last_updated → 200 {\"last_updated\":\"11/06/2026\"}"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "usaspending-awards"
     },
     {
       "id": "data-gov-目录-1285",

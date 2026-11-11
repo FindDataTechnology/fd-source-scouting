@@ -39,6 +39,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]          # finddata 根
 DOC = ROOT / "data-source-scouting" / "INDUSTRY-DATA-SOURCES.md"
 OUT = ROOT / "data-source-scouting" / "candidates.json"
+SCHEMA_PATH = ROOT / "data-source-scouting" / "candidates.schema.json"
 SPIDERS = ROOT / "fd-industry-data" / "spiders"
 
 SCHEMA = "source-candidates/v1"
@@ -771,6 +772,26 @@ def self_test() -> int:
         if c["status"] in ("rejected", "unknown") and not c.get("reason"):
             ok = False
             print(f"  FAIL {c['id']} 缺 reason")
+
+    # id 契约对位（2026-11-11 加）：schema 的 id.pattern 必须与 slugify 的真实产出兼容。
+    # 事故：schema 写了 ASCII-only `^[a-z0-9][a-z0-9-]*$`，slugify 却保留中文
+    # （`[^a-z0-9\u4e00-\u9fff-]` 才删），195 条里 119 条违约而无人察觉——两边各写
+    # 一份真理、且从没跑过对方。现在每次 self-test 都拿真实产出过一遍 schema 的 id
+    # 规则 + 唯一性，漂移当场红。
+    id_pat = re.compile(
+        json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
+        ["properties"]["candidates"]["items"]["properties"]["id"]["pattern"]
+    )
+    seen_ids: set[str] = set()
+    for c in real["candidates"]:
+        cid = c["id"]
+        if not id_pat.match(cid):
+            ok = False
+            print(f"  FAIL id {cid!r} 不匹配 schema pattern {id_pat.pattern}")
+        if cid in seen_ids:
+            ok = False
+            print(f"  FAIL id 重复 {cid!r}")
+        seen_ids.add(cid)
     print("self-test", "OK" if ok else "FAILED")
     return 0 if ok else 1
 
