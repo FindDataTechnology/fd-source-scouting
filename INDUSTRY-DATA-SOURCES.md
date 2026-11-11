@@ -1257,7 +1257,7 @@ Wave C 四扩展（c20/bsci/apri/comext）有 golden 且全绿，但入口只遍
 # 花卉全球供给面探针降级（2026-11-10，industry-source-solution-fleet P4）
 
 > 探针：`fd-source-probe`（本机直连，出口 IPv6 2408:8256:…轮换）；10 次探测台账见
-> `openspec/changes/industry-source-solution-fleet/replay/` 与 `fd-source-probe` 审计。
+> `openspec/changes/archive/2026-11-11-industry-source-solution-fleet/replay/` 与 `fd-source-probe` 审计。
 > 结论：**golden §A5「四站点均可达，需 3–4 个新单元」经实测降级**——首页可达 ≠ 有数据通道。
 
 | 站点 | 本轮实测 | 降级结论 |
@@ -1407,7 +1407,7 @@ Wave C 四扩展（c20/bsci/apri/comext）有 golden 且全绿，但入口只遍
   `provenance.pairing` 4 条 `missing → partial`（debt 收窄到 D1，新增 available_side.eu）。
   与 `hotel.eu.nights.monthly` 重叠 **180 个月**；幂等复跑 inserted=0。
   回滚点 `fd-industry-data/docs/rollback/hotel-pairing-before-2026-11-10.json`；
-  决定记录 `openspec/changes/industry-source-solution-fleet/decisions/2026-11-10-hotel-accommodation-price-index.md`
+  决定记录 `openspec/changes/archive/2026-11-11-industry-source-solution-fleet/decisions/2026-11-10-hotel-accommodation-price-index.md`
 - ✅ **golden 基线已同步（2026-11-10）**：`replay/golden-side.json` 的 N5 由
   「CP11/CP112 均 404」改为「**CP112 可得 301 期**」（`kind: probed_available`），
   原结论保留在 `superseded` 块里可追溯；陷阱 id 由 `…-absent` 改为 `…-available`

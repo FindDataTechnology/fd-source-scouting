@@ -1,7 +1,7 @@
 {
   "schema": "source-regression-traps/v1",
   "note": "已知陷阱清单（回放仲裁 4.3 的机制化）。每条记录一个**已经用证据定过性**的结论；回归探测只回答一个问题：这条结论现在是否仍然成立。变了不等于可以接——变了解锁=重侦察。 陷阱两条硬要求（2026-11-10 首次运行现学）：①必须记录**产生该结论的完整请求**（含全部参数），否则复现不出就是假漂移；②对「HTTP 200 但体内是错误」的 API（如 e-Stat 的 STATUS:100），必须给**正面成功标记** expect_contains，不能靠 HTTP 码判。 2026-11-10 第四批再补两条陷阱自身的坑：③expect_contains 只对**截断前缀**匹配——默认 2048B，标记常在 2KB 之后（同一 URL：2048B 判 caliber_mismatch、65536B 判 ok），回归探测已统一放宽到 64KB 并支持 per-trap max_body_bytes；④只传 header 不传 method/body，会把陷阱里的 POST 打成 GET（zhejiang 拿不到 sourceCode、data-europa 返 406/400），回归探测已改为 method/body/header 一起传。 2026-11-10 第五批补第三条硬要求：凭据类源分三种——①真公开（LPR/上清所，免 key，上清所连 JSESSIONID 都不需要）②200 伪装（高德/KOSIS，体内报 KEY 错）③缺可复现请求（NFRA 只有路径片段）→ 只能标「需重侦察」，**不能标不可得**。 断言两种合法写法必须写明在 why 里：A「断言成功标记存在」（如 data-europa/gdacs/lpr/shch，标记缺席→caliber_mismatch）；B「断言错误标记存在」（如 soozhu/kosis，标记存在→ok=陷阱成立，标记消失才是漂移）。写反会得到假漂移——第五批 kosis 就这么错过一次。",
-  "origin": "openspec/changes/industry-source-solution-fleet/replay/adjudication.md（酒店线回放漏掉 N2/N3/N5 的根因：执行侧没有已知陷阱清单可依）",
+  "origin": "openspec/changes/archive/2026-11-11-industry-source-solution-fleet/replay/adjudication.md（酒店线回放漏掉 N2/N3/N5 的根因：执行侧没有已知陷阱清单可依）",
   "traps": [
     {
       "id": "nbs-easyquery-blocked",
