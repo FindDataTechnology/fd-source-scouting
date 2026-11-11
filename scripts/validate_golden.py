@@ -28,7 +28,24 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]      # finddata 根
-DEFAULT = ROOT / "openspec" / "changes" / "industry-source-solution-fleet" / "replay" / "golden-side.json"
+CHANGE = "industry-source-solution-fleet"
+
+
+def _find_golden() -> Path:
+    """定位 golden-side.json：**活的 change 目录**或**已归档目录**都要能找到。
+
+    2026-11-11 实测教训：change 归档后本脚本的默认路径原地失效（`✗ 文件不存在`，exit 2）。
+    字面串 grep 抓不到它——路径是分段拼接的（"openspec" / "changes" / <name>）。
+    故这里两处都找：先活目录，再 archive/<日期>-<name>/；都没有才报错。
+    """
+    live = ROOT / "openspec" / "changes" / CHANGE / "replay" / "golden-side.json"
+    if live.exists():
+        return live
+    archived = sorted((ROOT / "openspec" / "changes" / "archive").glob(f"*{CHANGE}/replay/golden-side.json"))
+    return archived[-1] if archived else live
+
+
+DEFAULT = _find_golden()
 
 SCHEMA = "hotel-replay-golden/v1"
 KNOWN_KINDS = ("code_level_evidence", "probed_404", "probed_available", "caliber_trap")
