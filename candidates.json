@@ -1,15 +1,15 @@
 {
   "schema": "source-candidates/v1",
   "meta": {
-    "generated_at": "2026-11-11T03:19:08.955026+00:00",
+    "generated_at": "2026-11-11T04:28:52.190357+00:00",
     "source_doc": "data-source-scouting/INDUSTRY-DATA-SOURCES.md",
-    "source_doc_sha256": "735486c968ddb4a03c301c2680fc4a37bd1b614be7d7585c393481337ae79346",
+    "source_doc_sha256": "5e9c53cbb7d9fa36d2357711c6cb32f11132b0b00636bbb9ad053fc532f30713",
     "generator": "extract_candidates.py/1.0",
     "coverage": {
-      "tables_converted": 18,
-      "tables_excluded": 20,
-      "rows_converted": 199,
-      "rows_excluded": 95,
+      "tables_converted": 19,
+      "tables_excluded": 22,
+      "rows_converted": 202,
+      "rows_excluded": 102,
       "excluded_tables": [
         {
           "header": "维度 | 说明",
@@ -129,6 +129,18 @@
           "header": "口径 | 数 | 说明",
           "rows": 7,
           "line": 1553,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "源 | 为什么不探",
+          "rows": 3,
+          "line": 1590,
+          "reason": "表头签名未登记（非候选表或新表）"
+        },
+        {
+          "header": "源 | 为什么仍空白",
+          "rows": 4,
+          "line": 1614,
           "reason": "表头签名未登记（非候选表或新表）"
         }
       ]
@@ -3551,6 +3563,46 @@
       },
       "status": "accepted",
       "landed_slug": "jp-yahoo-events"
+    },
+    {
+      "id": "lpr-1584",
+      "name": "LPR",
+      "doc_line": 1584,
+      "section": "复测 · 第八批（银行业专场 3 条，2026-11-11，免 key 直连实测）",
+      "wave": "银行业专场",
+      "needs_review": true,
+      "evidence": {
+        "summary": "GET https://www.chinamoney.com.cn/ags/ms/cm-u-bk-currency/LprHis?lang=CN&startDate=2024-01-01&endDate=2024-12-31 → 200，体 {\"head\":{\"version\":\"2.0\",\"provider\":\"CWAP\",\"rep_code\":\"200\",\"rep_message\":\"\",…"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "nfra-处罚公开-1585",
+      "name": "NFRA 处罚公开",
+      "doc_line": 1585,
+      "section": "复测 · 第八批（银行业专场 3 条，2026-11-11，免 key 直连实测）",
+      "wave": "银行业专场",
+      "needs_review": true,
+      "evidence": {
+        "summary": "GET https://www.nfra.gov.cn/cbircweb/DocInfo/SelectDocByItemIdAndChild?itemId=4113&pageIndex=1&pageSize=1 → 200，体 {\"rptCode\":200,\"msg\":\"成功\",\"data\":{\"total\":662,\"rows\":[{\"docId\":1278360,…"
+      },
+      "status": "accepted",
+      "landed_slug": null
+    },
+    {
+      "id": "nfra-统计-excel-附件-1586",
+      "name": "NFRA 统计 Excel 附件",
+      "doc_line": 1586,
+      "section": "复测 · 第八批（银行业专场 3 条，2026-11-11，免 key 直连实测）",
+      "wave": "银行业专场",
+      "needs_review": true,
+      "evidence": {
+        "summary": "第一步同上拿 docId（实测 1278360）；第二步 GET /cbircweb/DocInfo/SelectByDocId?docId=1278360 → 200 rptCode:200，但该文档体内没有 attachmentInfoVOList（64KB 内既无 attachment、也无 .xls/.xlsx，只有 docFileUrl 与内联 Word HTML）"
+      },
+      "status": "unknown",
+      "reason": "链条成立、附件字段待验：两步取数机制确认可用（列表→详情），但 attachmentInfoVOList 只在统计类文档上出现；本批拿到的 1278360 是处罚列表类文档，不含附件。下一步须用统计通道的 itemId 取一篇真统计文档再核字段名",
+      "landed_slug": null
     }
   ]
 }
