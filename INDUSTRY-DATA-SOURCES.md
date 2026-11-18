@@ -682,8 +682,8 @@ Wave C 四扩展（c20/bsci/apri/comext）有 golden 且全绿，但入口只遍
 
 - **关键坑：改在产源排期必须 manifest+push**——DB 直改 `crawl_sources.schedule` 无效，
   tick 每次先 `sync_sources` 用 manifest 覆写回（本次验证时踩实）。
-- **三站镜像**：zihan/xinru-server2 的 `/opt/fd-dispatcher/run.sh` 引用 tag 本身，
-  tick 时 `docker run` 自动拉新（实测 36 分钟内到位）；xinru-server1 是 k8s CronJob
+- **三站镜像**：两台镜像主机 的 `/opt/fd-dispatcher/run.sh` 引用 tag 本身，
+  tick 时 `docker run` 自动拉新（实测 36 分钟内到位）；另一台主机 是 k8s CronJob
   （无 initContainer）`set image`。
 - **实证**：metal-com 临时改 16:29 → pending 164 `requested_by=schedule-tick` 16:30 入队；
   校准补跑单 → run 1988-1991 四源全 success（11 天断流后恢复）。
