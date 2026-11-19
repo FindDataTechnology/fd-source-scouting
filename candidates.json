@@ -1,9 +1,9 @@
 {
   "schema": "source-candidates/v1",
   "meta": {
-    "generated_at": "2026-11-11T04:28:52.190357+00:00",
+    "generated_at": "2026-11-19T10:09:54.082203+00:00",
     "source_doc": "data-source-scouting/INDUSTRY-DATA-SOURCES.md",
-    "source_doc_sha256": "5e9c53cbb7d9fa36d2357711c6cb32f11132b0b00636bbb9ad053fc532f30713",
+    "source_doc_sha256": "3a81a87d468b9b9f75f5ecaad6b155b6897e7605137b2fa369cca6dbcbdf0b15",
     "generator": "extract_candidates.py/1.0",
     "coverage": {
       "tables_converted": 19,
@@ -163,6 +163,9 @@
       "vertical": [
         "K"
       ],
+      "source_class": [
+        "K"
+      ],
       "status": "accepted",
       "landed_slug": "mofcom-data"
     },
@@ -182,6 +185,9 @@
       "vertical": [
         "K"
       ],
+      "source_class": [
+        "K"
+      ],
       "status": "accepted",
       "landed_slug": "spb-express"
     },
@@ -199,6 +205,9 @@
       },
       "cadence": "月",
       "vertical": [
+        "K"
+      ],
+      "source_class": [
         "K"
       ],
       "status": "accepted",
@@ -221,6 +230,10 @@
         "B",
         "D"
       ],
+      "source_class": [
+        "B",
+        "D"
+      ],
       "status": "accepted",
       "landed_slug": "zgdypf-boxoffice"
     },
@@ -238,6 +251,9 @@
       },
       "cadence": "时",
       "vertical": [
+        "B"
+      ],
+      "source_class": [
         "B"
       ],
       "status": "accepted",
@@ -259,6 +275,9 @@
       "vertical": [
         "B"
       ],
+      "source_class": [
+        "B"
+      ],
       "status": "accepted",
       "landed_slug": null
     },
@@ -276,6 +295,9 @@
       },
       "cadence": "月",
       "vertical": [
+        "A"
+      ],
+      "source_class": [
         "A"
       ],
       "status": "accepted",
@@ -297,6 +319,9 @@
       "vertical": [
         "A"
       ],
+      "source_class": [
+        "A"
+      ],
       "status": "accepted",
       "landed_slug": "un-comtrade"
     },
@@ -314,6 +339,9 @@
       },
       "cadence": "月",
       "vertical": [
+        "A"
+      ],
+      "source_class": [
         "A"
       ],
       "status": "accepted",
@@ -335,6 +363,9 @@
       "vertical": [
         "A"
       ],
+      "source_class": [
+        "A"
+      ],
       "status": "accepted",
       "landed_slug": "oecd-cli"
     },
@@ -352,6 +383,9 @@
       },
       "cadence": "随上游",
       "vertical": [
+        "C"
+      ],
+      "source_class": [
         "C"
       ],
       "status": "accepted",
@@ -373,6 +407,9 @@
       "vertical": [
         "C"
       ],
+      "source_class": [
+        "C"
+      ],
       "status": "accepted",
       "landed_slug": "ecb-exr"
     },
@@ -390,6 +427,9 @@
       },
       "cadence": "时",
       "vertical": [
+        "C"
+      ],
+      "source_class": [
         "C"
       ],
       "status": "accepted",
@@ -411,6 +451,9 @@
       "vertical": [
         "D"
       ],
+      "source_class": [
+        "D"
+      ],
       "status": "accepted",
       "landed_slug": null
     },
@@ -428,6 +471,9 @@
       },
       "cadence": "2min",
       "vertical": [
+        "D"
+      ],
+      "source_class": [
         "D"
       ],
       "status": "accepted",
@@ -449,6 +495,9 @@
       "vertical": [
         "D"
       ],
+      "source_class": [
+        "D"
+      ],
       "status": "accepted",
       "landed_slug": null
     },
@@ -466,6 +515,9 @@
       },
       "cadence": "月",
       "vertical": [
+        "E"
+      ],
+      "source_class": [
         "E"
       ],
       "status": "accepted",
@@ -487,6 +539,9 @@
       "vertical": [
         "E"
       ],
+      "source_class": [
+        "E"
+      ],
       "status": "accepted",
       "landed_slug": null
     },
@@ -503,6 +558,9 @@
         "note": "免费key"
       },
       "vertical": [
+        "E"
+      ],
+      "source_class": [
         "E"
       ],
       "status": "accepted",
@@ -524,6 +582,9 @@
       "vertical": [
         "F"
       ],
+      "source_class": [
+        "F"
+      ],
       "status": "accepted",
       "landed_slug": "openalex-works"
     },
@@ -541,6 +602,9 @@
       },
       "cadence": "日",
       "vertical": [
+        "F"
+      ],
+      "source_class": [
         "F"
       ],
       "status": "accepted",
@@ -562,6 +626,9 @@
       "vertical": [
         "F"
       ],
+      "source_class": [
+        "F"
+      ],
       "status": "accepted",
       "landed_slug": "gb-standards"
     },
@@ -579,6 +646,9 @@
       },
       "cadence": "15min",
       "vertical": [
+        "G"
+      ],
+      "source_class": [
         "G"
       ],
       "status": "accepted",
@@ -600,6 +670,9 @@
       "vertical": [
         "G"
       ],
+      "source_class": [
+        "G"
+      ],
       "status": "accepted",
       "landed_slug": "eia-v2"
     },
@@ -617,6 +690,9 @@
       },
       "cadence": "月",
       "vertical": [
+        "G"
+      ],
+      "source_class": [
         "G"
       ],
       "status": "accepted",
@@ -638,6 +714,9 @@
       "vertical": [
         "H"
       ],
+      "source_class": [
+        "H"
+      ],
       "status": "accepted",
       "landed_slug": "usda-quickstats"
     },
@@ -655,6 +734,9 @@
       },
       "cadence": "月",
       "vertical": [
+        "H"
+      ],
+      "source_class": [
         "H"
       ],
       "status": "accepted",
@@ -676,6 +758,9 @@
       "vertical": [
         "H"
       ],
+      "source_class": [
+        "H"
+      ],
       "status": "accepted",
       "landed_slug": "statcan-bulk"
     },
@@ -693,6 +778,9 @@
       },
       "cadence": "日",
       "vertical": [
+        "I"
+      ],
+      "source_class": [
         "I"
       ],
       "status": "accepted",
@@ -714,6 +802,9 @@
       "vertical": [
         "I"
       ],
+      "source_class": [
+        "I"
+      ],
       "status": "accepted",
       "landed_slug": "nasa-firms"
     },
@@ -731,6 +822,9 @@
       },
       "cadence": "10s",
       "vertical": [
+        "I"
+      ],
+      "source_class": [
         "I"
       ],
       "status": "accepted",
@@ -752,6 +846,9 @@
       "vertical": [
         "J"
       ],
+      "source_class": [
+        "J"
+      ],
       "status": "accepted",
       "landed_slug": "nasa-power"
     },
@@ -769,6 +866,9 @@
       },
       "cadence": "时/日",
       "vertical": [
+        "J"
+      ],
+      "source_class": [
         "J"
       ],
       "status": "accepted",
@@ -790,6 +890,9 @@
       "vertical": [
         "J"
       ],
+      "source_class": [
+        "J"
+      ],
       "status": "accepted",
       "landed_slug": "noaa-ncei"
     },
@@ -807,6 +910,9 @@
       },
       "cadence": "日",
       "vertical": [
+        "L"
+      ],
+      "source_class": [
         "L"
       ],
       "status": "accepted",
@@ -828,6 +934,9 @@
       "vertical": [
         "L"
       ],
+      "source_class": [
+        "L"
+      ],
       "status": "accepted",
       "landed_slug": "usaspending-awards"
     },
@@ -845,6 +954,9 @@
       },
       "cadence": "月",
       "vertical": [
+        "L"
+      ],
+      "source_class": [
         "L"
       ],
       "status": "accepted",
@@ -866,6 +978,9 @@
       "vertical": [
         "M"
       ],
+      "source_class": [
+        "M"
+      ],
       "status": "accepted",
       "landed_slug": "ted-notices"
     },
@@ -883,6 +998,9 @@
       },
       "cadence": "日",
       "vertical": [
+        "M"
+      ],
+      "source_class": [
         "M"
       ],
       "status": "accepted",
@@ -904,6 +1022,9 @@
       "vertical": [
         "N"
       ],
+      "source_class": [
+        "N"
+      ],
       "status": "accepted",
       "landed_slug": "hf-datasets"
     },
@@ -923,6 +1044,9 @@
       "vertical": [
         "N"
       ],
+      "source_class": [
+        "N"
+      ],
       "status": "accepted",
       "landed_slug": "hf-datasets"
     },
@@ -932,7 +1056,7 @@
       "doc_line": 105,
       "section": "★接 候选总表（34 项，全部经实测）",
       "wave": "Wave 1",
-      "needs_review": true,
+      "needs_review": false,
       "endpoint": "data.opendatasoft.com/api/explore/v2.1/catalog（10.2 万数据集聚合目录，免 key；publica 旧域名已死，必须 v2.1）",
       "auth": {
         "kind": "none",
@@ -942,8 +1066,11 @@
       "vertical": [
         "N"
       ],
+      "source_class": [
+        "N"
+      ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "nrdl-national-catalog"
     },
     {
       "id": "census-m3",
@@ -954,6 +1081,9 @@
       "needs_review": true,
       "endpoint": "NAICS 334413 出货/库存/订单月度，1992 起；免费 key（全 census 查询强制 key）",
       "vertical": [
+        "半导体"
+      ],
+      "topic": [
         "半导体"
       ],
       "status": "accepted",
@@ -970,6 +1100,9 @@
       "vertical": [
         "半导体"
       ],
+      "topic": [
+        "半导体"
+      ],
       "status": "accepted",
       "landed_slug": "twse-monthly-revenue"
     },
@@ -982,6 +1115,9 @@
       "needs_review": true,
       "endpoint": "韩国生产指数/出口月度，免费 key，直连通",
       "vertical": [
+        "半导体"
+      ],
+      "topic": [
         "半导体"
       ],
       "status": "accepted",
@@ -998,6 +1134,9 @@
       "vertical": [
         "医药"
       ],
+      "topic": [
+        "医药"
+      ],
       "status": "accepted",
       "landed_slug": "openfda"
     },
@@ -1007,13 +1146,16 @@
       "doc_line": 205,
       "section": "新增 ★接（15 个）",
       "wave": "Wave 2",
-      "needs_review": false,
+      "needs_review": true,
       "endpoint": "countTotal + AREA[StudyFirstPostDate]RANGE 一次返回整月注册量（2024-01=3776），2000 起，免 key",
       "vertical": [
         "医药"
       ],
+      "topic": [
+        "医药"
+      ],
       "status": "accepted",
-      "landed_slug": "clinicaltrials"
+      "landed_slug": null
     },
     {
       "id": "中检院批签发",
@@ -1024,6 +1166,9 @@
       "needs_review": false,
       "endpoint": "POST bio.nifdc.org.cn/pqf/search.do?formAction=list1 疫苗/血制品月度批签发 13 字段结构化，免 key 无验证码（https 自签证书需 -k）——国内黄金源",
       "vertical": [
+        "医药"
+      ],
+      "topic": [
         "医药"
       ],
       "status": "accepted",
@@ -1040,6 +1185,9 @@
       "vertical": [
         "物流"
       ],
+      "topic": [
+        "物流"
+      ],
       "status": "accepted",
       "landed_slug": "chinawuliu-logistics"
     },
@@ -1052,6 +1200,9 @@
       "needs_review": false,
       "endpoint": "并入已占 cisa spider 扩展：POST /gxportal/xfpt/portal/getColumnList JSON 免鉴权，粗钢旬报产量/库存（黄金口径，worldsteel 不覆盖中国旬度）+周度八品种价格指数；注意原 cisa spider 只指向 cisa.org.cn 兄弟站",
       "vertical": [
+        "钢铁"
+      ],
+      "topic": [
         "钢铁"
       ],
       "status": "accepted",
@@ -1068,6 +1219,9 @@
       "vertical": [
         "大宗"
       ],
+      "topic": [
+        "大宗"
+      ],
       "status": "accepted",
       "landed_slug": null
     },
@@ -1080,6 +1234,9 @@
       "needs_review": true,
       "endpoint": "月度 38 行规整 HTML 表（规上工业+产品产量+固投+社零+税电指数），每月 16-18 日，requests 可解析",
       "vertical": [
+        "区域"
+      ],
+      "topic": [
         "区域"
       ],
       "status": "accepted",
@@ -1096,6 +1253,9 @@
       "vertical": [
         "区域"
       ],
+      "topic": [
+        "区域"
+      ],
       "status": "accepted",
       "landed_slug": "sc-gd-stats"
     },
@@ -1108,6 +1268,9 @@
       "needs_review": false,
       "endpoint": "datas.carbonmonitor.org/API/downloadFullDataset.php 免鉴权全量日频 CSV（64.8 万行，38 国×6 部门，2019 起，滞后 2 月）；必须 --compressed -m 300；旧 db. 域名勿用；电力分燃料同款端点滞后≈0",
       "vertical": [
+        "碳"
+      ],
+      "topic": [
         "碳"
       ],
       "status": "accepted",
@@ -1124,6 +1287,9 @@
       "vertical": [
         "碳"
       ],
+      "topic": [
+        "碳"
+      ],
       "status": "accepted",
       "landed_slug": "edgar-emissions"
     },
@@ -1136,6 +1302,9 @@
       "needs_review": true,
       "endpoint": "免 key 直连，GeoJSON 含 alertlevel，fromDate/toDate 回溯 2020+",
       "vertical": [
+        "灾害"
+      ],
+      "topic": [
         "灾害"
       ],
       "status": "accepted",
@@ -1152,6 +1321,9 @@
       "vertical": [
         "灾害"
       ],
+      "topic": [
+        "灾害"
+      ],
       "status": "accepted",
       "landed_slug": "mem-disaster"
     },
@@ -1164,6 +1336,9 @@
       "needs_review": false,
       "endpoint": "api.data.apps.fao.org/api/v2/bigquery?sql_url=<公开.sql> 免 key 直连 CSV：全球动物疫病事件（WOAH 镜像，2025 起 4.2 万行实测）；FAO 通用 SQL 代理可复用到其他 FAO 数据集",
       "vertical": [
+        "疫情"
+      ],
+      "topic": [
         "疫情"
       ],
       "status": "accepted",
@@ -1180,6 +1355,9 @@
       "vertical": [
         "贸易壁垒"
       ],
+      "topic": [
+        "贸易壁垒"
+      ],
       "status": "accepted",
       "landed_slug": "wto-eping"
     },
@@ -1192,6 +1370,9 @@
       "needs_review": false,
       "endpoint": "jodidata.org/_resources/files/downloads/oil-data/annual-csv/primary/{year}.csv 确定性 URL，2002-2026 月度行 ~100 国，含质量旗",
       "vertical": [
+        "能源"
+      ],
+      "topic": [
         "能源"
       ],
       "status": "accepted",
@@ -1208,6 +1389,9 @@
       "vertical": [
         "能源"
       ],
+      "topic": [
+        "能源"
+      ],
       "status": "accepted",
       "landed_slug": "jodi-gas"
     },
@@ -1220,6 +1404,9 @@
       "needs_review": false,
       "endpoint": "api.e-stat.go.jp/rest/3.0/app/json/... 直连通，免费 appId：百货超市销售月度+三产指数+特定服务业",
       "vertical": [
+        "日韩零售"
+      ],
+      "topic": [
         "日韩零售"
       ],
       "status": "accepted",
@@ -1236,6 +1423,9 @@
       "vertical": [
         "日韩零售"
       ],
+      "topic": [
+        "日韩零售"
+      ],
       "status": "accepted",
       "landed_slug": null
     },
@@ -1250,6 +1440,9 @@
       "vertical": [
         "景气"
       ],
+      "topic": [
+        "景气"
+      ],
       "status": "accepted",
       "landed_slug": "eurostat-api"
     },
@@ -1259,13 +1452,16 @@
       "doc_line": 286,
       "section": "新增 ★接（~26 项）",
       "wave": "Wave 3",
-      "needs_review": true,
+      "needs_review": false,
       "endpoint": "POST /dopServer/dataCatalog/apiQueryPage 目录/元数据免登录可编程，「统计月报」7 条经济类接口已定位 sourceCode；取数需 appKey",
       "vertical": [
         "地方"
       ],
+      "topic": [
+        "地方"
+      ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "nrdl-national-catalog"
     },
     {
       "id": "data-europa-eu-sparql",
@@ -1276,6 +1472,9 @@
       "needs_review": true,
       "endpoint": "bif:contains \"'econom*'\" 语法秒回，2,918 经济数据集可按 dsModifyDate 增量",
       "vertical": [
+        "发现层"
+      ],
+      "topic": [
         "发现层"
       ],
       "status": "accepted",
@@ -1292,6 +1491,9 @@
       "vertical": [
         "中欧贸易"
       ],
+      "topic": [
+        "中欧贸易"
+      ],
       "status": "accepted",
       "landed_slug": "education_oa_fulltext"
     },
@@ -1304,6 +1506,9 @@
       "needs_review": false,
       "endpoint": "airports.csv 12.7MB 19 字段，航空类主数据",
       "vertical": [
+        "维表"
+      ],
+      "topic": [
         "维表"
       ],
       "status": "accepted",
@@ -1320,6 +1525,9 @@
       "vertical": [
         "粮农"
       ],
+      "topic": [
+        "粮农"
+      ],
       "status": "accepted",
       "landed_slug": "amis-market"
     },
@@ -1332,6 +1540,9 @@
       "needs_review": false,
       "endpoint": "Kp 指数 3h/10.7cm 通量，秒回免 key，成本极低",
       "vertical": [
+        "空间天气"
+      ],
+      "topic": [
         "空间天气"
       ],
       "status": "accepted",
@@ -1348,6 +1559,9 @@
       "vertical": [
         "美国能源"
       ],
+      "topic": [
+        "美国能源"
+      ],
       "status": "accepted",
       "landed_slug": "afdc"
     },
@@ -1362,6 +1576,9 @@
       "vertical": [
         "MCP"
       ],
+      "topic": [
+        "MCP"
+      ],
       "status": "accepted",
       "landed_slug": null
     },
@@ -1374,6 +1591,9 @@
       "needs_review": false,
       "endpoint": "ID 修正（apri_pi05_outq 已失效），季度农业产出价格指数",
       "vertical": [
+        "农业价格"
+      ],
+      "topic": [
         "农业价格"
       ],
       "status": "accepted",
@@ -1396,6 +1616,9 @@
       "vertical": [
         "行业面"
       ],
+      "topic": [
+        "行业面"
+      ],
       "status": "accepted",
       "landed_slug": null
     },
@@ -1414,6 +1637,9 @@
       "cadence": "日",
       "cost": "S",
       "vertical": [
+        "企业面"
+      ],
+      "topic": [
         "企业面"
       ],
       "status": "accepted",
@@ -1436,6 +1662,9 @@
       "vertical": [
         "行业面"
       ],
+      "topic": [
+        "行业面"
+      ],
       "status": "accepted",
       "landed_slug": null
     },
@@ -1454,6 +1683,9 @@
       "cadence": "季",
       "cost": "S",
       "vertical": [
+        "行业面"
+      ],
+      "topic": [
         "行业面"
       ],
       "status": "accepted",
@@ -1476,6 +1708,9 @@
       "vertical": [
         "行业面"
       ],
+      "topic": [
+        "行业面"
+      ],
       "status": "accepted",
       "landed_slug": null
     },
@@ -1494,6 +1729,9 @@
       "cadence": "年",
       "cost": "M",
       "vertical": [
+        "区域"
+      ],
+      "topic": [
         "区域"
       ],
       "status": "accepted",
@@ -1516,6 +1754,9 @@
       "vertical": [
         "货币市场"
       ],
+      "topic": [
+        "货币市场"
+      ],
       "status": "accepted",
       "landed_slug": null
     },
@@ -1534,6 +1775,9 @@
       "cadence": "日",
       "cost": "S",
       "vertical": [
+        "货币市场"
+      ],
+      "topic": [
         "货币市场"
       ],
       "status": "accepted",
@@ -1556,6 +1800,9 @@
       "vertical": [
         "货币市场"
       ],
+      "topic": [
+        "货币市场"
+      ],
       "status": "accepted",
       "landed_slug": "chinamoney-shibor"
     },
@@ -1574,6 +1821,9 @@
       "cadence": "日",
       "cost": "S",
       "vertical": [
+        "货币市场"
+      ],
+      "topic": [
         "货币市场"
       ],
       "status": "accepted",
@@ -1596,6 +1846,9 @@
       "vertical": [
         "行业面"
       ],
+      "topic": [
+        "行业面"
+      ],
       "status": "accepted",
       "landed_slug": null
     },
@@ -1614,6 +1867,9 @@
       "cadence": "月",
       "cost": "S",
       "vertical": [
+        "行业面"
+      ],
+      "topic": [
         "行业面"
       ],
       "status": "accepted",
@@ -1636,6 +1892,9 @@
       "vertical": [
         "市场面"
       ],
+      "topic": [
+        "市场面"
+      ],
       "status": "accepted",
       "landed_slug": "chinabond-yield-curve"
     },
@@ -1654,6 +1913,9 @@
       "cadence": "实时",
       "cost": "S",
       "vertical": [
+        "资本工具"
+      ],
+      "topic": [
         "资本工具"
       ],
       "status": "accepted",
@@ -1676,6 +1938,9 @@
       "vertical": [
         "理财"
       ],
+      "topic": [
+        "理财"
+      ],
       "status": "accepted",
       "landed_slug": "cba-wealth-index"
     },
@@ -1694,6 +1959,9 @@
       "cadence": "季",
       "cost": "S",
       "vertical": [
+        "理财"
+      ],
+      "topic": [
         "理财"
       ],
       "status": "accepted",
@@ -1716,6 +1984,9 @@
       "vertical": [
         "理财"
       ],
+      "topic": [
+        "理财"
+      ],
       "status": "accepted",
       "landed_slug": null
     },
@@ -1734,6 +2005,9 @@
       "cadence": "随披露",
       "cost": "S",
       "vertical": [
+        "预警"
+      ],
+      "topic": [
         "预警"
       ],
       "status": "accepted",
@@ -1756,6 +2030,9 @@
       "vertical": [
         "企业面(H股)"
       ],
+      "topic": [
+        "企业面(H股)"
+      ],
       "status": "accepted",
       "landed_slug": "hkex-disclosure"
     },
@@ -1774,6 +2051,9 @@
       "cadence": "日",
       "cost": "S",
       "vertical": [
+        "评级"
+      ],
+      "topic": [
         "评级"
       ],
       "status": "accepted",
@@ -1796,6 +2076,9 @@
       "vertical": [
         "评级"
       ],
+      "topic": [
+        "评级"
+      ],
       "status": "accepted",
       "landed_slug": "dagong-ratings"
     },
@@ -1814,6 +2097,9 @@
       "cadence": "日",
       "cost": "S",
       "vertical": [
+        "评级"
+      ],
+      "topic": [
         "评级"
       ],
       "status": "accepted",
@@ -1836,6 +2122,9 @@
       "vertical": [
         "评级"
       ],
+      "topic": [
+        "评级"
+      ],
       "status": "accepted",
       "landed_slug": "dfjc-ratings"
     },
@@ -1856,6 +2145,9 @@
       "vertical": [
         "评级"
       ],
+      "topic": [
+        "评级"
+      ],
       "status": "accepted",
       "landed_slug": "xsj-ratings"
     },
@@ -1874,6 +2166,9 @@
       "cadence": "实时",
       "cost": "S-M",
       "vertical": [
+        "资产质量"
+      ],
+      "topic": [
         "资产质量"
       ],
       "status": "accepted",
@@ -2687,7 +2982,7 @@
       "doc_line": 1060,
       "section": "全球",
       "wave": "花卉专场",
-      "needs_review": true,
+      "needs_review": false,
       "endpoint": "opendata.cbs.nl/ODataCatalog/Tables",
       "auth": {
         "kind": "none",
@@ -2704,7 +2999,7 @@
         "detail": "✅200"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "nrdl-national-catalog"
     },
     {
       "id": "哥伦比亚-asocolflores",
@@ -2736,6 +3031,9 @@
       "vertical": [
         "美股 NASDAQ"
       ],
+      "topic": [
+        "美股 NASDAQ"
+      ],
       "evidence": {
         "summary": "CIK 1084869；company_tickers.json 命中"
       },
@@ -2752,6 +3050,9 @@
       "vertical": [
         "日股 TSE"
       ],
+      "topic": [
+        "日股 TSE"
+      ],
       "evidence": {
         "summary": "EDINET 无 key 返回错误画面（需免费 key）"
       },
@@ -2766,6 +3067,9 @@
       "wave": "花卉专场",
       "needs_review": false,
       "vertical": [
+        "A股"
+      ],
+      "topic": [
         "A股"
       ],
       "evidence": {
@@ -2785,6 +3089,9 @@
       "vertical": [
         "A股"
       ],
+      "topic": [
+        "A股"
+      ],
       "evidence": {
         "summary": "2026H1：工程施工 97.70%、苗木销售 0.15%、苗木租摆 0.08%"
       },
@@ -2802,6 +3109,9 @@
       "vertical": [
         "A股"
       ],
+      "topic": [
+        "A股"
+      ],
       "evidence": {
         "summary": "2026H1：农化 69.65%、种子 16.51%、香料 13.85%，无花卉分部"
       },
@@ -2816,6 +3126,9 @@
       "wave": "花卉专场",
       "needs_review": false,
       "vertical": [
+        "美股"
+      ],
+      "topic": [
         "美股"
       ],
       "evidence": {
@@ -2835,6 +3148,9 @@
       "vertical": [
         "美股"
       ],
+      "topic": [
+        "美股"
+      ],
       "evidence": {
         "summary": "SEC title 命中但业务为大麻金融"
       },
@@ -2850,6 +3166,9 @@
       "wave": "花卉专场",
       "needs_review": false,
       "vertical": [
+        "美股"
+      ],
+      "topic": [
         "美股"
       ],
       "evidence": {
@@ -2869,6 +3188,9 @@
       "vertical": [
         "美股"
       ],
+      "topic": [
+        "美股"
+      ],
       "evidence": {
         "summary": "CENT（Central Garden & Pet）、SMG（Scotts Miracle-Gro）、HYFM（Hydrofarm）、EDBL（Edible Garden）"
       },
@@ -2883,6 +3205,9 @@
       "wave": "花卉专场",
       "needs_review": false,
       "vertical": [
+        "HK"
+      ],
+      "topic": [
         "HK"
       ],
       "evidence": {
@@ -2902,6 +3227,9 @@
       "vertical": [
         "EU"
       ],
+      "topic": [
+        "EU"
+      ],
       "evidence": {
         "summary": "FloraHolland / Dutch Flower Group / Dümmen Orange / Ball Horticultural 均为合作社或私有"
       },
@@ -2917,6 +3245,9 @@
       "wave": "花卉专场",
       "needs_review": true,
       "vertical": [
+        "中国"
+      ],
+      "topic": [
         "中国"
       ],
       "evidence": {
@@ -3224,7 +3555,7 @@
         "summary": "/api/explore/v2.1/catalog/datasets?limit=2 → 200（102,992 目录）"
       },
       "status": "accepted",
-      "landed_slug": "hf-datasets"
+      "landed_slug": null
     },
     {
       "id": "深圳开放平台-1302",
@@ -3238,7 +3569,7 @@
       },
       "status": "unknown",
       "reason": "需免费 appKey 注册（Wave E 既有标注维持）",
-      "landed_slug": null
+      "landed_slug": "nrdl-national-catalog"
     },
     {
       "id": "水利部水雨情-1303",
@@ -3320,7 +3651,7 @@
         "summary": "POST /dopServer/dataCatalog/apiQueryPage（body {\"pageNum\":1,\"pageSize\":2}，带 referer）→ 200 {\"success\":true,\"code\":\"2000\",\"total\":null,\"result\":{\"records\":[{\"id\":\"FzK5…\",\"sourceName\":\"浙江省公证员执业证版式文件\",\"sourceCode\":\"S330000TAB0220…\"}]}}"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "nrdl-national-catalog"
     },
     {
       "id": "data-europa-eu-sparql-1333",
@@ -3549,7 +3880,7 @@
         "summary": "GET /api/explore/v2.1/catalog/datasets?limit=1 → 200，体 {\"total_count\": 102983, \"results\": [{\"visibility\": \"domain\", …"
       },
       "status": "accepted",
-      "landed_slug": "hf-datasets"
+      "landed_slug": null
     },
     {
       "id": "gdacs",

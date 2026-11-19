@@ -41,6 +41,41 @@ DOC = ROOT / "data-source-scouting" / "INDUSTRY-DATA-SOURCES.md"
 OUT = ROOT / "data-source-scouting" / "candidates.json"
 SCHEMA_PATH = ROOT / "data-source-scouting" / "candidates.schema.json"
 SPIDERS = ROOT / "fd-industry-data" / "spiders"
+REGISTRY_PATH = ROOT / "data-source-scouting" / "vertical-registry.json"
+
+
+def _load_registry() -> tuple[set[str], set[str]]:
+    """(source classes, topics) from vertical-registry.json.
+
+    Read at import so the extractor refuses an unregistered value instead of
+    inventing a classification on the spot — a value nobody registered is a
+    decision nobody made, and letting it through silently fragments the history.
+    """
+    body = json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
+    dims = body["dimensions"]
+    return (
+        set(dims["source_class"]["values"]),
+        set(dims["topic"]["values"]),
+    )
+
+
+_REGISTRY_SINGLE, _REGISTRY_TOPICS = _load_registry()
+
+
+def split_verticals(values: list[str]) -> tuple[list[str], list[str]]:
+    """Partition the overloaded column into its two orthogonal dimensions.
+
+    A–N are the main document's section numbers (source *class*); everything else
+    is a *topic*. Keeping them apart is the whole point: grouping by the original
+    column answers two different questions at once and therefore neither.
+    """
+    classes, topics = [], []
+    for v in values:
+        if v in _REGISTRY_SINGLE:
+            classes.append(v)
+        elif v in _REGISTRY_TOPICS:
+            topics.append(v)
+    return classes, topics
 
 SCHEMA = "source-candidates/v1"
 GENERATOR = "extract_candidates.py/1.0"
@@ -597,6 +632,23 @@ def build(doc: Path = DOC) -> dict:
 
             if verticals:
                 rec["vertical"] = verticals
+                # The original column is left byte-identical; these two are a
+                # *reading* of it, not a rewrite. `vertical` mixes two orthogonal
+                # dimensions (A–N are document sections = source class; the rest
+                # are topics), so any statistic that grouped by it was mixing
+                # two questions. See vertical-registry.json.
+                classes, topics = split_verticals(verticals)
+                if classes:
+                    rec["source_class"] = classes
+                if topics:
+                    rec["topic"] = topics
+                unknown = [v for v in verticals if v not in _REGISTRY_SINGLE
+                           and v not in _REGISTRY_TOPICS]
+                if unknown:
+                    raise SystemExit(
+                        f"vertical 取值未登记：{unknown}（候选 {rec.get('name')!r}）。"
+                        "先在 vertical-registry.json 里登记；现场发明分类会让历史分组失去可比性"
+                    )
             if evidence_parts:
                 rec["evidence"] = {"summary": " / ".join(evidence_parts)}
 
