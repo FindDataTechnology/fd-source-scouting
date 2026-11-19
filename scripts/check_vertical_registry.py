@@ -42,6 +42,8 @@ def known(reg: dict) -> tuple[set[str], set[str]]:
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--quiet", action="store_true")
+    ap.add_argument("--mapping-table", action="store_true",
+                    help="打印「原值 → 规范项」对照表，供人逐条确认（不写盘）")
     args = ap.parse_args(argv)
 
     cand, reg = load()
@@ -78,6 +80,24 @@ def main(argv: list[str] | None = None) -> int:
         print(f"distinct vertical 值: {len(used)}")
         print(f"来源类别登记: {len(classes)} / 数据里出现 {len([v for v in used if v in single])}")
         print(f"主题登记: {len(topics)} / 数据里出现 {len([v for v in used if v not in single])}")
+
+    if args.mapping_table:
+        norm = reg.get("normalization") or {}
+        aliases = norm.get("aliases") or {}
+        print(f"\n{'原值':<16} {'维度':<12} {'规范项':<16} 依据")
+        print("-" * 72)
+        for v in sorted(used):
+            dim = "source_class" if v in single else "topic"
+            target = aliases.get(v, v)
+            kind = ""
+            if dim == "topic":
+                kind = reg["dimensions"]["topic"]["values"].get(v, {}).get("kind", "")
+            same = "恒等" if target == v else f"归一到 {target}"
+            print(f"{v:<16} {dim:<12} {target:<16} {same}{(' [' + kind + ']') if kind else ''}")
+        if norm.get("_rejected_merges"):
+            print("\n刻意不合并的（外延不同，不是书写差异）：")
+            for pair, why in norm["_rejected_merges"].items():
+                print(f"  {pair}：{why}")
 
     if problems:
         for p in problems:

@@ -6,74 +6,268 @@
     "source_class": {
       "note": "来源类别 = 主文档一级章节。每个候选取自它所在章节，是单值、封闭、稳定的。",
       "values": {
-        "A": {"name_zh": "国际官方统计", "name_en": "International official statistics"},
-        "B": {"name_zh": "中国官方高频", "name_en": "China official high-frequency"},
-        "C": {"name_zh": "全球聚合器", "name_en": "Global aggregators"},
-        "D": {"name_zh": "中文商业平台", "name_en": "Chinese commercial platforms"},
-        "E": {"name_zh": "政府开放平台", "name_en": "Government open-data portals"},
-        "F": {"name_zh": "专利论文实体", "name_en": "Patents, papers, entities"},
-        "G": {"name_zh": "能源电力", "name_en": "Energy and power"},
-        "H": {"name_zh": "农业食品渔业", "name_en": "Agriculture, food, fisheries"},
-        "I": {"name_zh": "交通卫星", "name_en": "Transport and satellites"},
-        "J": {"name_zh": "全球环境气候", "name_en": "Global environment and climate"},
-        "K": {"name_zh": "中国部委", "name_en": "Chinese ministries"},
-        "L": {"name_zh": "美国官方经济", "name_en": "US official economic data"},
-        "M": {"name_zh": "招投标", "name_en": "Procurement and tenders"},
-        "N": {"name_zh": "数据集托管", "name_en": "Dataset hosts"}
+        "A": {
+          "name_zh": "国际官方统计",
+          "name_en": "International official statistics"
+        },
+        "B": {
+          "name_zh": "中国官方高频",
+          "name_en": "China official high-frequency"
+        },
+        "C": {
+          "name_zh": "全球聚合器",
+          "name_en": "Global aggregators"
+        },
+        "D": {
+          "name_zh": "中文商业平台",
+          "name_en": "Chinese commercial platforms"
+        },
+        "E": {
+          "name_zh": "政府开放平台",
+          "name_en": "Government open-data portals"
+        },
+        "F": {
+          "name_zh": "专利论文实体",
+          "name_en": "Patents, papers, entities"
+        },
+        "G": {
+          "name_zh": "能源电力",
+          "name_en": "Energy and power"
+        },
+        "H": {
+          "name_zh": "农业食品渔业",
+          "name_en": "Agriculture, food, fisheries"
+        },
+        "I": {
+          "name_zh": "交通卫星",
+          "name_en": "Transport and satellites"
+        },
+        "J": {
+          "name_zh": "全球环境气候",
+          "name_en": "Global environment and climate"
+        },
+        "K": {
+          "name_zh": "中国部委",
+          "name_en": "Chinese ministries"
+        },
+        "L": {
+          "name_zh": "美国官方经济",
+          "name_en": "US official economic data"
+        },
+        "M": {
+          "name_zh": "招投标",
+          "name_en": "Procurement and tenders"
+        },
+        "N": {
+          "name_zh": "数据集托管",
+          "name_en": "Dataset hosts"
+        }
       }
     },
     "topic": {
       "note": "主题标签 = 该源覆盖的行业/主题。多值、可增补。这些值来自主文档表格里的描述与批次笔记，是**既有的分类意图**，不是新造的。",
       "values": {
-        "半导体": {"name_en": "Semiconductors"},
-        "医药": {"name_en": "Pharma"},
-        "物流": {"name_en": "Logistics"},
-        "钢铁": {"name_en": "Steel"},
-        "大宗": {"name_en": "Commodities"},
-        "能源": {"name_en": "Energy"},
-        "碳": {"name_en": "Carbon"},
-        "区域": {"name_en": "Regional"},
-        "地方": {"name_en": "Sub-national"},
-        "灾害": {"name_en": "Disasters"},
-        "疫情": {"name_en": "Epidemic"},
-        "粮农": {"name_en": "Agriculture"},
-        "农业价格": {"name_en": "Agricultural prices"},
-        "贸易壁垒": {"name_en": "Trade barriers"},
-        "中欧贸易": {"name_en": "China-EU trade"},
-        "景气": {"name_en": "Business climate"},
-        "预警": {"name_en": "Early warning"},
-        "货币市场": {"name_en": "Money markets"},
-        "资本工具": {"name_en": "Capital instruments"},
-        "理财": {"name_en": "Wealth management"},
-        "评级": {"name_en": "Credit ratings"},
-        "资产质量": {"name_en": "Asset quality"},
-        "行业面": {"name_en": "Industry fundamentals"},
-        "市场面": {"name_en": "Market fundamentals"},
-        "企业面": {"name_en": "Corporate fundamentals"},
-        "企业面(H股)": {"name_en": "Corporate fundamentals (H-share)"},
-        "维表": {"name_en": "Dimension tables"},
-        "发现层": {"name_en": "Discovery layer"},
-        "MCP": {"name_en": "MCP servers"},
-        "空间天气": {"name_en": "Space weather"},
-        "美国能源": {"name_en": "US energy"},
-        "日韩零售": {"name_en": "Japan/Korea retail"},
-        "A股": {"name_en": "A-share"},
-        "美股": {"name_en": "US equities"},
-        "美股 NASDAQ": {"name_en": "US equities (NASDAQ)"},
-        "日股 TSE": {"name_en": "Japanese equities (TSE)"},
-        "HK": {"name_en": "Hong Kong"},
-        "EU": {"name_en": "European Union"},
-        "中国": {"name_en": "China"}
+        "半导体": {
+          "name_en": "Semiconductors",
+          "kind": "industry"
+        },
+        "医药": {
+          "name_en": "Pharma",
+          "kind": "industry"
+        },
+        "物流": {
+          "name_en": "Logistics",
+          "kind": "industry"
+        },
+        "钢铁": {
+          "name_en": "Steel",
+          "kind": "industry"
+        },
+        "大宗": {
+          "name_en": "Commodities",
+          "kind": "market"
+        },
+        "能源": {
+          "name_en": "Energy",
+          "kind": "market"
+        },
+        "碳": {
+          "name_en": "Carbon",
+          "kind": "industry"
+        },
+        "区域": {
+          "name_en": "Regional",
+          "kind": "meta"
+        },
+        "地方": {
+          "name_en": "Sub-national",
+          "kind": "meta"
+        },
+        "灾害": {
+          "name_en": "Disasters",
+          "kind": "meta"
+        },
+        "疫情": {
+          "name_en": "Epidemic",
+          "kind": "meta"
+        },
+        "粮农": {
+          "name_en": "Agriculture",
+          "kind": "industry"
+        },
+        "农业价格": {
+          "name_en": "Agricultural prices",
+          "kind": "meta"
+        },
+        "贸易壁垒": {
+          "name_en": "Trade barriers",
+          "kind": "meta"
+        },
+        "中欧贸易": {
+          "name_en": "China-EU trade",
+          "kind": "industry"
+        },
+        "景气": {
+          "name_en": "Business climate",
+          "kind": "meta"
+        },
+        "预警": {
+          "name_en": "Early warning",
+          "kind": "meta"
+        },
+        "货币市场": {
+          "name_en": "Money markets",
+          "kind": "market"
+        },
+        "资本工具": {
+          "name_en": "Capital instruments",
+          "kind": "market"
+        },
+        "理财": {
+          "name_en": "Wealth management",
+          "kind": "financial_face"
+        },
+        "评级": {
+          "name_en": "Credit ratings",
+          "kind": "financial_face"
+        },
+        "资产质量": {
+          "name_en": "Asset quality",
+          "kind": "financial_face"
+        },
+        "行业面": {
+          "name_en": "Industry fundamentals",
+          "kind": "financial_face"
+        },
+        "市场面": {
+          "name_en": "Market fundamentals",
+          "kind": "financial_face"
+        },
+        "企业面": {
+          "name_en": "Corporate fundamentals",
+          "kind": "financial_face"
+        },
+        "企业面(H股)": {
+          "name_en": "Corporate fundamentals (H-share)",
+          "kind": "financial_face"
+        },
+        "维表": {
+          "name_en": "Dimension tables",
+          "kind": "meta"
+        },
+        "发现层": {
+          "name_en": "Discovery layer",
+          "kind": "meta"
+        },
+        "MCP": {
+          "name_en": "MCP servers",
+          "kind": "meta"
+        },
+        "空间天气": {
+          "name_en": "Space weather",
+          "kind": "meta"
+        },
+        "美国能源": {
+          "name_en": "US energy",
+          "kind": "market"
+        },
+        "日韩零售": {
+          "name_en": "Japan/Korea retail",
+          "kind": "industry"
+        },
+        "A股": {
+          "name_en": "A-share",
+          "kind": "market"
+        },
+        "美股": {
+          "name_en": "US equities",
+          "kind": "market"
+        },
+        "美股 NASDAQ": {
+          "name_en": "US equities (NASDAQ)",
+          "kind": "market"
+        },
+        "日股 TSE": {
+          "name_en": "Japanese equities (TSE)",
+          "kind": "market"
+        },
+        "HK": {
+          "name_en": "Hong Kong",
+          "kind": "market"
+        },
+        "EU": {
+          "name_en": "European Union",
+          "kind": "market"
+        },
+        "中国": {
+          "name_en": "China",
+          "kind": "market"
+        }
+      },
+      "kind": {
+        "_note": "39 个主题值分四类。这是 2026-11-19 由 AI 逐条判读主文档上下文得出，没有领域专家复核——每条的依据写在该主题的 kind_reason 里，有异议时改这一处即可，normalization 会跟着变。",
+        "_kinds": {
+          "industry": "该主题是一种产业/商品/经济体分类",
+          "market": "该主题是一个交易市场或资产类别（可交易、可定价）",
+          "financial_face": "该主题是金融机构监管报表的口径（银行/非银的业务面），不是行业",
+          "meta": "该主题不是行业也不是市场：它是功能定位、数据形态或预警性质"
+        }
       }
     }
   },
   "mapping": {
     "note": "原 vertical 值 → 它属于哪个维度。单字母进 source_class，其余进 topic。原列一字不动，这是**读出**而非改写。",
-    "single_letter_to_source_class": ["A","B","C","D","E","F","G","H","I","J","K","L","M","N"],
+    "single_letter_to_source_class": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N"
+    ],
     "everything_else": "topic"
   },
   "concept_families": {
     "note": "把 topic 映射到 protocol 的概念族（fd-open-data-protocol 的 concepts.yaml）。**只填能确认的**：空数组表示「这个主题还没有对应的概念族」，那是待补的事实，不是遗漏。",
     "placeholder": "首次落地时由人逐条确认；本文件先留空数组，不做自动推断（见 change design D5）。"
+  },
+  "normalization": {
+    "_note": "本版**不合并任何取值**。2026-11-19 逐组判读后判定它们的外延确实不同：",
+    "_rejected_merges": {
+      "美股 / 美股 NASDAQ": "NASDAQ 是子市场，不是美股的另一种写法；两者可以并存为父子关系，但那需要层级不是别名",
+      "企业面 / 企业面(H股)": "H 股是特定上市地，外延更窄；合并会让 H 股源被算作覆盖了全部企业面",
+      "能源 / 美国能源": "美国能源是能源的地域子集，同上",
+      "区域 / 地方": "区域可跨省，地方是省内；实测两源不同（四川统计局 vs 浙江开放平台）",
+      "粮农 / 农业价格": "一个是部门面，一个是价格面；AMIS 与 Eurostat apri 是不同性质的源"
+    },
+    "note": "所有 53 个取值都是规范值，映射是恒等。这不等于「不用做归一」——它的意思是本版**没有找到**需要归一的同义项，而这一点本身需要记录，否则下一个人会重复判断一次。"
   }
 }

@@ -117,3 +117,52 @@ def test_original_vertical_is_untouched_by_extraction():
     after = json.loads((ROOT / "candidates.json").read_text(encoding="utf-8"))
     now = [r.get("vertical") for r in after["candidates"]]
     assert now == orig, "the extractor rewrote the original vertical column"
+
+
+# --------------------------------------------------- task 1.3: mapping table
+
+
+def test_topic_values_carry_a_kind():
+    """39 topics split into four kinds; an unkinded topic answers nothing.
+
+    The kinds matter because 'industry', 'market' and 'financial_face' are not
+    the same axis — grouping a bank's regulatory report face with a commodity
+    price source under one 'industry' label would be a category error.
+    """
+    reg = json.loads((ROOT / "vertical-registry.json").read_text(encoding="utf-8"))
+    topics = reg["dimensions"]["topic"]["values"]
+    missing = [k for k, v in topics.items() if "kind" not in v]
+    assert not missing, f"topics without a kind: {missing}"
+    kinds = {v["kind"] for v in topics.values()}
+    assert kinds == {"industry", "market", "financial_face", "meta"}
+
+
+def test_mapping_table_covers_every_value(capsys):
+    """Task 1.3: the dry-run tie-out prints all 53 values with a destination."""
+    rc = chk.main(["--quiet", "--mapping-table"])
+    out = capsys.readouterr().out
+    rows = [ln for ln in out.splitlines() if "恒等" in ln or "归一到" in ln]
+    assert len(rows) == 53, f"expected 53 rows, got {len(rows)}"
+    assert rc == 0
+
+
+def test_deliberate_non_merges_are_recorded():
+    """Not merging is a decision, and an undocumented one gets re-litigated."""
+    reg = json.loads((ROOT / "vertical-registry.json").read_text(encoding="utf-8"))
+    rejected = reg["normalization"]["_rejected_merges"]
+    assert len(rejected) == 5
+    for pair, why in rejected.items():
+        assert why and len(why) > 10, f"{pair} has no real reason"
+
+
+def test_single_letters_are_identity_mapped():
+    """A–N ARE the canonical values (they are the document's section numbers).
+
+    Verified against the document: A's users are Eurostat/UN Comtrade (international
+    official statistics), K's are 商务部/工信部 (Chinese ministries). No renaming
+    needed — renaming would break the tie to the source document.
+    """
+    reg = json.loads((ROOT / "vertical-registry.json").read_text(encoding="utf-8"))
+    aliases = reg["normalization"].get("aliases") or {}
+    for letter in reg["mapping"]["single_letter_to_source_class"]:
+        assert letter not in aliases, f"{letter} should not be an alias of anything"
