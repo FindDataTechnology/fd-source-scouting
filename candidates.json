@@ -1,7 +1,7 @@
 {
   "schema": "source-candidates/v1",
   "meta": {
-    "generated_at": "2026-11-19T10:09:54.082203+00:00",
+    "generated_at": "2026-11-21T08:21:14.903755+00:00",
     "source_doc": "data-source-scouting/INDUSTRY-DATA-SOURCES.md",
     "source_doc_sha256": "3a81a87d468b9b9f75f5ecaad6b155b6897e7605137b2fa369cca6dbcbdf0b15",
     "generator": "extract_candidates.py/1.0",
@@ -279,7 +279,8 @@
         "B"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "eurostat",
@@ -455,7 +456,8 @@
         "D"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "高德开放平台",
@@ -477,7 +479,8 @@
         "D"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "生意社-100ppi",
@@ -499,7 +502,8 @@
         "D"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "深圳开放平台",
@@ -521,7 +525,8 @@
         "E"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "data-gov-uk",
@@ -543,7 +548,8 @@
         "E"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "data-gov-目录",
@@ -564,7 +570,8 @@
         "E"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "openalex",
@@ -828,7 +835,8 @@
         "I"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "nasa-power",
@@ -916,7 +924,8 @@
         "L"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "usaspending",
@@ -960,7 +969,8 @@
         "L"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "census-eits",
+      "reconciliation": "landed_as"
     },
     {
       "id": "eu-ted",
@@ -1121,7 +1131,8 @@
         "半导体"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "openfda",
@@ -1155,7 +1166,8 @@
         "医药"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "clinicaltrials",
+      "reconciliation": "landed_as"
     },
     {
       "id": "中检院批签发",
@@ -1223,7 +1235,8 @@
         "大宗"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "四川统计局",
@@ -1240,7 +1253,8 @@
         "区域"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "广东统计局",
@@ -1308,7 +1322,8 @@
         "灾害"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "gdacs",
+      "reconciliation": "landed_as"
     },
     {
       "id": "应急管理部-mem-gov-cn",
@@ -1427,7 +1442,8 @@
         "日韩零售"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "eurostat-ei-bsco-m",
@@ -1478,7 +1494,8 @@
         "发现层"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "eurostat-comext",
@@ -1580,7 +1597,8 @@
         "MCP"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "eurostat-apri-pi-outq",
@@ -1620,7 +1638,8 @@
         "行业面"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "nfra-stats-xls",
+      "reconciliation": "landed_as"
     },
     {
       "id": "nfra-处罚公开",
@@ -1643,7 +1662,8 @@
         "企业面"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "nfra-penalty",
+      "reconciliation": "landed_as"
     },
     {
       "id": "pboc-信贷收支表",
@@ -1666,7 +1686,8 @@
         "行业面"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "pboc-credit-funds",
+      "reconciliation": "landed_as"
     },
     {
       "id": "pboc-贷款投向",
@@ -1689,7 +1710,8 @@
         "行业面"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "pboc-loan-usage",
+      "reconciliation": "landed_as"
     },
     {
       "id": "pboc-货政报告",
@@ -1712,7 +1734,8 @@
         "行业面"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "pboc-monetary",
+      "reconciliation": "landed_as"
     },
     {
       "id": "pboc-区域金融",
@@ -1735,7 +1758,8 @@
         "区域"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "lpr",
@@ -1758,7 +1782,8 @@
         "货币市场"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "chinamoney-lpr",
+      "reconciliation": "landed_as"
     },
     {
       "id": "shibor",
@@ -1850,7 +1875,8 @@
         "行业面"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "shclearing-monthly",
+      "reconciliation": "landed_as"
     },
     {
       "id": "中债登统计月报",
@@ -1919,7 +1945,8 @@
         "资本工具"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "shclearing-capital-notes",
+      "reconciliation": "landed_as"
     },
     {
       "id": "cba-理财指数",
@@ -1988,7 +2015,8 @@
         "理财"
       ],
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "东财披露日历",
@@ -2456,7 +2484,8 @@
         "detail": "✅200"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "农业农村部",
@@ -2595,7 +2624,8 @@
         "detail": "✅200"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "中国海关",
@@ -2810,7 +2840,8 @@
         "detail": "✅200"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "kenya-flower-council",
@@ -2835,7 +2866,8 @@
         "detail": "✅200"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "union-fleurs-欧洲花卉贸易",
@@ -3038,7 +3070,8 @@
         "summary": "CIK 1084869；company_tickers.json 命中"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "1377-t-sakata-seed",
@@ -3057,7 +3090,8 @@
         "summary": "EDINET 无 key 返回错误画面（需免费 key）"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "花王股份-603007",
@@ -3116,7 +3150,8 @@
         "summary": "2026H1：农化 69.65%、种子 16.51%、香料 13.85%，无花卉分部"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "flo-flowers-foods",
@@ -3195,7 +3230,8 @@
         "summary": "CENT（Central Garden & Pet）、SMG（Scotts Miracle-Gro）、HYFM（Hydrofarm）、EDBL（Edible Garden）"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "港股",
@@ -3349,7 +3385,8 @@
         "summary": "2024Q3（已停更）"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "mct-star-hotel",
+      "reconciliation": "landed_as"
     },
     {
       "id": "文旅部-国内居民出游数据",
@@ -3487,7 +3524,8 @@
         "summary": "GET /organizations?api_key=DEMO_KEY → 200，255,636 数据集目录（DEMO_KEY 可用；侦察簿所记 /refs 路径为误记）"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "treasury-fiscaldata-1286",
@@ -3542,7 +3580,8 @@
         "summary": "package_search?q=flower&rows=2 → 200（CKAN 标准 API 活）"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "opendatasoft-1301",
@@ -3555,7 +3594,8 @@
         "summary": "/api/explore/v2.1/catalog/datasets?limit=2 → 200（102,992 目录）"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "深圳开放平台-1302",
@@ -3664,7 +3704,8 @@
         "summary": "Accept: application/sparql-results+json + 真查询 → 200 SPARQL JSON（head/results，bindings=2）"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "四川统计局-1334",
@@ -3677,7 +3718,8 @@
         "summary": "首页 200 不算；顺首页链接找到 /scstjj/c112116/sj.shtml → 最新发布列表 → 月度页 /scstjj/c112117/2026/9/16/073e…shtml（131,580 B，含 <table>，含「规模以上工业」）"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "nbs-流通领域-dbcodefsyd",
@@ -3718,7 +3760,8 @@
         "summary": "GET /ags/ms/cm-u-bk-currency/LprHis?lang=CN&startDate=…&endDate=… → 200，\"rep_code\":\"200\" + records[] 含 {\"5Y\":\"3.50\",\"1Y\":\"3.00\",\"showDateCN\":\"2026-10-20\"}"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "chinamoney-lpr",
+      "reconciliation": "landed_as"
     },
     {
       "id": "上清所月报-1352",
@@ -3731,7 +3774,8 @@
         "summary": "POST /shchapp/web/sdocClient/monthListPage（body {\"pageNo\":1,\"pageSize\":2}，只需 Referer）→ 200 {\"flag\":\"0\",\"data\":[…]}，标题含「表一 上海清算所固定收益产品业务总览」「表二 …发行量」"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "shclearing-monthly",
+      "reconciliation": "landed_as"
     },
     {
       "id": "高德开放平台-1353",
@@ -3786,7 +3830,8 @@
         "summary": "栏目页 diaochatongjisi/116219/116319/index.html → 200，65,536 B；<title>统计数据</title>；页内 273 个 <tr> 全是站点导航（30 行有效文本为「信息公开/新闻发布/法律法规…」），0 个条目链接"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "pboc-credit-funds",
+      "reconciliation": "landed_as"
     },
     {
       "id": "pboc-贷款投向-1370",
@@ -3841,7 +3886,8 @@
         "summary": "POST /shchapp/web/disclosureForTrsServer/search（body 试了 ch/channelId/ch166/columnId=166 四种键名）→ HTTP 200 但体 {\"success\":false,\"root\":[],\"totalProperty\":\"0\",\"message\":\"请选择查询的栏目\"}"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "shclearing-capital-notes",
+      "reconciliation": "landed_as"
     },
     {
       "id": "treasury-fiscaldata-1511",
@@ -3854,7 +3900,8 @@
         "summary": "GET /services/api/fiscal_service/v1/accounting/dts/deposits_withdrawals_operating_cash?page[size]=1 → 200，体 {\"data\":[{\"record_date\":\"2005-10-03\",\"account_type\":\"Federal Reserve Account\",…（2,540 B）；另测 v1/accounting/od/rates_of_exchange → 200、v2/accounting/od/avg_interest_rates → 200，三条均 ok"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "data-gov-uk-1512",
@@ -3867,7 +3914,8 @@
         "summary": "GET /api/3/action/package_search?rows=1 → 200，体 {\"help\": …, \"success\": true, \"result\": {…（25,289 B）"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "opendatasoft-1513",
@@ -3880,7 +3928,8 @@
         "summary": "GET /api/explore/v2.1/catalog/datasets?limit=1 → 200，体 {\"total_count\": 102983, \"results\": [{\"visibility\": \"domain\", …"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": null,
+      "reconciliation": "never_landed"
     },
     {
       "id": "gdacs",
@@ -3906,7 +3955,8 @@
         "summary": "GET https://www.chinamoney.com.cn/ags/ms/cm-u-bk-currency/LprHis?lang=CN&startDate=2024-01-01&endDate=2024-12-31 → 200，体 {\"head\":{\"version\":\"2.0\",\"provider\":\"CWAP\",\"rep_code\":\"200\",\"rep_message\":\"\",…"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "chinamoney-lpr",
+      "reconciliation": "landed_as"
     },
     {
       "id": "nfra-处罚公开-1585",
@@ -3919,7 +3969,8 @@
         "summary": "GET https://www.nfra.gov.cn/cbircweb/DocInfo/SelectDocByItemIdAndChild?itemId=4113&pageIndex=1&pageSize=1 → 200，体 {\"rptCode\":200,\"msg\":\"成功\",\"data\":{\"total\":662,\"rows\":[{\"docId\":1278360,…"
       },
       "status": "accepted",
-      "landed_slug": null
+      "landed_slug": "nfra-penalty",
+      "reconciliation": "landed_as"
     },
     {
       "id": "nfra-统计-excel-附件-1586",
