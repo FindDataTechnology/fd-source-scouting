@@ -1,0 +1,286 @@
+{
+  "schema": "source-candidates-overrides/v1",
+  "note": "手写判断的载体，与派生输出 candidates.json 分开存。理由见 ontology-alignment.json 的 note（2026-11-19 实测：写在 candidates.json 里的字段会被下一次抽取整体覆盖）。apply_overrides.py 在抽取后按候选 id 合并本文件。",
+  "conventions": {
+    "landed_as": "该候选对应的爬虫单元名（spiders/<slug>/）。与 landed_slug 同义；若与派生值不同，以本文件为准并覆写。",
+    "reconciliation": "accepted 候选的三档归属之一：landed_as / never_landed / dropped。三档合计必须等于 accepted 数。",
+    "dropped_archive": "reconciliation=dropped 时指向归档目录，供人查原实现。",
+    "review_reason": "needs_review 候选缺的是哪一列信息。不许写「待复核」「需人工」这类空话。",
+    "decided_at": "做出该判断的日期（ISO）。"
+  },
+  "overrides": {
+    "census-api": {
+      "landed_as": "census-eits",
+      "reconciliation": "landed_as",
+      "decided_at": "2026-11-21",
+      "evidence": "fd-industry-data/spiders/census-eits/manifest.yaml 的 source_url 与本候选 endpoint 对应"
+    },
+    "nfra-统计-excel-附件": {
+      "landed_as": "nfra-stats-xls",
+      "reconciliation": "landed_as",
+      "decided_at": "2026-11-21",
+      "evidence": "fd-industry-data/spiders/nfra-stats-xls/manifest.yaml 的 source_url 与本候选 endpoint 对应"
+    },
+    "nfra-处罚公开": {
+      "landed_as": "nfra-penalty",
+      "reconciliation": "landed_as",
+      "decided_at": "2026-11-21",
+      "evidence": "fd-industry-data/spiders/nfra-penalty/manifest.yaml 的 source_url 与本候选 endpoint 对应"
+    },
+    "nfra-处罚公开-1585": {
+      "landed_as": "nfra-penalty",
+      "reconciliation": "landed_as",
+      "decided_at": "2026-11-21",
+      "evidence": "fd-industry-data/spiders/nfra-penalty/manifest.yaml 的 source_url 与本候选 endpoint 对应"
+    },
+    "pboc-信贷收支表": {
+      "landed_as": "pboc-credit-funds",
+      "reconciliation": "landed_as",
+      "decided_at": "2026-11-21",
+      "evidence": "fd-industry-data/spiders/pboc-credit-funds/manifest.yaml 的 source_url 与本候选 endpoint 对应"
+    },
+    "pboc-信贷收支表-1369": {
+      "landed_as": "pboc-credit-funds",
+      "reconciliation": "landed_as",
+      "decided_at": "2026-11-21",
+      "evidence": "fd-industry-data/spiders/pboc-credit-funds/manifest.yaml 的 source_url 与本候选 endpoint 对应"
+    },
+    "pboc-贷款投向": {
+      "landed_as": "pboc-loan-usage",
+      "reconciliation": "landed_as",
+      "decided_at": "2026-11-21",
+      "evidence": "fd-industry-data/spiders/pboc-loan-usage/manifest.yaml 的 source_url 与本候选 endpoint 对应"
+    },
+    "pboc-货政报告": {
+      "landed_as": "pboc-monetary",
+      "reconciliation": "landed_as",
+      "decided_at": "2026-11-21",
+      "evidence": "fd-industry-data/spiders/pboc-monetary/manifest.yaml 的 source_url 与本候选 endpoint 对应"
+    },
+    "lpr": {
+      "landed_as": "chinamoney-lpr",
+      "reconciliation": "landed_as",
+      "decided_at": "2026-11-21",
+      "evidence": "fd-industry-data/spiders/chinamoney-lpr/manifest.yaml 的 source_url 与本候选 endpoint 对应"
+    },
+    "lpr-1584": {
+      "landed_as": "chinamoney-lpr",
+      "reconciliation": "landed_as",
+      "decided_at": "2026-11-21",
+      "evidence": "fd-industry-data/spiders/chinamoney-lpr/manifest.yaml 的 source_url 与本候选 endpoint 对应"
+    },
+    "中国货币网-lpr": {
+      "landed_as": "chinamoney-lpr",
+      "reconciliation": "landed_as",
+      "decided_at": "2026-11-21",
+      "evidence": "fd-industry-data/spiders/chinamoney-lpr/manifest.yaml 的 source_url 与本候选 endpoint 对应"
+    },
+    "上清所月报": {
+      "landed_as": "shclearing-monthly",
+      "reconciliation": "landed_as",
+      "decided_at": "2026-11-21",
+      "evidence": "fd-industry-data/spiders/shclearing-monthly/manifest.yaml 的 source_url 与本候选 endpoint 对应"
+    },
+    "上清所月报-1352": {
+      "landed_as": "shclearing-monthly",
+      "reconciliation": "landed_as",
+      "decided_at": "2026-11-21",
+      "evidence": "fd-industry-data/spiders/shclearing-monthly/manifest.yaml 的 source_url 与本候选 endpoint 对应"
+    },
+    "上清所-trs-公告": {
+      "landed_as": "shclearing-capital-notes",
+      "reconciliation": "landed_as",
+      "decided_at": "2026-11-21",
+      "evidence": "fd-industry-data/spiders/shclearing-capital-notes/manifest.yaml 的 source_url 与本候选 endpoint 对应"
+    },
+    "上清所-trs-公告-1373": {
+      "landed_as": "shclearing-capital-notes",
+      "reconciliation": "landed_as",
+      "decided_at": "2026-11-21",
+      "evidence": "fd-industry-data/spiders/shclearing-capital-notes/manifest.yaml 的 source_url 与本候选 endpoint 对应"
+    },
+    "clinicaltrials-gov-v2": {
+      "landed_as": "clinicaltrials",
+      "reconciliation": "landed_as",
+      "decided_at": "2026-11-21",
+      "evidence": "fd-industry-data/spiders/clinicaltrials/manifest.yaml 的 source_url 与本候选 endpoint 对应"
+    },
+    "gdacs-rssapi": {
+      "landed_as": "gdacs",
+      "reconciliation": "landed_as",
+      "decided_at": "2026-11-21",
+      "evidence": "fd-industry-data/spiders/gdacs/manifest.yaml 的 source_url 与本候选 endpoint 对应"
+    },
+    "文旅部-星级饭店季报": {
+      "landed_as": "mct-star-hotel",
+      "reconciliation": "landed_as",
+      "decided_at": "2026-11-21",
+      "evidence": "fd-industry-data/spiders/mct-star-hotel/manifest.yaml 的 source_url 与本候选 endpoint 对应"
+    },
+    "水利部水雨情": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；xxfb.mwr.cn 日通报 JSON 从未接入"
+    },
+    "搜猪网生猪大数据": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；标注〔价格类待裁决〕，未决前不接"
+    },
+    "高德开放平台": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；交通态势需 key，非行业数据主线"
+    },
+    "生意社-100ppi": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；WAF 两步 cookie，且价格类待裁决"
+    },
+    "深圳开放平台": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；~2986 接口是区县月报"
+    },
+    "data-gov-uk": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；CKAN 发现层"
+    },
+    "data-gov-目录": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；GSA 发现层 DEMO_KEY"
+    },
+    "opensky": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；实时航班需自建采样"
+    },
+    "treasury-fiscaldata": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；国库日频"
+    },
+    "treasury-fiscaldata-1511": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "treasury-fiscaldata 的重复行，无单元"
+    },
+    "kosis-openapi": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；韩国生产指数"
+    },
+    "kosis-零售-线上购物表": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "kosis-openapi 的另一表，同批未接入"
+    },
+    "nbs-流通领域生产资料价格": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；流通领域价格"
+    },
+    "四川统计局": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；省级统计"
+    },
+    "四川统计局-1334": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "四川统计局 的重复行，无单元"
+    },
+    "data-europa-eu-sparql": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；EU SPARQL"
+    },
+    "data-europa-eu-sparql-1333": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "data-europa-eu-sparql 的重复行，无单元"
+    },
+    "world-bank-data360-mcp": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；Data360 MCP"
+    },
+    "理财产品查询": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；理财产品"
+    },
+    "国家林草局": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；林业数据"
+    },
+    "花讯网": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；花卉资讯站"
+    },
+    "expoflores-厄瓜多尔": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；海外花卉商"
+    },
+    "kenya-flower-council": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；肯尼亚花卉协会"
+    },
+    "flws-1-800-flowers-com": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；美国花商"
+    },
+    "1377-t-sakata-seed": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；日本种苗商"
+    },
+    "丰乐种业-000713": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；种业上市公司"
+    },
+    "邻接候选": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "侦察簿的「邻接候选」归类行，非单一源"
+    },
+    "data-gov-目录-1285": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "data-gov-目录 的重复行，无单元"
+    },
+    "data-gov-uk-ckan": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "data-gov-uk 的同源重复行（CKAN 端点），无单元"
+    },
+    "data-gov-uk-1512": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "data-gov-uk 的重复行，无单元"
+    },
+    "opendatasoft-1301": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；OpenDataSoft 发现层"
+    },
+    "opendatasoft-1513": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "opendatasoft-1301 的重复行，无单元"
+    },
+    "pboc-区域金融": {
+      "reconciliation": "never_landed",
+      "decided_at": "2026-11-21",
+      "note": "仓内无对应单元；PBOC 区域金融"
+    }
+  }
+}

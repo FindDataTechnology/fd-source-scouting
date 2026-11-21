@@ -905,6 +905,17 @@ def main(argv: list[str]) -> int:
         json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     print(f"\n-> {args.out}")
+
+    # 抽取后自动合并手写 overrides（change structure-scout-candidates D2）：
+    # 人的判断存在 candidates.overrides.json，派生输出不手改——否则下一次重抽
+    # 会把它们整体覆盖（ontology-alignment.json 撞过同一个坑）。
+    import subprocess
+    ov = Path(__file__).resolve().parent / "apply_overrides.py"
+    if ov.is_file():
+        r = subprocess.run([sys.executable, str(ov)], capture_output=True, text=True)
+        print(r.stdout.strip() or r.stderr.strip())
+        if r.returncode:
+            return r.returncode
     return 0
 
 
